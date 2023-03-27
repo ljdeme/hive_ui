@@ -1,21 +1,24 @@
-import logo from './logo.svg';
+import logo from './/images/hex.png';
+import git from './/images/github.png';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1> H I V E </h1>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <span>Welcome to Hive: The Grounded Swarm <br></br></span>
+          <span>Coming Soon...</span>
         </p>
         <a
-          className="App-link"
-          href="https://reactjs.org"
+          className="git-link"
+          href="https://github.com/marc4813/HIVE.git"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          <img src={git} alt="logo" />
         </a>
       </header>
     </div>
