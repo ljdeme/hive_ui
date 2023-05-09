@@ -1,27 +1,40 @@
-import logo from './/images/hex.png';
-import git from './/images/github.png';
-import './App.css';
+import React  from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Home from "./pages/Home";
+import InProgress from "./pages/InProgress";
+import Login from "./pages/Login";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
+import Navbar from './components/Navbar';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1> H I V E </h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <span>Welcome to Hive: The Grounded Swarm <br></br></span>
-          <span>Coming Soon...</span>
-        </p>
-        <a
-          className="git-link"
-          href="https://github.com/marc4813/HIVE.git"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src={git} alt="logo" />
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar/>
+      <Routes>
+          <Route
+            path="/"
+            element={<InProgress />} />
+          <Route/>
+          <Route
+            path="/home"
+            element={<Home />} />
+          <Route/>
+          <Route
+            path="/login"
+            element={<Login />} />
+          <Route/>
+          <Route
+            path="/about-us"
+            element={<AboutUs />} />
+          <Route/>
+          <Route
+            path="/contact-us"
+            element={<ContactUs />} />
+          <Route/>
+      </Routes>
+    </>
   );
 }
 

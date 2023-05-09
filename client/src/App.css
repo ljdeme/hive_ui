@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Chakra+Petch');
+/* Comments */
 .App {
   text-align: center;
 }
@@ -37,4 +38,62 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 30px;
+
+  
+  background-color: #100924;
+  border-bottom: 1px solid #e8b83d8a;
+}
+
+.nav-links {
+  
+  list-style: none;
+}
+
+.nav-links li{
+  
+  display: inline-block; /* displays items horizontally */
+  padding: 0px 100px;
+}
+
+.nav-links li a {
+  transition: all 0.3s ease 0s; /* Makes navigation to page smoother */
+  
+  text-decoration: none; /* Removes Underline from links */
+  font-family: "Chakra Petch";
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.nav-links li a:hover{
+  color: goldenrod
+}
+
+.navbar-spacer {
+  width: 30%;
+}
+
+.nav-login {
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  padding: 10px 40px;
+
+  background-color: transparent;
+  border-radius: 10px;
+  border-color: #E8B83D;
+  text-decoration: none; /* Removes Underline from links */
+  font-family: "Chakra Petch";
+  color: #ffffff;
+  font-size: 24px;
+  
+}
+
+.nav-login:hover{
+  color: #E8B83D
 }
