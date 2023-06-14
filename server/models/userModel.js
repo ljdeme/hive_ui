@@ -1,4 +1,4 @@
-const mongoose = import("mongoose")
+const mongoose = require("mongoose")
 
 
 // Set `strictQuery: false` to globally opt into filtering by properties that aren't in the schema
@@ -6,7 +6,7 @@ const mongoose = import("mongoose")
 // See: https://mongoosejs.com/docs/migrating_to_6.html#strictquery-is-removed-and-replaced-by-strict
 mongoose.set("strictQuery", false);
 
-const Schema = mongose.Schema
+const Schema = mongoose.Schema
 
 const userSchema = new Schema({
     username: {

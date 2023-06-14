@@ -4,11 +4,11 @@ const mongoose = require('mongoose')
 // get a user 
 
 // TODO: Add logic for: username found, email found, and email login
-const getUser = async( req, res) => {
-    const username = req.query.username
-    const password = req.query.password
+const getUser = async(req, res) => {
+    const username = req.body.username
+    const password = req.body.password
 
-    const user = await User.findOne({ username: username, password : password})
+    const user = await User.findOne({username: username, password: password})
 
     if (!user) {
 
@@ -19,13 +19,12 @@ const getUser = async( req, res) => {
 }
 
 // create a new user
-
 const createUser = async(req, res) => {
     const {username, password, email} = req.body
 
     try{
         const user = await User.create({username: username, password: password, email: email })
-        console.log('User registered.')
+        return res.status(200).json(user)
     }
     catch(error){
         console.log(error.message)

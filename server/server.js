@@ -21,8 +21,8 @@ app.use((req, res, next) => {
 app.use('/api/users', userRoutes)
 
 // connect to the database and listen for requests
-// TODO: Actually get the database URL
-mongoose.connect("")
+
+mongoose.connect("mongodb+srv://apitest:KVd79eQ502146SuP@dbaas-db-7572895-d1d43c96.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=dbaas-db-7572895")
     .then(() => {
         app.listen(port, () => {
             console.log("Connected. Listening on port 3001")
