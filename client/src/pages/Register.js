@@ -1,10 +1,11 @@
-import {Link} from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 import '../css/login_and_register.css';
 import hex from "../images/hex2.png"
 
 function Register() {
+  const navigate = useNavigate();
   const initialValues = {
     email: "",
     username: "",
@@ -31,9 +32,9 @@ function Register() {
     console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       handleRegister(formValues);
-      
       console.log(formValues);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formErrors, formValues, isSubmit]);
 
 
@@ -120,7 +121,7 @@ function Register() {
 
   const handleRegister = (values) => {
     console.log(values.email + ", " + values.username + ", " + values.password)
-    fetch('/users', {
+    fetch('/api/users', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -131,8 +132,10 @@ function Register() {
     })
     .then((data) => {
         console.log(data);
+        navigate("/login", { replace: true });
     })
     .catch((error) => console.error(error));
+    setIsSubmit(false);
   };
 
   return (
