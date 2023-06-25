@@ -49,13 +49,9 @@ function Login() {
 
   const handleLogin = (values) => {
     console.log(values.username + ", " + values.password)
-    fetch('/api/users', {
+    fetch(`/api/users?username=${values.username}&password=${values.password}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: values.username,
-        password: values.password,
-      }),
     })
     .then((data) => {
         console.log(data);
