@@ -25,9 +25,7 @@ function Landing() {
             <img className="landingimg-1" src={connectimg} />
         </div>   
          
-         
-         {/* TODO: Link to register once it exists */}
-         <a href="/login">
+         <a href="/register">
             <button class="landing-trynow">Try Now</button>
         </a>
         </header>
