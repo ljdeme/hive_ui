@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import InProgress from "./pages/InProgress";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import Navbar from './components/Navbar';
@@ -12,7 +13,7 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <>
+    <div>
       <Navbar/>
       <Routes>
           <Route
@@ -28,6 +29,10 @@ function App() {
             element={<Login />} />
           <Route/>
           <Route
+            path="/register"
+            element={<Register />} />
+          <Route/>
+          <Route
             path="/about-us"
             element={<AboutUs />} />
           <Route/>
@@ -36,7 +41,7 @@ function App() {
             element={<ContactUs />} />
           <Route/>
       </Routes>
-    </>
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../images/nav-logo.png"
+import logo from "../images/hive-logo.png"
 
 export default function Navbar() {
   return (
@@ -24,7 +24,7 @@ export default function Navbar() {
         </ul>
 
         <a href="/login">
-            <button class="nav-login">Login</button>
+            <button className="nav-login">Log in</button>
         </a>
     </nav>
   );
