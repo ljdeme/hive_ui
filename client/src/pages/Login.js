@@ -54,15 +54,20 @@ function Login() {
       headers: { "Content-Type": "application/json" },
     })
     .then((data) => {
+      console.log(data);
+      if (!data.ok){
+        const error = (data && data.message) || data.statusText;
+        console.error(error)
+        console.log("INVALID CREDENTIALS IN VALIDATE");
         console.log(data);
+        setFormErrors({ ...formErrors, password: "INVALID CREDENTIALS" });
+        setIsSubmit(false);
+      }
+      else{
         navigate("/home", { replace: true });
-    })
-    .catch((error) => {
-      console.error(error)
-      console.log("INVALID CREDENTIALS IN VALIDATE");
-      setFormErrors({ ...formErrors, password: "INVALID CREDENTIALS" });
-      setIsSubmit(false);
+      }
     });
+    
   };
 
   return (

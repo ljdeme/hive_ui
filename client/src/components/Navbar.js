@@ -21,11 +21,16 @@ export default function Navbar() {
             <li className="nav-item">
                 <Link to="/contact-us">Contact Us</Link>
             </li>
+            <li className="nav-login">
+                <Link to="/login">
+                    <input
+                        className="nav-login"
+                        type="button"
+                        value="Join Now"
+                    />
+                </Link>
+            </li>
         </ul>
-
-        <a href="/login">
-            <button className="nav-login">Log in</button>
-        </a>
     </nav>
   );
 }
