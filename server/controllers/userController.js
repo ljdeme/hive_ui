@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
 
 // TODO: Add logic for: username found, email found, and email login
 const getUser = async(req, res) => {
-    const username = req.body.username
-    const password = req.body.password
+    const username = req.query.username
+    const password = req.query.password
 
     const user = await User.findOne({username: username, password: password})
 

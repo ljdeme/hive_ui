@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const userRoutes = require('./routes/users')
 
 // Connect to the database on this port. 
-const port = 3000
+const port = 4000
 
 // The express app object we'll be using.
 const app = express()
@@ -25,7 +25,7 @@ app.use('/api/users', userRoutes)
 mongoose.connect("mongodb+srv://apitest:KVd79eQ502146SuP@dbaas-db-7572895-d1d43c96.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=dbaas-db-7572895")
     .then(() => {
         app.listen(port, () => {
-            console.log("Connected. Listening on port 3000")
+            console.log("Connected. Listening on port 4000")
         })
     })
     .catch((error) => {
