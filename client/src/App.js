@@ -1,7 +1,9 @@
 import React  from 'react';
+import { Textfit } from 'react-textfit';
 import { Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home";
 import InProgress from "./pages/InProgress";
+import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AboutUs from "./pages/AboutUs";
@@ -16,7 +18,7 @@ function App() {
       <Routes>
           <Route
             path="/"
-            element={<InProgress />} />
+            element={<Landing />} />
           <Route/>
           <Route
             path="/home"
