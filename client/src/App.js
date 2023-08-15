@@ -1,8 +1,8 @@
 import React  from 'react';
-import { Textfit } from 'react-textfit';
+// import { Textfit } from 'react-textfit';
 import { Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home";
-import InProgress from "./pages/InProgress";
+// import InProgress from "./pages/InProgress";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";

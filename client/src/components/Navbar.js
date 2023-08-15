@@ -13,7 +13,6 @@ export default function Navbar() {
                 alt= "HIVE logo"/>
         </Link> 
         <div className="navbar-spacer"></div>
-        
         <ul className="nav-links">
             <li className="nav-item">
                 <Link to="/about-us">About Us</Link>

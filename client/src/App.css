@@ -49,10 +49,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  white-space: nowrap;
   padding: 30px 30px;
   background-color: #100924;
   border-bottom: 1px solid #e8b83d8a;
-}
+} 
 
 .nav-links {
   
@@ -60,19 +61,18 @@
 }
 
 .nav-links li{
-  
   display: inline-block; /* displays items horizontally */
-  padding: 0px 100px;
-}
+  padding: 10px 50px;
+} 
 
 .nav-links li a {
   transition: all 0.3s ease 0s; /* Makes navigation to page smoother */
-  
   text-decoration: none; /* Removes Underline from links */
   font-family: "Chakra Petch";
   color: #ffffff;
   font-size: 24px;
-}
+} 
+
 
 .nav-links li a:hover{
   color: goldenrod
@@ -85,8 +85,6 @@
 .nav-login {
   transition: all 0.3s ease 0s;
   cursor: pointer;
-  padding: 10px 40px;
-
   background-color: transparent;
   border-radius: 10px;
   border-color: #E8B83D;
@@ -98,68 +96,4 @@
 
 .nav-login:hover{
   color: #E8B83D
-}
-
-.LandingText1Header
-{
-  display: flex;
-  position: absolute;
-  left: 59px;
-  top: 159px;
-  color:#ffffff;
-  font-size: 1vw;
-  font-family: 'Raleway';
-  font-weight: 600;
-  letter-spacing: 4;
-  word-wrap: break-word;
-  text-align: left;
-}
-
-.LandingText1Body
-{
-  display: flex;
-  position: absolute;
-  left: 64px;
-  top: 244px;
-  width: 492px; 
-  height: 193px;
-  color: #ffffff;
-  font-size: 1vw;
-  font-family: Roboto;
-  font-weight: 400;
-  word-wrap: break-word;
-  text-align: left;
-}
-
-.landing-trynow {
-  position: absolute;
-  top:90%;
-  left:45%;
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  padding: 10px 40px;
-  display:flex;
-
-
-  background-color: transparent;
-  border-radius: 10px;
-  border-color: #E8B83D;
-  text-decoration: none; /* Removes Underline from links */
-  font-family: "Chakra Petch";
-  color: #ffffff;
-  font-size: 24px;
-  
-}
-
-.landing-trynow:hover{
-  color: #E8B83D
-}
-
-.landingimg-1 {
-  display:flex;
-  position: absolute;
-  right: 0%;
-  bottom: 0%;
-  width: 700px; 
-  height: 490px;
 }

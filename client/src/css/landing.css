@@ -1,0 +1,102 @@
+.landing-page{
+    height:120vh;
+    text-align: left;
+    background-color: #100924;
+    color:#ffffff;
+}
+
+.landing-layout{
+    width: 100vh;
+}
+
+.box-item-1{
+    width: 70%;
+    height: 50vh;
+    /* background-color: tomato; */
+    text-align: left;
+    color: white;
+}
+
+.box-item-2{
+    width: 30%;
+    height: 50vh;
+    padding: 30px;
+    /* background-color: green; */
+    margin: 50px;
+}
+
+.top-flexbox{
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 100px;
+}
+
+.headerText{
+    text-align: left;
+}
+
+.landingImg-1{
+    object-fit: contain;
+    height: 50vh;
+}
+
+.bottom-flexbox{
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 100px;
+    width: 110%;
+    margin-top: -10em;
+}
+
+.box-item-3{
+    width: 70%;
+    height: 50vh;
+    /* background-color: tomato; */
+    text-align: left;
+    color: white;
+}
+
+.box-item-4{
+    width: 70%;
+    height: 50vh;
+    padding: 30px;
+    /* background-color: green; */
+    margin: 0px -150px;
+}
+
+.landingImg-2{
+    object-fit: contain;
+    height: 40vh;
+}
+
+.landing-trynow {
+    position: absolute;
+    top:110%;
+    left:45%;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    padding: 10px 40px;
+    display:flex;
+  
+  
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: #E8B83D;
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: #ffffff;
+    font-size: 24px;
+    
+  }
+  
+  .landing-trynow:hover{
+    color: #E8B83D
+  }
