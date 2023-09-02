@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 import '../css/login_and_register.css';
-import hex from "../images/hex2.png"
+import hex from "../images/hive-logo.png"
 
 function Register() {
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ function Register() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+    
   };
 
   const handleSubmit = (e) => {
@@ -143,11 +144,11 @@ function Register() {
       <div className="register-container">
         <div className="authentication-header">
           <p><img src={hex} alt='HIVE logo' height='75'/></p> 
-          <h1>Register</h1>
+          <h1>Create an account to get started</h1>
         </div>
         <div className='input-fields'>
-          <div className="container-half">
-              <div id="login-input" className="input-group">
+            <div className="container-half">
+                <div id="login-input" className="input-group">
                   <label htmlFor="Email">Email</label>
                   <input 
                     type="email" 
@@ -170,7 +171,7 @@ function Register() {
                   />
                   <p className="error">{formErrors.username}</p>
                 </div>
-          </div>
+            </div>
           
           <div className="container-half">
             <div id="login-input" className="input-group">

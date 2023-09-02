@@ -1,12 +1,14 @@
-.landing-page{
+.landing-page
+{
     height: 110vh;
     margin: auto;
     text-align: left;
-    background-color: #100924;
-    color:#ffffff;
+    background-color: var(--bg);
+    color: var(--text-color);
 }
 
-.landing-layout{
+.landing-layout
+{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,22 +16,24 @@
     object-fit: contain;
 }
 
-.box-item-1{
+.box-item-1
+{
     width: 40%;
     height: 50vh;
     /* background-color: tomato; */
-    color: white;
+    color: var(--text-color);
 
 }
 
-.box-item-2{
+.box-item-2
+{
     height: 50vh;
     padding: 30px;
     /* background-color: green; */
- 
 }
 
-.top-flexbox{
+.top-flexbox
+{
     display: flex;
     list-style: none;
     flex-direction: row;
@@ -39,16 +43,20 @@
     /* padding: 0px 100px; */
 }
 
-.landingText-1{
+.landingText-1
+{
     padding-left: 9em;
     width: 600px;
     /* background-color: orange; */
 }
-.landingImg-1{
+
+.landingImg-1
+{
     height: 50vh;
 }
 
-.bottom-flexbox{
+.bottom-flexbox
+{
     display: flex;
     list-style: none;
     flex-direction: row;
@@ -59,34 +67,39 @@
     margin-top: -10em;
 }
 
-.box-item-3{
+.box-item-3
+{
     width: 20%;
     height: 50vh;
+    padding-top: 10em;
     /* background-color: tomato; */
-    color: white;
+    color: var(--text-color);
 }
 
-.box-item-4{
+.box-item-4
+{
     width: 750px;
     height: 50vh;
     padding: 20px;
     /* background-color: green; */
     margin: 0px -135px;
 }
-.landingText-2{
+
+.landingText-2
+{
     width: 750px;
     /* background-color: orange; */
 }
 
-.landingImg-2{
+.landingImg-2
+{
     object-fit: contain;
     height: 50vh;
 }
 
-.landing-trynow {
-    position: absolute;
-    top:110%;
-    left:45%;
+.landing-trynow
+{
+    position: center;
     transition: all 0.3s ease 0s;
     cursor: pointer;
     padding: 10px 40px;
@@ -94,14 +107,11 @@
   
     background-color: transparent;
     border-radius: 10px;
-    border-color: #E8B83D;
+    border-color: var(--bg-accent);
     text-decoration: none; /* Removes Underline from links */
-    font-family: "Chakra Petch";
-    color: #ffffff;
-    font-size: 24px;
-    
-  }
+}
   
-  .landing-trynow:hover{
-    color: #E8B83D
-  }
+.landing-trynow:hover
+{
+    color: var(--bg-accent)
+}
