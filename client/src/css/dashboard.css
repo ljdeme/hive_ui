@@ -37,28 +37,105 @@
 
     height: 60%;
     width: 100%;
-   
-    
     display: flex;
     flex-direction: row;
     text-align: left;
     justify-content: space-between;
 }
 
-.dashboard-agent-list-item
+.dashboard-agent
 {
-    background-color: var(--bg-container);
+    display: flex;
 
+    background-color: var(--bg-container);
     height: 100%;
     width: 35%;
     border-radius: 10px;
     padding-left: 10px;
+    
+    flex-direction: column;
+
+}
+.dashboard-agent-scroll
+{
+    /* background-color: black; */
+    width: 510px;
+}
+.dashboard-agent-list
+{   
+    display: flex;
+    flex-direction: column;
+    /* background-color: aquamarine; */
+    border-radius: 10px;
+    padding-left: 10px;
 }
 
-.dashboard-map-item
+.dashboard-agent-list-container
+{
+    /* background-color: blueviolet; */
+    background-color:var(--bg-container);
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    margin: 5px;
+    border-radius: 10px;
+
+    align-items: center;
+    justify-content: left;
+    border: var(--border);
+
+}
+.dashboard-agent-list-item-info-container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+/* .dashboard-agent-list-item-info-item
+{
+    /* background-color:cadetblue; */
+    /* border: var(--border); 
+    
+} */
+
+.agent-title
+{
+   font-size: 32px;
+}
+
+.agent-location
+{
+    font-size: 12px;
+}
+
+.agent-status
+{
+    font-size: 18px;
+}
+.dashboard-agent-list-item
+{
+    display: flex;
+    flex-direction: row;
+    
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.agent-icon
+{
+    background-color:antiquewhite;
+    
+    height: 70px;
+    width: 70px;
+
+    border-radius: 10px;
+    
+    
+}
+
+.dashboard-map
 {
     background-color: var(--bg-container);
-
     height: 100%;
     width: 62%;
     border-radius: 10px;
@@ -79,7 +156,7 @@
     justify-content: space-between;
 }
 
-.dashboard-topics-item
+.dashboard-topics
 {
     background-color:var(--bg-container);
     height: 100%;
@@ -88,7 +165,7 @@
     padding-left: 10px;
 }
 
-.dashboard-messages-item
+.dashboard-messages
 {
     background-color:var(--bg-container);
     
@@ -98,7 +175,7 @@
     padding-left: 10px;
 }
 
-.dashboard-extra-item
+.dashboard-extra
 {
     background-color:var(--bg-container);;
 
