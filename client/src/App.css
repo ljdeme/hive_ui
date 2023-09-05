@@ -25,7 +25,6 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Chakra Petch';
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -47,12 +46,12 @@
 
 .navbar {
   height:var(--nav-size);
-  padding: 0 50px;
+  padding: 0 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   white-space: nowrap;
-  background-color: #100924;
+  background-color: var(--bg);
   border-bottom: var(--border);
 } 
 
@@ -66,16 +65,16 @@
   transition: all 0.3s ease 0s; /* Makes navigation to page smoother */
   text-decoration: none; /* Removes Underline from links */
   font-family: "Chakra Petch";
-  color: #ffffff;
+  color: var(--text-color);
   font-size: 24px;
 } 
 
 .nav-links li a:hover{
-  color: goldenrod
+  color: var(--bg-accent)
 }
 
 a:is(:link, :active, :visited).active{
-  color: #E8B83D;
+  color: var(--bg-accent);
 }
 
 .navbar-spacer {
@@ -87,15 +86,15 @@ a:is(:link, :active, :visited).active{
   cursor: pointer;
   background-color: transparent;
   border-radius: 10px;
-  border-color: #E8B83D;
+  border-color:var(--bg-accent);
   text-decoration: none; /* Removes Underline from links */
   font-family: "Chakra Petch";
-  color: #ffffff;
+  color: var(--text-color);
   font-size: 24px;
 }
 
 .nav-login:hover{
-  color: #E8B83D
+  color: var(--bg-accent)
 }
 
 

@@ -16,6 +16,7 @@ code {
 {
   --bg:#100924;
   --bg-accent:#E8B83D;
+  --bg-container:rgba(255, 255, 255, 0.25);
   --text-color: white;
   --nav-size: 135px;
   --border: 1px solid #e8b83d8a;
@@ -36,59 +37,3 @@ a
   text-decoration: none;
 }
 
-/* .navbar
-{
-  height:var(--nav-size);
-  background-color: var(--bg);
-  padding: 0 10rem;
-  border-bottom: var(--border);
-}
-
-.navbar-nav
-{
-  max-width: 100%;
-  height: 100%;
-  display: flex;
-  font-size: 24px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-item
-{
-  width: calc(var(--nav-size) * 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-text
-{
-  --button-size: calc(var(--nav-size) * .6);
-  width: calc(var(--button-size) * 2);
-  height: var(--button-size);
-  
-  display: flex;
-  white-space: nowrap;
-  align-items: center;
-  justify-content: center;
-  
-  transition: filter 300ms;
-}
-.nav-button
-{
-  --button-size: calc(var(--nav-size) * .6);
-  width: calc(var(--button-size) * 2);
-  height: var(--button-size);
-
-  border-radius: 10px;
-  border-color:white;
-  
-  display: flex;
-  white-space: nowrap;
-  align-items: center;
-  justify-content: center;
-  padding: 0 30px;
-  
-  transition: filter 300ms;
-} */

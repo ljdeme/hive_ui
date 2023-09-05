@@ -1,0 +1,109 @@
+.dashboard
+{
+    height: 100vh;
+    margin: auto;
+    background-color: var(--bg);
+    color: var(--text-color);
+}
+
+.dashboard-container
+{
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-layout
+{
+    /* background-color: green; */
+
+    height: 950px;
+    width: 1500px;
+    margin-top: 5rem;
+    
+    flex-shrink: 0;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    color: var(--bg-accent);
+    font-weight: bold;
+}
+
+.dashboard-top-flexbox
+{
+    /* background-color: blueviolet; */
+
+    height: 60%;
+    width: 100%;
+   
+    
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.dashboard-agent-list-item
+{
+    background-color: var(--bg-container);
+
+    height: 100%;
+    width: 35%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.dashboard-map-item
+{
+    background-color: var(--bg-container);
+
+    height: 100%;
+    width: 62%;
+    border-radius: 10px;
+    padding-left: 10px;
+
+}
+
+.dashboard-bottom-flexbox
+{
+    /* background-color: blue; */
+
+    height: 35%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.dashboard-topics-item
+{
+    background-color:var(--bg-container);
+    height: 100%;
+    width: 25%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.dashboard-messages-item
+{
+    background-color:var(--bg-container);
+    
+    height: 100%;
+    width: 45%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.dashboard-extra-item
+{
+    background-color:var(--bg-container);;
+
+    height: 100%;
+    width: 25%;
+    border-radius: 10px;
+    padding-left: 10px;
+}

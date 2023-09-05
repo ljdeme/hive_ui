@@ -9,7 +9,7 @@
 
 .authentication-header
 {
-    border-bottom: 1px solid #E8B83D;
+    border-bottom: 1px solid var(--bg-accent);
     margin-bottom: 2rem;
 }
 
@@ -21,11 +21,11 @@
     color: aliceblue;
     font-family: "Chakra Petch";
     background-color: #100924;
-    border: 2px solid #E8B83D;
+    border: 2px solid var(--bg-accent);
     padding: 30px;
     border-radius: 30px;
     text-align: center;
-    box-shadow: 1px 1px 10px #E8B83D;
+    box-shadow: 1px 1px 10px var(--bg-accent);
     z-index: 0;
 }
 
@@ -38,14 +38,14 @@
 {
     width: 1000px;
     margin: 100px auto;
-    color: aliceblue;
+    color:var(--text-color);
     position: relative;
-    background-color: #100924;
-    border: 2px solid #E8B83D;
+    background-color: var(--bg);
+    border: 2px solid var(--bg-accent);
     padding: 30px;
     border-radius: 30px;
     text-align: center;
-    box-shadow: 1px 1px 10px #E8B83D
+    box-shadow: 1px 1px 10px var(--bg-accent);
 }
 
 .container-half
@@ -62,21 +62,21 @@
 
 .login-register-swap
 {
-    color: aliceblue;
+    color: var(--text-color);
 }
 
 .login-register-swap:visited
 {
-    color: #E8B83D;
+    color: var(--bg-accent);
 }
 
 .login-register-swap:hover
 {
-    color: #E8B83D;
+    color: var(--bg-accent);
 }
 
 label {
-    color: aliceblue;
+    color: var(--text-color);
     display: block;
     margin-top: 1em;
     font-size: 15px;
@@ -146,7 +146,7 @@ input[type = button]
   
     background-color: transparent;
     border-radius: 10px;
-    border-color: #E8B83D;
+    border-color: var(--bg-accent);
     text-decoration: none; /* Removes Underline from links */
     font-family: "Chakra Petch";
     color: #ffffff;

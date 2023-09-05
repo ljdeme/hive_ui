@@ -1,6 +1,6 @@
 .landing-page
 {
-    height: 110vh;
+    height: 150vh;
     margin: auto;
     text-align: left;
     background-color: var(--bg);
@@ -40,7 +40,7 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    /* padding: 0px 100px; */
+    margin-top: 5em;
 }
 
 .landingText-1
@@ -64,7 +64,7 @@
     justify-content: space-between;
     align-items: center;
     /* padding: 0px 100px; */
-    margin-top: -10em;
+    margin-top: -5em;
 }
 
 .box-item-3
@@ -103,12 +103,17 @@
     transition: all 0.3s ease 0s;
     cursor: pointer;
     padding: 10px 40px;
+    margin-top: 5rem;
     display:flex;
-  
+    
     background-color: transparent;
     border-radius: 10px;
     border-color: var(--bg-accent);
     text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 24px;
+
 }
   
 .landing-trynow:hover
