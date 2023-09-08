@@ -17,13 +17,12 @@ function Dashboard() {
     }else{
       setHasMore(false);
     }
-    
   }
   return (
     <div className="dashboard">
+      <h1 className='dashboard-header'>[Fleet Name] Console</h1>
       <div className="dashboard-container">
         <div className="dashboard-layout">
-
           <div className="dashboard-top-flexbox">
             <div className="dashboard-agent">
                 <p>Agent</p>

@@ -1,0 +1,96 @@
+.myFleets
+{
+    height: 89.26vh;
+    /* margin: auto; */
+    background-color: var(--bg);
+    color: var(--text-color);
+}
+
+.fleets-header
+{
+    text-align: center;
+    font-size: 48px;
+    margin-top: 0px;
+    padding-top: 3rem;
+}
+
+.myFleets-container
+{
+    display: flex;
+    justify-content: center; 
+}
+
+.myFleets-layout
+{
+    background-color:var(--bg-container);
+
+    height: 900px;
+    width: 1500px;
+    border-radius: 20px;
+    padding-top: 30px;
+
+    flex-shrink: 0;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border: var(--border-container);
+    color: var(--bg-accent);
+    font-weight: bold;
+}
+
+.fleet-scroll
+{
+    
+    /* background-color: var(--bg-container); */
+    height: 800px;
+    width: 1450px;
+    border-radius: 10px;
+}
+
+.fleet-list
+{   
+    /* background-color:var(--bg-container); */
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.fleet-list-container
+{
+    background-color:var(--bg-container);
+    
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    border-radius: 10px;
+
+    align-items: center;
+    justify-content: left;
+    border: var(--border);
+}
+
+.fleet-list-item
+{
+    display: flex;
+    flex-direction: row;
+    
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.fleet-title
+{
+    font-size: 36px;
+    padding-left: 5rem;
+}
+
+.spacer 
+{
+    width: 900px;
+}

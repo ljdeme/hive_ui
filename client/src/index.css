@@ -20,6 +20,7 @@ code {
   --text-color: white;
   --nav-size: 135px;
   --border: 1px solid #e8b83d8a;
+  --border-container: 3px solid #e8b83d8a;
   --border-radius: 8px;
   --speed: 500ms;
 }

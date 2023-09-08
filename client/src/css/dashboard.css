@@ -6,6 +6,16 @@
     color: var(--text-color);
 }
 
+.dashboard-header
+{
+    text-align: center;
+    font-size: 48px;
+    margin-top: 0px;
+    padding-top: 3rem;
+
+    
+}
+
 .dashboard-container
 {
     display: flex;
@@ -18,7 +28,6 @@
 
     height: 950px;
     width: 1500px;
-    margin-top: 5rem;
     
     flex-shrink: 0;
     align-self: center;
@@ -60,6 +69,7 @@
 {
     /* background-color: black; */
     width: 510px;
+    color: var(--text-color);
 }
 .dashboard-agent-list
 {   
