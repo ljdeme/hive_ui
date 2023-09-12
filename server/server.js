@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/users')
+const fleetRoutes = require('./routes/fleets')
 
 // Connect to the database on this port. 
 const port = 4000
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 
 // routes for our app 
 app.use('/api/users', userRoutes)
+app.use('/api/fleets', fleetRoutes)
 
 // connect to the database and listen for requests
 
