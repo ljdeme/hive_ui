@@ -45,8 +45,25 @@ const deleteFleet = async(req, res) => {
 
 }
 
+const updateFleet = async(req, res) => {
+    const {fleetid, ipaddress_new, name_new, plugins_new, agents_new} = req.body
+    filter = {_id : fleetid}
+    update = {ipaddress : ipaddress_new, name : name_new, plugins: plugins_new, agents : agents_new}
+    try {
+        const fleet = await Fleet.findOneAndUpdate(filter, update, {
+            new : true
+        } )
+        return res.status(200).json(fleet)
+    }
+    catch (error){
+        console.log(error)
+        res.status(400).json(error)
+    }
+}
+
 module.exports = {
     getFleets,
     createFleet,
-    deleteFleet    
+    deleteFleet,
+    updateFleet    
 }

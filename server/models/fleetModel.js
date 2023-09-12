@@ -24,7 +24,6 @@ const fleetSchema = new Schema({
     plugins:[{
         id : String, 
         topic: String,
-        required: true
     }],
 
     agents:[{
@@ -33,7 +32,6 @@ const fleetSchema = new Schema({
         attachments : [{
             id : String,
             topic : String,
-            required: true
         }]
     }]
 
