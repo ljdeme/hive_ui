@@ -19,7 +19,23 @@ const fleetSchema = new Schema({
     name:{
         type:String,
         required: true
-    }
+    },
+
+    plugins:[{
+        id : String, 
+        topic: String,
+        required: true
+    }],
+
+    agents:[{
+        name : String,
+        namespace: String,
+        attachments : [{
+            id : String,
+            topic : String,
+            required: true
+        }]
+    }]
 
 }, {timestamps:true})
 
