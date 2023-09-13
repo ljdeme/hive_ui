@@ -2,8 +2,11 @@ import '../css/dashboard.css';
 import robot_img from '../images/robot.png';
 import React, { useState} from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import SendMessage from "./SendMessage";
+
 
 function Dashboard() {
+  
   const [agentListSource, setAgentListSource] = useState(Array.from({length:20}));
   // const [topicListSource, setTopicListSource] = useState(Array.from({length:20}));
   const [hasMore, setHasMore] = useState(true);
@@ -18,8 +21,11 @@ function Dashboard() {
       setHasMore(false);
     }
   }
+
   return (
+    
     <div className="dashboard">
+      
       <h1 className='dashboard-header'>[Fleet Name] Console</h1>
       <div className="dashboard-container">
         <div className="dashboard-layout">
@@ -90,8 +96,10 @@ function Dashboard() {
 
         </div>{/* dashboard-layout*/}
       </div>
+      <SendMessage/>
     </div>
   );
 }
+// Run npm install roslib
 
 export default Dashboard;

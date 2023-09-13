@@ -1,6 +1,6 @@
 .dashboard
 {
-    height: 100vh;
+    height: 150vh;
     margin: auto;
     background-color: var(--bg);
     color: var(--text-color);
