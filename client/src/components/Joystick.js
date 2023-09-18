@@ -1,75 +1,66 @@
 // TEMP Joystick Control
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactNipple from "react-nipple";
 import DebugView from "react-nipple/lib/DebugView";
-import ROSLIB from 'roslib'
+import ROSLIB from 'roslib';
 
 function Joystick() {
 
     // Connect to ROS
-    const [currentStatus, setStatus] = useState("Not connected")
-    const ros = new ROSLIB.Ros({encoding: 'ascii'})
-   
-    function connect() {
-        console.log("Button Pressed");
-        console.log(currentStatus);
-        
-        if (currentStatus === 'Connected!') {
-            console.log("Already Connected\n");
-        }
-        else {
-            ros.connect("ws://192.168.254.128:9090");
-            ros.on("connection", ()=>{
-                console.log("connected to ros\n");
-                setStatus("Connected!")
+    const [currentStatus, setStatus] = useState("Not connected");
+    const [ros, setRos] = useState(null);
+
+    useEffect(() => {
+        if (currentStatus === 'Connected!' && ros === null) {
+            const newRos = new ROSLIB.Ros({ encoding: 'ascii' });
+            newRos.connect("ws://192.168.254.128:9090");
+            newRos.on("connection", () => {
+                console.log("Connected to ROS");
+                setStatus("Connected!");
+                setRos(newRos);
             });
-            
-            ros.on("error", (error)=>{
-                console.log("failed to connect to ros\n");
-                setStatus(error)
-            })
-            
-            ros.on("close", ()=>{
-                console.log("disconnected from ros\n");
-                setStatus("Connection closed")
-            }); 
+
+            newRos.on("error", (error) => {
+                console.error("Failed to connect to ROS: ", error);
+                setStatus("Connection failed");
+            });
+
+            newRos.on("close", () => {
+                console.log("Disconnected from ROS");
+                setStatus("Connection closed");
+            });
         }
-    }
-    
-    // =============== ROS topics ===============
-    const txt_listener = new ROSLIB.Topic({
-        ros : ros,
-        name : '/txt_msg',
-        messageType : 'std_msgs/String'
-    });
+    }, [currentStatus, ros]);
 
-    txt_listener.subscribe (function(m) {
-        document.getElementById("msg").innerHTML = m.data;
-    });
-
-    // agent names may vary.
-    const map = new ROSLIB.Topic({
+    // ROS topics
+    const joystick = new ROSLIB.Topic({
         ros: ros,
-        name: "/agent1/map",
-        messageType: "nav_msgs/OccupancyGrid"
+        name: '/agent1/joystick',
+        messageType: 'geometry_msgs/Twist'
     });
 
-    // gets data from "agent1/map" topic.
-    map.subscribe(data=>{
-        console.log(data);
-    });
+    const sendVelocityCommand = (linearX, angularZ) => {
+        const twist = new ROSLIB.Message({
+            linear: {
+                x: linearX,
+                y: 0,
+                z: 0,
+            },
+            angular: {
+                x: 0,
+                y: 0,
+                z: angularZ,
+            },
+        });
 
-    // =============== state ===============
+        joystick.publish(twist);
+    }
+
+    // State
     const [data, setData] = useState();
 
-    const [state, setState] = useState({
-        axes: [0, 0, 0, 0, 0, 0],
-        buttons: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    });
-
-
-    // =============== functions ===============
+    // Functions
     const handleJoystickStart = (evt, data) => {
         console.log("Movement start");
         setData(data);
@@ -78,30 +69,7 @@ function Joystick() {
     const handleJoystickEnd = (evt, data) => {
         console.log("Movement end");
         setData(data);
-        setState({
-            axes: [0, 0, 0, 0, 0, 0]
-        });
-        // Publish data to "/agent1/joystick" topic.
-        var joystick = new ROSLIB.Topic({
-            ros: ros,
-            name: '/agent1/joystick',
-            messageType: 'geometry_msgs/Twist'
-        });
-    
-        var twist = new ROSLIB.Message({
-            linear: {
-              x: 0,
-              y: 0,
-              z: 0
-            },
-            angular: {
-              x: 0,
-              y: 0,
-              z: 0
-            }
-        });
-        console.log(twist);
-        joystick.publish(twist);
+        sendVelocityCommand(0, 0);
     };
 
     const handleJoystickMove = (evt, data) => {
@@ -114,30 +82,8 @@ function Joystick() {
 
         const linearSpeed = (Math.sin(data.angle.radian) * maxLinear * data.distance) / maxDistance;
         const angularSpeed = (Math.cos(data.angle.radian) * maxAngular * data.distance) / maxDistance;
-        console.log("Linear Speed: " + linearSpeed );
-        console.log("Angular Speed: " + angularSpeed);
 
-        // Publish data to "/agent1/joystick" topic.
-        var joystick = new ROSLIB.Topic({
-            ros: ros,
-            name: '/agent1/joystick',
-            messageType: 'geometry_msgs/Twist'
-        });
-    
-        var twist = new ROSLIB.Message({
-            linear: {
-            x: linearSpeed,
-            y: 0,
-            z: 0
-            },
-            angular: {
-            x: 0,
-            y: 0,
-            z: angularSpeed
-            }
-        });
-        console.log(twist);
-        joystick.publish(twist);
+        sendVelocityCommand(linearSpeed, angularSpeed);
     };
 
     return (
@@ -145,7 +91,7 @@ function Joystick() {
             <div>
                 {currentStatus}
             </div>
-            <button onClick={()=> {connect()}}>Connect</button>
+            <button onClick={() => { setStatus('Connected!') }}>Connect</button>
             <div className="joystick-wrapper mt-5">
                 <ReactNipple
                     className="joystick is-relative"
