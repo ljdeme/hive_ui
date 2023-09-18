@@ -2,8 +2,8 @@ import '../css/dashboard.css';
 import robot_img from '../images/robot.png';
 import React, { useState} from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import SendMessage from "./SendMessage";
-
+// import Connect from "../components/RosConnectButton";
+import Joystick from "../components/Joystick";
 
 function Dashboard() {
   
@@ -91,12 +91,17 @@ function Dashboard() {
             <div className="dashboard-extra">
               <p>EXTRA</p>
             </div>
-
-          </div> 
-
+          </div>
         </div>{/* dashboard-layout*/}
       </div>
-      <SendMessage/>
+      <div className="dashboard-testing">
+            <div className='zone_joystick'>
+              <Joystick/>
+            </div>
+            <div className='msg-list'>
+              <p>Last /txt_msg received: <br></br><span id="msg"></span></p>
+            </div>
+      </div>
     </div>
   );
 }

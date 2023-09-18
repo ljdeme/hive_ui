@@ -18,8 +18,10 @@
 
 .dashboard-container
 {
+    /* background-color: beige; */
     display: flex;
     justify-content: center;
+    
 }
 
 .dashboard-layout
@@ -194,3 +196,26 @@
     border-radius: 10px;
     padding-left: 10px;
 }
+
+.dashboard-testing
+{
+    background-color:var(--bg-container);
+    height: 650px;
+    width: 1460px;
+    position:absolute;
+    top: 100%;
+    left: 14%;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+/* .container-item1
+{
+    background-color:aqua
+}
+
+.container-item2
+{
+    background-color:blue;
+} */
