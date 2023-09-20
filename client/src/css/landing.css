@@ -1,0 +1,122 @@
+.landing-page
+{
+    height: 150vh;
+    margin: auto;
+    text-align: left;
+    background-color: var(--bg);
+    color: var(--text-color);
+}
+
+.landing-layout
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+}
+
+.box-item-1
+{
+    width: 40%;
+    height: 50vh;
+    /* background-color: tomato; */
+    color: var(--text-color);
+
+}
+
+.box-item-2
+{
+    height: 50vh;
+    padding: 30px;
+    /* background-color: green; */
+}
+
+.top-flexbox
+{
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5em;
+}
+
+.landingText-1
+{
+    padding-left: 9em;
+    width: 600px;
+    /* background-color: orange; */
+}
+
+.landingImg-1
+{
+    height: 50vh;
+}
+
+.bottom-flexbox
+{
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 0px 100px; */
+    margin-top: -5em;
+}
+
+.box-item-3
+{
+    width: 20%;
+    height: 50vh;
+    padding-top: 10em;
+    /* background-color: tomato; */
+    color: var(--text-color);
+}
+
+.box-item-4
+{
+    width: 750px;
+    height: 50vh;
+    padding: 20px;
+    /* background-color: green; */
+    margin: 0px -135px;
+}
+
+.landingText-2
+{
+    width: 750px;
+    /* background-color: orange; */
+}
+
+.landingImg-2
+{
+    object-fit: contain;
+    height: 50vh;
+}
+
+.landing-trynow
+{
+    position: center;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    padding: 10px 40px;
+    margin-top: 5rem;
+    display:flex;
+    
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: var(--bg-accent);
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 24px;
+
+}
+  
+.landing-trynow:hover
+{
+    color: var(--bg-accent)
+}

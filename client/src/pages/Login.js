@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import '../css/login_and_register.css';
-import hex from "../images/hex2.png"
+import hex from "../images/hive-logo.png"
 
 function Login() {
   const navigate = useNavigate();
@@ -54,15 +54,20 @@ function Login() {
       headers: { "Content-Type": "application/json" },
     })
     .then((data) => {
+      console.log(data);
+      if (!data.ok){
+        const error = (data && data.message) || data.statusText;
+        console.error(error)
+        console.log("INVALID CREDENTIALS IN VALIDATE");
         console.log(data);
+        setFormErrors({ ...formErrors, password: "INVALID CREDENTIALS" });
+        setIsSubmit(false);
+      }
+      else{
         navigate("/home", { replace: true });
-    })
-    .catch((error) => {
-      console.error(error)
-      console.log("INVALID CREDENTIALS IN VALIDATE");
-      setFormErrors({ ...formErrors, password: "INVALID CREDENTIALS" });
-      setIsSubmit(false);
+      }
     });
+    
   };
 
   return (
@@ -70,7 +75,6 @@ function Login() {
       <div className="login-container">
             <div className="authentication-header">
               <p><img src={hex} alt='HIVE logo' height='75'/></p> 
-              <h1>Log in</h1> 
             </div>
             <div className='input-fields'>
               <div id="login-input" className="input-group">

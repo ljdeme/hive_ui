@@ -1,18 +1,25 @@
 import React  from 'react';
+// import { Textfit } from 'react-textfit';
 import { Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home";
-import InProgress from "./pages/InProgress";
+// import InProgress from "./pages/InProgress";
+import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AboutUs from "./pages/AboutUs";
-import ContactUs from "./pages/ContactUs";
-import Navbar from './components/Navbar';
-
+import MyFleets from "./pages/MyFleets";
+import Dashboard from "./pages/Dashboard";
+import Documentation from "./pages/Documentation";
+import Profile from "./pages/Profile";
+import GuestNavbar from './components/GuestNavbar';
+import AuthenticatedNavbar from './components/AuthenticatedNavbar';
 
 function App() {
   return (
     <div>
-      <Navbar/>
+      <script>activePage.js</script>
+      {/* <GuestNavbar/> */}
+      <AuthenticatedNavbar/>
       <Routes>
           <Route
             path="/"
@@ -35,8 +42,25 @@ function App() {
             element={<AboutUs />} />
           <Route/>
           <Route
-            path="/contact-us"
-            element={<ContactUs />} />
+            path="/documentation"
+            element={<Documentation />} />
+          <Route/>
+          {/* LOGGED IN USER LINKS */}
+          <Route
+            path="/myFleets"
+            element={<MyFleets />} />
+          <Route/>
+          <Route
+            path="/dashboard"
+            element={<Dashboard />} />
+          <Route/>
+          <Route
+            path="/documentation"
+            element={<Documentation />} />
+          <Route/>
+          <Route
+            path="/profile"
+            element={<Profile />} />
           <Route/>
       </Routes>
     </div>
