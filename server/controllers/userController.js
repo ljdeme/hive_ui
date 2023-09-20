@@ -1,5 +1,14 @@
 const User = require('../models/userModel')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
+
+dotenv.config()
+process.env.TOKEN_SECRET
+
+function generateAccessToken(username) {
+    return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+}
 
 // get a user 
 
@@ -15,7 +24,9 @@ const getUser = async(req, res) => {
         return res.status(404).json({error: "Incorrect credentials. Please try again or make a new account."})
     }
 
-    res.status(200).json(user)
+    token = generateAccessToken({id: username})
+
+    res.status(200).json({token: token, user: user})
 }
 
 // create a new user
