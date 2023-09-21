@@ -23,7 +23,7 @@ function App() {
       <Routes>
           <Route
             path="/"
-            element={<InProgress />} />
+            element={<Landing />} />
           <Route/>
           <Route
             path="/home"
