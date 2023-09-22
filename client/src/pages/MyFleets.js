@@ -2,7 +2,7 @@
 import '../css/myFleets.css';
 import React, { useState} from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import Navbar from "../components/Navbar";
 
 function MyFleets() {
   const [fleetListSource, setFleetListSource] = useState(Array.from({length:20}));
@@ -21,8 +21,8 @@ function MyFleets() {
   }
 
   return (
-    
     <div className='myFleets'>
+      <Navbar/>
       <h1 className='fleets-header'>Fleets</h1>
       <div className='myFleets-container'>
         <div className='myFleets-layout'>

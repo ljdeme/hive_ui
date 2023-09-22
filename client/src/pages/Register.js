@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-
+import Navbar from "../components/Navbar";
 import '../css/login_and_register.css';
 import hex from "../images/hive-logo.png"
 
@@ -141,6 +141,7 @@ function Register() {
 
   return (
     <div className="authentication-page">
+      <Navbar/>
       <div className="register-container">
         <div className="authentication-header">
           <p><img src={hex} alt='HIVE logo' height='75'/></p> 

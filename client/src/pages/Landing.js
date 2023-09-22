@@ -1,13 +1,14 @@
 import '../css/landing.css';
 import connect_img from '../images/connect-img.png';
 import modular_img from '../images/modular-img.png';
-
+import Navbar from "../components/Navbar";
 
 export default Landing;
 
 function Landing() {
     return(
         <div className='landing-page'>
+            <Navbar/>
             <div class='landing-layout'>
                 <div className='top-flexbox'>
                     <div className='box-item-1'>

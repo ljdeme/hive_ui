@@ -1,6 +1,6 @@
 .dashboard
 {
-    height: 150vh;
+    height: 170vh;
     margin: auto;
     background-color: var(--bg);
     color: var(--text-color);
@@ -103,21 +103,29 @@
     flex-direction: column;
 }
 
-/* .dashboard-agent-list-item-info-item
+ .dashboard-agent-list-item-info-item
 {
-    /* background-color:cadetblue; */
-    /* border: var(--border); 
-    
-} */
+    /* background-color:cadetblue;  */
+    /* border: var(--border); */
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+} 
 
 .agent-title
 {
    font-size: 32px;
+   /* background-color: aqua; */
+   margin-top: 10px;
+   margin-bottom: 4px;
+   
 }
 
 .agent-location
 {
     font-size: 12px;
+    margin-top: -1px;
+    /* background-color: blanchedalmond; */
 }
 
 .agent-status

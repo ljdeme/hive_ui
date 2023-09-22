@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import '../css/login_and_register.css';
 import hex from "../images/hive-logo.png"
+import Navbar from "../components/Navbar";
 
 function Login() {
   const navigate = useNavigate();
@@ -48,30 +49,38 @@ function Login() {
   };
 
   const handleLogin = (values) => {
-    console.log(values.username + ", " + values.password)
+    console.log(values.username + ", " + values.password);
     fetch(`/api/users?username=${values.username}&password=${values.password}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
-    .then((data) => {
-      console.log(data);
-      if (!data.ok){
-        const error = (data && data.message) || data.statusText;
-        console.error(error)
-        console.log("INVALID CREDENTIALS IN VALIDATE");
-        console.log(data);
-        setFormErrors({ ...formErrors, password: "INVALID CREDENTIALS" });
-        setIsSubmit(false);
+    .then((response) => {
+      console.log(response);
+      if (!response.ok){
+        return response.json().then((data) => {
+          console.error(data.error); // Log the error message
+          setFormErrors({ ...formErrors, password: "INVALID CREDENTIALS" });
+          setIsSubmit(false);
+        });
       }
       else{
-        navigate("/home", { replace: true });
+        return response.json().then((data) => {
+          console.log(data.token); // Log the token
+          console.log(data.user);  // Log the user object
+    
+          // Store the token and user data in localStorage or state as needed
+          localStorage.setItem('token', data.token);
+          // setUser(data.user); // Set the user data in your state if needed
+    
+          navigate("/home", { replace: true });
+        });
       }
     });
-    
   };
 
   return (
     <div className="authentication-page">
+      <Navbar/>
       <div className="login-container">
             <div className="authentication-header">
               <p><img src={hex} alt='HIVE logo' height='75'/></p> 

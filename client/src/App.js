@@ -1,4 +1,4 @@
-import React  from 'react';
+
 // import { Textfit } from 'react-textfit';
 import { Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home";
@@ -11,15 +11,12 @@ import MyFleets from "./pages/MyFleets";
 import Dashboard from "./pages/Dashboard";
 import Documentation from "./pages/Documentation";
 import Profile from "./pages/Profile";
-import GuestNavbar from './components/GuestNavbar';
-import AuthenticatedNavbar from './components/AuthenticatedNavbar';
+import Testing from "./pages/testing";
 
 function App() {
   return (
     <div>
       <script>activePage.js</script>
-      {/* <GuestNavbar/> */}
-      <AuthenticatedNavbar/>
       <Routes>
           <Route
             path="/"
@@ -61,6 +58,10 @@ function App() {
           <Route
             path="/profile"
             element={<Profile />} />
+          <Route/>
+          <Route
+            path="/testing"
+            element={<Testing />} />
           <Route/>
       </Routes>
     </div>

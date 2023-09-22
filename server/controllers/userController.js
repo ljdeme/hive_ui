@@ -21,7 +21,7 @@ const getUser = async(req, res) => {
 
     if (!user) {
 
-        return res.status(404).json({error: "Incorrect credentials. Please try again or make a new account."})
+        return res.status(404).json({error: "Incorrect credentials. Please try again."})
     }
 
     token = generateAccessToken({id: username})
@@ -41,8 +41,6 @@ const createUser = async(req, res) => {
         console.log(error.message)
         res.status(400).json({error: error.message})
     }
-    
-    
 }
 
 module.exports = {
