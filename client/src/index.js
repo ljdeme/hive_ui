@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 // Imports for ROS libraries
 const script1 = document.createElement('script');
-script1.src = 'https://cdn.jsdelivr.net/npm/ros2d@0.10.0/build/ros2d.min.js';
+script1.src = 'https://github.com/RobotWebTools/ros2djs/blob/develop/build/ros2d.min.js';
 document.head.appendChild(script1);
 
 

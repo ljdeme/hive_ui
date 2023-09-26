@@ -7,7 +7,8 @@ class ROSConnection {
     this.isConnected = false;
 
     this.connect = () => {
-      this.ros.connect('ws://192.168.254.128:9090'); // Replace with your ROS master URI
+      // this.ros.connect('ws://192.168.254.128:9090');  FOR LOCAL
+      this.ros.connect('ws://144.126.249.86:9090');  // On DigitalOcean
       this.ros.on('connection', () => {
         this.isConnected = true;
       });
