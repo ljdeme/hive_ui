@@ -3,8 +3,8 @@ import robot_img from '../images/robot.png';
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Navbar from "../components/Navbar";
-// import Connect from "../components/RosConnectButton";
 import Joystick from "../components/Joystick";
+import Map from "../components/MapDisplay";
 
 function Dashboard() {
   const [agentListSource, setAgentListSource] = useState(Array.from({ length: 20 }));
@@ -83,6 +83,7 @@ function Dashboard() {
             </div>
             <div className="dashboard-map">
               <p>Map</p>
+              <Map/>
             </div>
           </div>
 
@@ -102,19 +103,14 @@ function Dashboard() {
             <div className="dashboard-messages">
               <p>Messages</p>
             </div>
-            <div className="dashboard-extra">
-              <p>EXTRA</p>
+            <div className="dashboard-joystick">
+              <p className='container-text'>Joystick</p>
+              <div className='joystick-container'>
+                <Joystick agentName={`agent${activeAgent + 1}`} />
+              </div>
             </div>
           </div>
         </div>{/* dashboard-layout*/}
-      </div>
-      <div className="dashboard-testing">
-        <div className='zone_joystick'>
-          <Joystick agentName={`agent${activeAgent + 1}`} />
-        </div>
-        <div className='msg-list'>
-          <p>Last /txt_msg received: <br></br><span id="msg"></span></p>
-        </div>
       </div>
     </div>
   );

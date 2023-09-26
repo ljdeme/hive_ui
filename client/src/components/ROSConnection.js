@@ -1,43 +1,27 @@
-import { useEffect, useState } from 'react';
+// rosManager.js
 import ROSLIB from 'roslib';
 
-function ROSConnection({ url, onConnect, onError, onClose }) {
-  const [ros, setRos] = useState(null);
+class ROSConnection {
+  constructor() {
+    this.ros = new ROSLIB.Ros();
+    this.isConnected = false;
 
-  useEffect(() => {
-    const newRos = new ROSLIB.Ros({ encoding: 'ascii' });
-    newRos.connect(url);
-
-    newRos.on('connection', () => {
-      console.log('Connected to ROS');
-      setRos(newRos);
-      if (onConnect) {
-        onConnect(newRos);
-      }
-    });
-
-    newRos.on('error', (error) => {
-      console.error('Failed to connect to ROS: ', error);
-      if (onError) {
-        onError(error);
-      }
-    });
-
-    newRos.on('close', () => {
-      console.log('Disconnected from ROS');
-      setRos(null);
-      if (onClose) {
-        onClose();
-      }
-    });
-
-    return () => {
-      if (newRos) {
-        newRos.close();
-      }
+    this.connect = () => {
+      this.ros.connect('ws://192.168.254.128:9090'); // Replace with your ROS master URI
+      this.ros.on('connection', () => {
+        this.isConnected = true;
+      });
+      this.ros.on('close', () => {
+        this.isConnected = false;
+      });
     };
-  }, [url, onConnect, onError, onClose]);
-  return null; // This component doesn't render anything visible
+
+    this.disconnect = () => {
+      this.ros.close();
+      this.isConnected = false;
+    };
+  }
 }
 
-export default ROSConnection;
+const rosConnection = new ROSConnection();
+export default rosConnection;

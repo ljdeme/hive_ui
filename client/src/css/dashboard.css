@@ -1,6 +1,6 @@
 .dashboard
 {
-    height: 170vh;
+    height: 100vh;
     margin: auto;
     background-color: var(--bg);
     color: var(--text-color);
@@ -195,15 +195,30 @@
     padding-left: 10px;
 }
 
-.dashboard-extra
+.dashboard-joystick
 {
-    background-color:var(--bg-container);;
-
+    background-color:var(--bg-container);
+    /* background-color:aqua; */
     height: 100%;
     width: 25%;
     border-radius: 10px;
     padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
+.container-text{
+    /* background-color:greenyellow; */
+}
+
+.joystick-container {
+    /* background-color:aqua; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:75%;
+    width: 100%; /* Set the width to 100% */
+  }
 
 .dashboard-testing
 {

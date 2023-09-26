@@ -1,37 +1,45 @@
 import React, { useState, useEffect } from "react";
 import ReactNipple from "react-nipple";
-import DebugView from "react-nipple/lib/DebugView";
 import ROSLIB from 'roslib';
+import rosConnection from './ROSConnection';
 
 function Joystick({ agentName }) {
+    // State
+    // eslint-disable-next-line
+    const [currentStatus, setCurrentStatus] = useState("Disconnected");
 
-    // Connect to ROS
-    const [currentStatus, setStatus] = useState("Not connected");
-    const [ros] = useState(new ROSLIB.Ros({ encoding: 'ascii' })); // Initialize with a new ROS instance
+    // Functions
+    const setStatus = (status) => {
+        setCurrentStatus(status);
+    };
 
     useEffect(() => {
-        if (currentStatus === 'Connected!' && !ros.isConnected) {
-            ros.connect("ws://192.168.254.128:9090");
-            ros.on("connection", () => {
-                console.log("Connected to ROS");
-                setStatus("Connected!");
-            });
+        // Connect to ROS when the component mounts
+        rosConnection.connect();
 
-            ros.on("error", (error) => {
-                console.error("Failed to connect to ROS: ", error);
-                setStatus("Connection failed");
-            });
+        rosConnection.ros.on("connection", () => {
+            console.log("Connected to ROS");
+            setStatus("Connected");
+        });
 
-            ros.on("close", () => {
-                console.log("Disconnected from ROS");
-                setStatus("Connection closed");
-            });
-        }
-    }, [currentStatus, ros]);
+        rosConnection.ros.on("error", (error) => {
+            console.error("Error connecting to ROS:", error);
+            setStatus("Error");
+        });
 
-    // ROS topics
+        rosConnection.ros.on("close", () => {
+            console.log("Disconnected from ROS");
+            setStatus("Disconnected");
+        });
+
+        // Clean up the ROS connection on unmount
+        return () => {
+            rosConnection.disconnect();
+        };
+    }, []);
+
     const joystick = new ROSLIB.Topic({
-        ros: ros,
+        ros: rosConnection.ros, // Use the ROS connection from rosConnection
         name: `${agentName}/joystick`,
         messageType: 'geometry_msgs/Twist'
     });
@@ -54,6 +62,7 @@ function Joystick({ agentName }) {
     }
 
     // State
+    // eslint-disable-next-line
     const [data, setData] = useState(null);
 
     // Functions
@@ -77,26 +86,24 @@ function Joystick({ agentName }) {
 
     return (
         <div>
-            <div>
-                {currentStatus}
-            </div>
-            <button onClick={() => { setStatus('Connected!') }}>Connect</button>
             <div className="joystick-wrapper mt-5">
                 <ReactNipple
                     className="joystick is-relative"
                     options={{
                         mode: "static",
-                        color: "hsl(219, 84%, 56%)",
-                        position: { top: "50%", left: "50%" },
+                        color: "black",
+                        position: { top: '50%', left: '50%' },
                         threshold: 0.1,
                     }}
                     style={{
-                        width: 250,
-                        height: 250,
+                        width: 200,
+                        height: 200,
+                        position: 'relative',
+                        backgroundColor: 'rgba(255, 249, 228, 0.842)',
+                        borderRadius: 1120
                     }}
                     onMove={handleJoystickMove}
                 />
-                <DebugView data={data} />
             </div>
         </div>
     );

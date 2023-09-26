@@ -1,7 +1,8 @@
 
-// import { Textfit } from 'react-textfit';
+import React, { useEffect } from "react";
 import { Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home";
+import rosConnection from './components/ROSConnection';
 // import InProgress from "./pages/InProgress";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -14,6 +15,20 @@ import Profile from "./pages/Profile";
 import Testing from "./pages/testing";
 
 function App() {
+  // For ROS Connection
+  useEffect(() => {
+    rosConnection.connect();
+
+    // If using Redux, dispatch the connect action
+    // dispatch({ type: 'CONNECT_ROS' });
+
+    return () => {
+      rosConnection.disconnect();
+      // If using Redux, dispatch the disconnect action
+      // dispatch({ type: 'DISCONNECT_ROS' });
+    };
+  }, []);
+
   return (
     <div>
       <script>activePage.js</script>
