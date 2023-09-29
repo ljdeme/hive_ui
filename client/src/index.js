@@ -1,24 +1,55 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { useEffect } from 'react';
 import './index.css';
+import InProgress from './pages/InProgress';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom";
+import { createRoot } from 'react-dom/client'; // Corrected import
 
-// Imports for ROS libraries
-const script1 = document.createElement('script');
-script1.src = 'https://github.com/RobotWebTools/ros2djs/blob/develop/build/ros2d.min.js';
-document.head.appendChild(script1);
+function loadScript(src, callback) {
+  const script = document.createElement('script');
+  script.src = src;
+  script.onload = callback;
+  document.head.appendChild(script);
+}
 
+// Create the root element once
+const root = createRoot(document.getElementById('root')); // Use createRoot
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+function AppWithScripts() {
+  useEffect(() => {
+    // Load all the scripts one by one
+    loadScript('https://cdn.jsdelivr.net/npm/roslib@1/build/roslib.min.js', () => {
+      loadScript('https://cdn.jsdelivr.net/npm/easeljs@1/lib/easeljs.min.js', () => {
+        loadScript('https://cdn.jsdelivr.net/npm/eventemitter2@6/lib/eventemitter2.min.js', () => {
+          loadScript('https://cdn.jsdelivr.net/npm/ros2d@0/build/ros2d.js', () => {
+            // All scripts are loaded, now render your app
+            root.render(
+              <React.StrictMode>
+                <Router>
+                  <App />
+                </Router>
+              </React.StrictMode>
+            );
+          });
+        });
+      });
+    });
+  }, []);
+
+  return (
+    <div>
+      <InProgress />
+    </div>
+  );
+}
+
+// Initial render
 root.render(
-  <Router>
-        <App /> 
-  </Router>
+  <React.StrictMode>
+    <AppWithScripts />
+  </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Measure performance using reportWebVitals
 reportWebVitals();

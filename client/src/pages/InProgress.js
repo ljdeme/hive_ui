@@ -1,17 +1,15 @@
 import logo from '../images/hex.png';
 import git from '../images/github.png';
 import '../App.css';
-import Navbar from "../components/Navbar";
 function InProgress() {
   return (
     <div className="App">
-      <Navbar/>
       <header className="App-header">
         <h1> H I V E </h1>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           <span>Welcome to Hive: The Grounded Swarm <br></br></span>
-          <span>Coming Soon...</span>
+          <span>Loading Components...</span>
         </p>
         <a
           className="git-link"

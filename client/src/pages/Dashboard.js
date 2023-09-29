@@ -83,7 +83,7 @@ function Dashboard() {
             </div>
             <div className="dashboard-map">
               <p>Map</p>
-              <Map/>
+              {/* <Map/> */}
             </div>
           </div>
 
@@ -111,6 +111,10 @@ function Dashboard() {
             </div>
           </div>
         </div>{/* dashboard-layout*/}
+        
+      </div>
+      <div className="dashboard-testing">
+            <Map/>
       </div>
     </div>
   );

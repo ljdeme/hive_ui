@@ -9,7 +9,7 @@ function Landing() {
     return(
         <div className='landing-page'>
             <Navbar/>
-            <div class='landing-layout'>
+            <div className='landing-layout'>
                 <div className='top-flexbox'>
                     <div className='box-item-1'>
                         <div className='landingText-1'>
@@ -48,7 +48,7 @@ function Landing() {
                     </div>
                 </div>
                 <a href='/register'>
-                    <button class='landing-trynow'>Try Now</button>
+                    <button className='landing-trynow'>Try Now</button>
                 </a>
             </div>
         </div>
