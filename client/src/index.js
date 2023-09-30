@@ -3,8 +3,8 @@ import './index.css';
 import InProgress from './pages/InProgress';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from "react-router-dom";
-import { createRoot } from 'react-dom/client'; // Corrected import
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
 
 function loadScript(src, callback) {
   const script = document.createElement('script');
@@ -14,7 +14,7 @@ function loadScript(src, callback) {
 }
 
 // Create the root element once
-const root = createRoot(document.getElementById('root')); // Use createRoot
+const root = createRoot(document.getElementById('root'));
 
 function AppWithScripts() {
   useEffect(() => {
@@ -25,11 +25,9 @@ function AppWithScripts() {
           loadScript('https://cdn.jsdelivr.net/npm/ros2d@0/build/ros2d.js', () => {
             // All scripts are loaded, now render your app
             root.render(
-              <React.StrictMode>
-                <Router>
-                  <App />
-                </Router>
-              </React.StrictMode>
+              <Router>
+                <App />
+              </Router>
             );
           });
         });
@@ -45,11 +43,7 @@ function AppWithScripts() {
 }
 
 // Initial render
-root.render(
-  <React.StrictMode>
-    <AppWithScripts />
-  </React.StrictMode>
-);
+root.render(<AppWithScripts />);
 
 // Measure performance using reportWebVitals
 reportWebVitals();

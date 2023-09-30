@@ -5,16 +5,53 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Navbar from "../components/Navbar";
 import Joystick from "../components/Joystick";
 import Map from "../components/MapDisplay";
+import ROSLIB from 'roslib';
 
 function Dashboard() {
+  // State for the ROS connection
+  const [ros, setRos] = useState(null);
+
   const [agentListSource, setAgentListSource] = useState(Array.from({ length: 20 }));
   const [activeAgent, setActiveAgent] = useState(null); // State to track the active agent
   const [hasMore, setHasMore] = useState(true);
-
   useEffect(() => {
     // This will log the updated activeAgent value whenever it changes.
     console.log(activeAgent);
+  
   }, [activeAgent]);
+
+  useEffect(() => {
+    // Initialize the ROS connection when the component mounts
+    const ros = new ROSLIB.Ros({
+      url: 'ws://192.168.254.128:9090', // FOR LOCAL
+      // url: 'ws://144.126.249.86:9090', // On DigitalOcean
+    });
+
+    ros.on('connection', () => {
+      console.log('Connected to ROS');
+    });
+
+    ros.on('error', (error) => {
+      console.error('Error connecting to ROS:', error);
+    });
+
+    ros.on('close', () => {
+      console.log('Disconnected from ROS');
+    });
+
+    setRos(ros);
+
+    // Clean up the ROS connection on unmount
+    return () => {
+      ros.close();
+    };
+  }, []);
+
+  if (!ros) {
+    // Wait for the ROS connection to be established
+    return <div>Loading...</div>;
+  }
+  
 
   const fetchMoreAgents = () => {
     if (agentListSource.length < 100) {
@@ -82,8 +119,8 @@ function Dashboard() {
               </div>
             </div>
             <div className="dashboard-map">
-              <p>Map</p>
-              {/* <Map/> */}
+              <p className='container-text'>Map</p>
+              <Map ros={ ros } />
             </div>
           </div>
 
@@ -106,20 +143,19 @@ function Dashboard() {
             <div className="dashboard-joystick">
               <p className='container-text'>Joystick</p>
               <div className='joystick-container'>
-                <Joystick agentName={`agent${activeAgent + 1}`} />
+                <Joystick ros={ ros } agentName={`agent${activeAgent + 1}`} />
+                {/* <Joystick agentName={`agent${activeAgent + 1}`} /> */}
               </div>
             </div>
           </div>
         </div>{/* dashboard-layout*/}
         
       </div>
-      <div className="dashboard-testing">
-            <Map/>
-      </div>
+      {/* <div className="dashboard-testing">
+        <Map ros={ ros } />
+      </div> */}
     </div>
   );
 }
-
-// Run npm install roslib
 
 export default Dashboard;

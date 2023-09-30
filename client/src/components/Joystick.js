@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ReactNipple from "react-nipple";
 import ROSLIB from 'roslib';
-import rosConnection from './ROSConnection';
 
-function Joystick({ agentName }) {
+function Joystick(props) {
     // State
     // eslint-disable-next-line
     const [currentStatus, setCurrentStatus] = useState("Disconnected");
@@ -13,34 +12,9 @@ function Joystick({ agentName }) {
         setCurrentStatus(status);
     };
 
-    useEffect(() => {
-        // Connect to ROS when the component mounts
-        rosConnection.connect();
-
-        rosConnection.ros.on("connection", () => {
-            console.log("Connected to ROS");
-            setStatus("Connected");
-        });
-
-        rosConnection.ros.on("error", (error) => {
-            console.error("Error connecting to ROS:", error);
-            setStatus("Error");
-        });
-
-        rosConnection.ros.on("close", () => {
-            console.log("Disconnected from ROS");
-            setStatus("Disconnected");
-        });
-
-        // Clean up the ROS connection on unmount
-        return () => {
-            rosConnection.disconnect();
-        };
-    }, []);
-
     const joystick = new ROSLIB.Topic({
-        ros: rosConnection.ros, // Use the ROS connection from rosConnection
-        name: `${agentName}/joystick`,
+        ros: props.ros, // Use the ROS connection from props
+        name: `${props.agentName}/joystick`,
         messageType: 'geometry_msgs/Twist'
     });
 
