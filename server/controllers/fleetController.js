@@ -26,8 +26,6 @@ const createFleet = async(req, res) => {
         console.log(error.message)
         res.status(400).json({error: error.message})
     }
-    
-    
 }
 
 const deleteFleet = async(req, res) => {
@@ -42,7 +40,6 @@ const deleteFleet = async(req, res) => {
         console.log(error)
         res.status(400).json({error: error.message})
     }
-
 }
 
 const updateFleet = async(req, res) => {

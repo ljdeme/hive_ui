@@ -67,12 +67,12 @@ function Login() {
         return response.json().then((data) => {
           console.log(data.token); // Log the token
           console.log(data.user);  // Log the user object
-    
+          console.log(data.user._id);
           // Store the token and user data in localStorage or state as needed
           localStorage.setItem('token', data.token);
           // setUser(data.user); // Set the user data in your state if needed
     
-          navigate("/home", { replace: true });
+          navigate("/myFleets", {state:{id:data.user._id,}});
         });
       }
     });
@@ -81,45 +81,47 @@ function Login() {
   return (
     <div className="authentication-page">
       <Navbar/>
-      <div className="login-container">
-            <div className="authentication-header">
-              <p><img src={hex} alt='HIVE logo' height='75'/></p> 
-            </div>
-            <div className='input-fields'>
-              <div id="login-input" className="input-group">
-                  <label htmlFor="Username">Username</label>
-                  <input 
-                    type="text" 
-                    name="username" 
-                    id="login-username" 
-                    placeholder="Username"
-                    value={formValues.username}
-                    onChange={handleChange}
-                  />
-                  <p className="error">{formErrors.username}</p>
-                  <label htmlFor="Password">Password</label>
-                  <input 
-                    type="password" 
-                    name="password" 
-                    id="login-password" 
-                    placeholder="Password"
-                    value={formValues.password}
-                    onChange={handleChange}
-                  />
-                  <p className="error">{formErrors.password}</p>
+      <div className="form-page">
+        <div className="login-container">
+              <div className="authentication-header">
+                <p><img src={hex} alt='HIVE logo' height='75'/></p> 
               </div>
-            </div>
-            <h1>
-              <Link to="/pages/home.js">
-                <input
-                  className="nav-login"
-                  type="button"
-                  value="Log in"
-                  onClick={handleSubmit}
-                />
-              </Link>
-            </h1>
-            <Link className="login-register-swap" to="/register">Don't have an account yet?</Link>
+              <div className='input-fields'>
+                <div id="login-input" className="input-group">
+                    <label htmlFor="Username">Username</label>
+                    <input 
+                      type="text" 
+                      name="username" 
+                      id="login-username" 
+                      placeholder="Username"
+                      value={formValues.username}
+                      onChange={handleChange}
+                    />
+                    <p className="error">{formErrors.username}</p>
+                    <label htmlFor="Password">Password</label>
+                    <input 
+                      type="password" 
+                      name="password" 
+                      id="login-password" 
+                      placeholder="Password"
+                      value={formValues.password}
+                      onChange={handleChange}
+                    />
+                    <p className="error">{formErrors.password}</p>
+                </div>
+              </div>
+              <h1>
+                <Link to="/pages/home.js">
+                  <input
+                    className="nav-login"
+                    type="button"
+                    value="Log in"
+                    onClick={handleSubmit}
+                  />
+                </Link>
+              </h1>
+              <Link className="login-register-swap" to="/register">Don't have an account yet?</Link>
+          </div>
         </div>
     </div>
   );

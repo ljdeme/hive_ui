@@ -65,11 +65,13 @@
 } 
 
 .nav-links li a:hover{
-  color: var(--bg-accent)
+  color: var(--bg-accent);
 }
 
 a:is(:link, :active, :visited).active{
   color: var(--bg-accent);
+  border-color:var(--bg-accent);
+
 }
 
 .navbar-spacer {

@@ -142,83 +142,85 @@ function Register() {
   return (
     <div className="authentication-page">
       <Navbar/>
-      <div className="register-container">
-        <div className="authentication-header">
-          <p><img src={hex} alt='HIVE logo' height='75'/></p> 
-          <h1>Create an account to get started</h1>
-        </div>
-        <div className='input-fields'>
+      <div className="form-page">
+        <div className="register-container">
+          <div className="authentication-header">
+            <p><img src={hex} alt='HIVE logo' height='75'/></p> 
+            <h1>Create an account to get started</h1>
+          </div>
+          <div className='input-fields'>
+              <div className="container-half">
+                  <div id="login-input" className="input-group">
+                    <label htmlFor="Email">Email</label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      id="register-email" 
+                      placeholder="Email (ex. abc@123.com)"
+                      value={formValues.email}
+                      onChange={handleChange}
+                    />
+                    <p className="error">{formErrors.email}</p>
+
+                    <label htmlFor="Username">Username</label>
+                    <input 
+                      type="text" 
+                      name="username" 
+                      id="register-username" 
+                      placeholder="Username (ex. abc123)"
+                      value={formValues.username}
+                      onChange={handleChange}
+                    />
+                    <p className="error">{formErrors.username}</p>
+                  </div>
+              </div>
+            
             <div className="container-half">
-                <div id="login-input" className="input-group">
-                  <label htmlFor="Email">Email</label>
-                  <input 
-                    type="email" 
-                    name="email" 
-                    id="register-email" 
-                    placeholder="Email (ex. abc@123.com)"
-                    value={formValues.email}
-                    onChange={handleChange}
-                  />
-                  <p className="error">{formErrors.email}</p>
+              <div id="login-input" className="input-group">
+                <label htmlFor="Password">Password</label>
+                <input 
+                  type="password" 
+                  name="password" 
+                  id="register-password" 
+                  placeholder="Password"
+                  value={formValues.password}
+                  onChange={handleChange}
+                />
+                <p className="error">{formErrors.password}</p>
+                <p>
+                  <ul className="error">
+                    {isBetween8And32Chars && <li className="error-li">*Password must be between 8-32 characters</li>}
+                    {hasUppercaseLetter && <li className="error-li">*Password must contain at least one uppercase letter</li>}
+                    {hasSpecialCharacter && <li className="error-li">*Password must contain at least one special character (@#$%^&+=)</li>}
+                    {hasDigit && <li className="error-li">*Password must contain at least one digit</li>}
+                  </ul>
+                </p>
 
-                  <label htmlFor="Username">Username</label>
-                  <input 
-                    type="text" 
-                    name="username" 
-                    id="register-username" 
-                    placeholder="Username (ex. abc123)"
-                    value={formValues.username}
-                    onChange={handleChange}
-                  />
-                  <p className="error">{formErrors.username}</p>
-                </div>
-            </div>
-          
-          <div className="container-half">
-            <div id="login-input" className="input-group">
-              <label htmlFor="Password">Password</label>
-              <input 
-                type="password" 
-                name="password" 
-                id="register-password" 
-                placeholder="Password"
-                value={formValues.password}
-                onChange={handleChange}
-              />
-              <p className="error">{formErrors.password}</p>
-              <p>
-                <ul className="error">
-                  {isBetween8And32Chars && <li className="error-li">*Password must be between 8-32 characters</li>}
-                  {hasUppercaseLetter && <li className="error-li">*Password must contain at least one uppercase letter</li>}
-                  {hasSpecialCharacter && <li className="error-li">*Password must contain at least one special character (@#$%^&+=)</li>}
-                  {hasDigit && <li className="error-li">*Password must contain at least one digit</li>}
-                </ul>
-              </p>
-
-              <label htmlFor="Password">Confirm Password</label>
-              <input 
-                type="password" 
-                name="confirmPassword" 
-                id="register-confirmPassword" 
-                placeholder="Confirm Password"
-                value={formValues.confirmPassword}
-                onChange={handleChange}
-              />
-              <p className="error">{formErrors.confirmPassword}</p>
+                <label htmlFor="Password">Confirm Password</label>
+                <input 
+                  type="password" 
+                  name="confirmPassword" 
+                  id="register-confirmPassword" 
+                  placeholder="Confirm Password"
+                  value={formValues.confirmPassword}
+                  onChange={handleChange}
+                />
+                <p className="error">{formErrors.confirmPassword}</p>
+              </div>
             </div>
           </div>
-        </div>
-      <h1>
-        <Link to="/pages/home.js">
-          <input
-            className="nav-login"
-            type="button"
-            value="Register"
-            onClick={handleSubmit}
-          />
-        </Link>
-      </h1>
-      <Link className="login-register-swap" to="/login">Already have an account?</Link>
+        <h1>
+          <Link to="/pages/home.js">
+            <input
+              className="nav-login"
+              type="button"
+              value="Register"
+              onClick={handleSubmit}
+            />
+          </Link>
+        </h1>
+        <Link className="login-register-swap" to="/login">Already have an account?</Link>
+      </div>
     </div>
   </div>
   );
