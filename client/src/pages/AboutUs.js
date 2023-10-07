@@ -8,7 +8,7 @@ function AboutUs() {
     <div className="App">
       <Navbar/>
       <header className="App-header">
-        <h1> IN ABOUT US </h1>
+        <h1> IN ABOUT US PAGE</h1>
       </header>
     </div>
   );
