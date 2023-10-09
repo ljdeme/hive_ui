@@ -25,15 +25,14 @@ function Dashboard() {
         // Verify the token on the server (optional)
         // If token is valid, set isLoggedIn to true
         setIsUserLoggedIn(true);
-        console.log(location.state.fleet.ipaddress)
-        setRosIP(location.state.fleet.ipaddress);
+        console.log(location.state?.fleet.ipaddress)
+        setRosIP(location.state?.fleet.ipaddress);
       }
   }, []);
 
   useEffect(() => {
     // This will log the updated activeAgent value whenever it changes.
     console.log(activeAgent);
-  
   }, [activeAgent]);
 
   useEffect(() => {
@@ -87,10 +86,10 @@ function Dashboard() {
     setActiveAgent(index); // Set the clicked agent as active
   }
 
-  return (
+  return ( location.state) ? (
     <div className="dashboard">
       <Navbar />
-      <h1 className='dashboard-header'>[Fleet Name] Console</h1>
+      <h1 className='dashboard-header'>{location.state?.fleet.name} Console</h1>
       <div className="dashboard-container">
         <div className="dashboard-layout">
           <div className="dashboard-top-flexbox">
@@ -168,13 +167,17 @@ function Dashboard() {
             </div>
           </div>
         </div>{/* dashboard-layout*/}
-        
       </div>
-      {/* <div className="dashboard-testing">
-        <Map ros={ ros } />
-      </div> */}
     </div>
-  );
+  ):
+  (
+    <div className="dashboard">
+      <Navbar />
+      <h1 className='dashboard-header'>No Fleet Active</h1>
+      <div className="dashboard-container">
+      </div>
+    </div>
+  )
 }
 
 export default Dashboard;

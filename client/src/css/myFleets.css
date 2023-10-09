@@ -47,7 +47,7 @@
 
 .myFleets-layout
 {
-    /* background-color:var(--bg-container); */
+    background-color:var(--bg-container);
     height: 900px;
     width: 1500px;
     border-radius: 20px;
@@ -94,6 +94,7 @@
 
 .fleet-list-container
 {
+    /* background-color:var(--bg-container); */
     background-color:var(--bg-container);
     
     display: flex;
@@ -110,7 +111,7 @@
 {
     display: flex;
     flex-direction: row;
-    
+    width: 470px;
     margin: 5px;
     border-radius: 10px;
 }
