@@ -7,14 +7,12 @@ import Popup from "../components/Popup";
 import "../css/addFleet.css";
 
 function MyFleets() {
-  const location = useLocation();
   const navigate = useNavigate();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userID, setUserID] = useState(null);
 
   const [showAddFleet, setShowAddFleet] = useState(false);
   const [fleetListSource, setFleetListSource] = useState([]);
-  const [displayedFleets, setDisplayedFleets] = useState([]);
   const [fleetListChanged, setFleetListChanged] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -33,20 +31,15 @@ function MyFleets() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (isUserLoggedIn) {
-      getUserFleets(userID);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isUserLoggedIn, userID, fleetListChanged]);
-
   const handleSwitchToggle = (item) => {
     // Navigate to the dashboard route when the switch is toggled on
     navigate("/dashboard", { state: { fleet: item } });
   };
 
-  const getUserFleets = (page) => {
-    fetch(`/api/fleets?userid=${userID}&page=${page}`, {
+  
+  const getUserFleets = (newPage) => {
+    console.log("Getting page " + newPage);
+    fetch(`/api/fleets?userid=${userID}&page=${newPage}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -54,36 +47,28 @@ function MyFleets() {
         if (!response.ok) {
           return response.json().then((data) => {
             console.error(data.error);
+            setHasMore(false);
           });
         } else {
           return response.json().then((data) => {
-            setFleetListSource([...fleetListSource, ...data]);
-            setPage(page + 1); // Increment the page number
+            if (newPage === 1) {
+              setFleetListSource(data); // Reset the list if it's the first page
+            } else {
+              setFleetListSource([...fleetListSource, ...data]); // Append data to the existing list
+            }
+            setPage(newPage);
           });
         }
       });
   };
 
-  const fetchMoreFleets = () => {
-    if (displayedFleets.length < fleetListSource.length) {
-      setTimeout(() => {
-        fetch(`/api/fleets?userid=${userID}&page=${page}`)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.length === 0 || data.length + displayedFleets.length >= fleetListSource.length) {
-              // All fleets have been displayed, set hasMore to false
-              setHasMore(false);
-            } else {
-              setFleetListSource([...fleetListSource, ...data]);
-              setPage(page + 1);
-            }
-          })
-          .catch((error) => console.error(error));
-      }, 500);
-    } else {
-      setHasMore(false);
+  useEffect(() => {
+    if (isUserLoggedIn || fleetListChanged)
+    {
+      getUserFleets(page);
     }
-  };
+  }, [isUserLoggedIn, fleetListChanged]);
+
   // ========================================= ADD FLEET =========================================
   const initialValues = {
     fleetName: "",
@@ -251,7 +236,8 @@ function MyFleets() {
               <InfiniteScroll
                 className="fleet-list"
                 dataLength={fleetListSource.length}
-                next={fetchMoreFleets}
+                next={()=>getUserFleets(page + 1)}
+                hasMore={hasMore}
                 loader={<p>Loading...</p>}
                 endMessage={<p>All Agents Displayed.</p>}
                 height={800}

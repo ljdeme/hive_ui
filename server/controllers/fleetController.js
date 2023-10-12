@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const getFleets = async (req, res) => {
     const user_id = req.query.userid;
     const page = parseInt(req.query.page) || 1; // Default to page 1 if 'page' query parameter is not provided
-    const perPage = 6; // Number of items per page
+    const perPage = 8; // Number of items per page
   
     try {
       // Calculate the number of items to skip based on the current page and perPage
