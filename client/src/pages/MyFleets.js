@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import ToggleSwitch from "../components/ToggleSwitch";
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -67,6 +67,7 @@ function MyFleets() {
     {
       getUserFleets(page);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUserLoggedIn, fleetListChanged]);
 
   // ========================================= ADD FLEET =========================================

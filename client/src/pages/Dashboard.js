@@ -89,7 +89,7 @@ function Dashboard() {
   return ( location.state) ? (
     <div className="dashboard">
       <Navbar />
-      <h1 className='dashboard-header'>{location.state?.fleet.name} Console</h1>
+      <h1 className='dashboard-header'>{(location.state?.fleet.name).toUpperCase()} CONSOLE</h1>
       <div className="dashboard-container">
         <div className="dashboard-layout">
           <div className="dashboard-top-flexbox">
@@ -107,7 +107,7 @@ function Dashboard() {
                 >
                   {agentListSource.map((item, index) => {
                     return (
-                      <div className="dashboard-agent-list-container" key={index}>
+                      <div key={index} className={activeAgent === index ? 'dashboard-agent-active-container' : 'dashboard-agent-inactive-container'}>
                         <div className="dashboard-agent-list-item">
                           <img className="agent-icon" src={robot_img} alt='agent icon'></img>
                         </div>

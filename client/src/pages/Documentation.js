@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 function Documentation() {
   return (
     
-    <div className="App">
+    <div className="documentation-page">
       <Navbar/>
       <header className="App-header">
         <h1> IN DOCS </h1>

@@ -1,6 +1,6 @@
 .dashboard
 {
-    height: 170vh;
+    height: 100vh;
     margin: auto;
     background-color: var(--bg);
     color: var(--text-color);
@@ -12,7 +12,7 @@
     font-size: 48px;
     margin-top: 0px;
     padding-top: 3rem;
-
+    letter-spacing: 0.3em
     
 }
 
@@ -29,7 +29,7 @@
     /* background-color: green; */
 
     height: 950px;
-    width: 1500px;
+    width: 1650px;
     
     flex-shrink: 0;
     align-self: center;
@@ -60,19 +60,20 @@
 
     background-color: var(--bg-container);
     height: 100%;
-    width: 35%;
+    width: 40%;
     border-radius: 10px;
     padding-left: 10px;
     
     flex-direction: column;
-
 }
+
 .dashboard-agent-scroll
 {
     /* background-color: black; */
-    width: 510px;
+    width: 650px;
     color: var(--text-color);
 }
+
 .dashboard-agent-list
 {   
     display: flex;
@@ -82,10 +83,25 @@
     padding-left: 10px;
 }
 
-.dashboard-agent-list-container
+.dashboard-agent-active-container
+{
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--bg-accent);
+    align-items: center;
+    justify-content: space-evenly;
+    border: var(--border);
+    border-width: 5px ;
+
+}
+
+.dashboard-agent-inactive-container
 {
     /* background-color: blueviolet; */
-    background-color:var(--bg-container);
+    /* background-color:var(--bg-container); */
     display: flex;
     flex-direction: row;
     height: 80px;
@@ -93,10 +109,12 @@
     border-radius: 10px;
 
     align-items: center;
-    justify-content: left;
+    justify-content: space-evenly;
     border: var(--border);
+    border-width: 2px ;
 
 }
+
 .dashboard-agent-list-item-info-container
 {
     display: flex;
@@ -132,6 +150,7 @@
 {
     font-size: 18px;
 }
+
 .dashboard-agent-list-item
 {
     display: flex;
@@ -149,15 +168,41 @@
     width: 70px;
 
     border-radius: 10px;
-    
-    
+}
+
+.agent-active-button{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: var(--bg-accent);
+    border-color: var(--bg-accent);
+    box-shadow: 0 0 10px var(--bg-accent);
+
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
+}
+
+.agent-inactive-button{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: #01000565;
+    border-color: var(--bg-accent);
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
 }
 
 .dashboard-map
 {
     background-color: var(--bg-container);
     height: 100%;
-    width: 62%;
+    width: 58%;
     border-radius: 10px;
     padding-left: 10px;
 
@@ -220,25 +265,37 @@
     width: 100%; /* Set the width to 100% */
   }
 
-.dashboard-testing
-{
-    background-color:var(--bg-container);
-    height: 650px;
-    width: 1460px;
-    position:absolute;
-    top: 100%;
-    left: 5%;
-    margin: 20px;
+.sim-buttons{
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-/* .container-item1
-{
-    background-color:aqua
+    justify-content: space-between;
+    padding: 5px 50px;
+    
 }
 
-.container-item2
-{
-    background-color:blue;
-} */
+.startSim-btn{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: #266353;
+    border-color: var(--bg-accent);
+    /* box-shadow: 1px 1px 5px white; */
+    border-radius: 10px;
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
+}
+
+.stopSim-btn{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: #b33d2e;
+    border-color: var(--bg-accent);
+    /* box-shadow: 1px 1px 5px white; */
+    border-radius: 10px;
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
+}
