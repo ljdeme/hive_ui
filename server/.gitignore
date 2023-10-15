@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+# no / makes it recursive
 node_modules
 /.pnp
 .pnp.js
@@ -13,13 +14,12 @@ node_modules
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-testing.css
-testing.js

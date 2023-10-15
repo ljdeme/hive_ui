@@ -1,0 +1,171 @@
+.authentication-page
+{   
+    background-color: var(--bg);
+    color:var(--text-color);
+    font-family: "Chakra Petch";
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.authentication-header
+{
+    border-bottom: 1px solid var(--bg-accent);
+    margin-bottom: 2rem;
+}
+
+.form-page
+{
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.login-container
+{
+    width: 400px;
+    border: 2px solid var(--bg-accent);
+    padding: 30px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 1px 1px 10px var(--bg-accent);
+    z-index: 0;
+    
+}
+
+.navbar-spacer
+{
+    width: 30%;
+}
+
+.register-container
+{
+    width: 1000px;
+    border: 2px solid var(--bg-accent);
+    padding: 30px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 1px 1px 10px var(--bg-accent);
+}
+
+.container-half
+{
+    width: 45%;
+    float: left;
+    margin-left: 30px;
+}
+
+.input-fields
+{
+    text-align: center;
+}
+
+.login-register-swap
+{
+    color: var(--text-color);
+    text-decoration: underline;
+}
+
+
+
+.login-register-swap:hover
+{
+    color: var(--bg-accent);
+}
+
+label {
+
+    display: block;
+    margin-top: 1em;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+}
+
+input[type = text] {
+    border: 1px solid gray;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 1em;
+    margin-top: .5em;
+}
+  
+textarea[type = text] {
+    border: 1px solid gray;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 1em;
+    margin-top: .5em;
+    margin-bottom: 1.2em;
+    resize: none;
+}
+  
+input[type = email] {
+    border: 1px solid gray;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 1em;
+    margin-top: .5em;
+    margin-bottom: 1.2em;
+  }
+  
+textarea[type = text] 
+{
+    border: 1px solid gray;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 1em;
+    margin-top: .5em;
+    margin-bottom: 1.2em;
+    resize: none;
+}
+  
+input[type = password] 
+{
+    border: 1px solid gray;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 1em;
+    margin-top: .5em;
+    margin-bottom: 1.2em;
+    font-family: Verdana;
+}
+
+input[type = button] 
+{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    padding: 10px 40px;
+  
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: var(--bg-accent);
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.error
+{
+    text-decoration: none;
+    color: rgb(199, 50, 50);
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 1rem;
+}
+
+.error-li
+{
+    text-decoration: none;
+    color: rgb(199, 50, 50);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    margin: 1rem;
+}

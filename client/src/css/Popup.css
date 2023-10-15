@@ -1,0 +1,59 @@
+.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index:999;
+    background-color: var(--bg-container);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Raleway';
+}
+
+.popup-inner{
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+    background-color: var(--bg);
+    box-shadow: 1px 1px 10px var(--bg-accent);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.addFleet-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 20px;
+}
+
+.close-btn{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: var(--bg-accent);
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 24px;
+    padding: 5px 15px;
+}
+
+.save-btn{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: var(--bg-accent);
+    border-color: var(--bg-accent);
+    /* box-shadow: 1px 1px 5px white; */
+    border-radius: 10px;
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--bg);
+    font-size: 24px;
+    padding: 5px 15px;
+}

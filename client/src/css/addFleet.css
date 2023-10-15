@@ -1,0 +1,33 @@
+.popup-page{
+    /* background-color: wheat; */
+}
+
+.form-title{
+    /* background-color: aqua; */
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--bg-accent);
+}
+
+.form-page
+{
+    /* background-color: green; */
+    justify-content: center;
+    align-items: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.form-container{
+    /* background-color: yellow; */
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form-header{
+    font-family: "Chakra Petch";
+    font-size: 18px;
+}
+

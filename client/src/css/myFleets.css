@@ -1,0 +1,130 @@
+.myFleets-page
+{
+    height: 100vh;
+    background-color: var(--bg);
+    color: var(--text-color);
+    font-family: "Chakra Petch";
+}
+
+.myFleets-content
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.fleets-header
+{
+    display: flex;
+    flex-direction: row;
+    width: 1400px;
+    
+    text-align: left;
+    font-size: 36px;
+    
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+}
+
+.add-fleet{
+    color: var(--text-color);
+    background-color: var(--bg);
+    border-color:var(--bg-accent);
+    box-shadow: 1px 1px 5px var(--bg-accent);
+    border-radius: 10px;
+    font-family: "Chakra Petch";
+    font-size: 24px;
+    height: 50px;
+    width: 150px;
+   
+}
+
+.myFleets-container
+{
+    display: flex;
+    justify-content: center; 
+}
+
+.myFleets-layout
+{
+    background-color:var(--bg-container);
+    height: 900px;
+    width: 1500px;
+    border-radius: 20px;
+
+    flex-shrink: 0;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border: var(--border-container);
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+
+
+.fleet-scroll
+{
+    background-color: var(--bg-container);
+    height: 800px;
+    width: 1450px;
+    border-radius: 10px;
+}
+
+.no-fleets
+{   
+    /* background-color: bisque; */
+    justify-self: center;
+    align-self: center;
+}
+
+.fleet-list
+{   
+    /* background-color:var(--bg-container); */
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.fleet-list-container
+{
+    /* background-color:var(--bg-container); */
+    background-color:var(--bg-container);
+    
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    border-radius: 10px;
+
+    align-items: center;
+    justify-content: left;
+    border: var(--border);
+}
+
+.fleet-list-item
+{
+    display: flex;
+    flex-direction: row;
+    width: 470px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.fleet-title
+{
+    /* background-color:red; */
+    font-size: 36px;
+}
+
+.spacer 
+{
+    /* background-color:red; */
+    height: 75px;
+    width: 900px;
+}

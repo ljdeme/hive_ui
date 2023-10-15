@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Chakra+Petch');
+/* Comments */
 .App {
   text-align: center;
 }
@@ -15,19 +16,18 @@
 }
 
 .App-header {
-  background-color: #100924;
+  background-color:var(--bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Chakra Petch';
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--text-color);
 }
 
 .git-link {
-  color: #E8B83D;
+  color: var(--bg);
 }
 
 @keyframes App-logo-spin {
@@ -38,3 +38,223 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar {
+  height:var(--nav-size);
+  padding: 0 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  background-color: var(--bg);
+  border-bottom: var(--border);
+} 
+
+.nav-links li{
+  display: inline-block;
+  padding: 10px 50px;
+} 
+
+.nav-links li a {
+  transition: all 0.3s ease 0s; /* Makes navigation to page smoother */
+  text-decoration: none; /* Removes Underline from links */
+  font-family: "Chakra Petch";
+  color: var(--text-color);
+  font-size: 24px;
+} 
+
+.nav-links li a:hover{
+  font-weight: 600;
+  color: var(--bg-accent);
+  transition: transform 0.5s;
+}
+
+a:is(:link, :active, :visited).active{
+  color: var(--bg-accent);
+  border-color:var(--bg-accent);
+
+}
+
+.navbar-spacer {
+  width: 30%;
+}
+
+.nav-login {
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 10px;
+  border-color:var(--bg-accent);
+  text-decoration: none; /* Removes Underline from links */
+  font-family: "Chakra Petch";
+  color: var(--text-color);
+  font-size: 24px;
+}
+
+.nav-login:hover{
+  color: var(--bg-accent)
+}
+
+.profile-menu{
+  background: transparent;
+  border-color: transparent;
+  font-weight: normal;
+  font-family: "Chakra Petch";
+  color: var(--text-color);
+  font-size: 24px;
+}
+
+.profile-menu:hover{
+  color: var(--bg-accent);
+  font-weight: 600;
+  transition: transform 0.5s;
+}
+
+.submenu-wrap{
+  position: absolute;
+  top: 8%;
+  right: 4%;
+  width: 225px;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s;
+}
+
+.submenu-wrap.open-menu{
+  max-height: 400px;
+}
+
+.submenu{
+  background: var(--bg);
+  box-shadow: 1px 2px 10px var(--bg-accent);
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  color: var(--text-color);
+}
+
+.submenu-link{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; 
+}
+
+.submenu-link p{
+  width: 100%;
+  font-weight:normal;
+  margin-top: 10%;
+  font-size: 18px;
+}
+
+.submenu-link img{
+  width: 20px;
+  background: #e5e5e5;
+  border-radius: 50%;
+  padding: 8px;
+  margin-left: 15px;
+  margin-right: 20px;
+}
+
+.submenu-link span{
+  transition: transform 0.5s;
+}
+
+.submenu-link:hover span{
+  color: var(--bg-accent);
+  transform: translate(5px);
+}
+
+.submenu-link:hover p{
+  color: var(--bg-accent);
+  font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Attempts to make a new nav bar */
+/* .navbar
+{
+  height:var(--nav-size);
+  background-color: var(--bg);
+  padding: 0 10rem;
+  border-bottom: var(--border);
+}
+
+.navbar-nav
+{
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  font-size: 24px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-item
+{
+  width: calc(var(--nav-size) * 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-text
+{
+  --button-size: calc(var(--nav-size) * .6);
+  width: calc(var(--button-size) * 2);
+  height: var(--button-size);
+  
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  
+  transition: filter 300ms;
+}
+.nav-button
+{
+  --button-size: calc(var(--nav-size) * .6);
+  width: calc(var(--button-size) * 2);
+  height: var(--button-size);
+
+  border-radius: 10px;
+  border-color:white;
+  
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  
+  transition: filter 300ms;
+} */

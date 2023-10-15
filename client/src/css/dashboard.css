@@ -1,0 +1,311 @@
+.dashboard
+{
+    height: 100vh;
+    margin: auto;
+    background-color: var(--bg);
+    color: var(--text-color);
+}
+
+.dashboard-header
+{
+    text-align: center;
+    font-size: 48px;
+    margin-top: 0px;
+    padding-top: 3rem;
+    letter-spacing: 0.3em
+    
+}
+
+.dashboard-container
+{
+    /* background-color: beige; */
+    display: flex;
+    justify-content: center;
+    
+}
+
+.dashboard-layout
+{
+    /* background-color: green; */
+
+    height: 950px;
+    width: 1650px;
+    
+    flex-shrink: 0;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    color: var(--bg-accent);
+    font-weight: bold;
+}
+
+.dashboard-top-flexbox
+{
+    /* background-color: blueviolet; */
+
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.dashboard-agent
+{
+    display: flex;
+
+    background-color: var(--bg-container);
+    height: 100%;
+    width: 40%;
+    border-radius: 10px;
+    padding-left: 10px;
+    
+    flex-direction: column;
+}
+
+.dashboard-agent-scroll
+{
+    /* background-color: black; */
+    width: 650px;
+    color: var(--text-color);
+}
+
+.dashboard-agent-list
+{   
+    display: flex;
+    flex-direction: column;
+    /* background-color: aquamarine; */
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.dashboard-agent-active-container
+{
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--bg-accent);
+    align-items: center;
+    justify-content: space-evenly;
+    border: var(--border);
+    border-width: 5px ;
+
+}
+
+.dashboard-agent-inactive-container
+{
+    /* background-color: blueviolet; */
+    /* background-color:var(--bg-container); */
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    margin: 5px;
+    border-radius: 10px;
+
+    align-items: center;
+    justify-content: space-evenly;
+    border: var(--border);
+    border-width: 2px ;
+
+}
+
+.dashboard-agent-list-item-info-container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+ .dashboard-agent-list-item-info-item
+{
+    /* background-color:cadetblue;  */
+    /* border: var(--border); */
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+} 
+
+.agent-title
+{
+   font-size: 32px;
+   /* background-color: aqua; */
+   margin-top: 10px;
+   margin-bottom: 4px;
+   
+}
+
+.agent-location
+{
+    font-size: 12px;
+    margin-top: -1px;
+    /* background-color: blanchedalmond; */
+}
+
+.agent-status
+{
+    font-size: 18px;
+}
+
+.dashboard-agent-list-item
+{
+    display: flex;
+    flex-direction: row;
+    
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.agent-icon
+{
+    background-color:antiquewhite;
+    
+    height: 70px;
+    width: 70px;
+
+    border-radius: 10px;
+}
+
+.agent-active-toggle{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: var(--bg-accent);
+    border-color: var(--bg-accent);
+    box-shadow: 0 0 10px var(--bg-accent);
+
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
+    margin: 0;
+}
+.agent-active-toggle input{
+    display: none;
+}
+
+
+
+.agent-inactive-toggle{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: #01000565;
+    border-color: var(--bg-accent);
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
+    margin: 0;
+}
+.agent-inactive-toggle input{
+    display: none;
+}
+
+.dashboard-map
+{
+    background-color: var(--bg-container);
+    height: 100%;
+    width: 58%;
+    border-radius: 10px;
+    padding-left: 10px;
+
+}
+
+.dashboard-bottom-flexbox
+{
+    /* background-color: blue; */
+
+    height: 35%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.dashboard-topics
+{
+    background-color:var(--bg-container);
+    height: 100%;
+    width: 25%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.dashboard-messages
+{
+    background-color:var(--bg-container);
+    
+    height: 100%;
+    width: 45%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.dashboard-joystick
+{
+    background-color:var(--bg-container);
+    /* background-color:aqua; */
+    height: 100%;
+    width: 25%;
+    border-radius: 10px;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.container-text{
+    /* background-color:greenyellow; */
+}
+
+.joystick-container {
+    /* background-color:aqua; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:75%;
+    width: 100%; /* Set the width to 100% */
+  }
+
+.sim-buttons{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 50px;
+    
+}
+
+.startSim-btn{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: #266353;
+    border-color: var(--bg-accent);
+    /* box-shadow: 1px 1px 5px white; */
+    border-radius: 10px;
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
+}
+
+.stopSim-btn{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: #b33d2e;
+    border-color: var(--bg-accent);
+    /* box-shadow: 1px 1px 5px white; */
+    border-radius: 10px;
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
+}
