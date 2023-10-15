@@ -170,7 +170,7 @@
     border-radius: 10px;
 }
 
-.agent-active-button{
+.agent-active-toggle{
     transition: all 0.3s ease 0s;
     cursor: pointer;
     background-color: var(--bg-accent);
@@ -183,9 +183,15 @@
     color: var(--text-color);
     font-size: 16px;
     padding: 5px 15px;
+    margin: 0;
+}
+.agent-active-toggle input{
+    display: none;
 }
 
-.agent-inactive-button{
+
+
+.agent-inactive-toggle{
     transition: all 0.3s ease 0s;
     cursor: pointer;
     background-color: #01000565;
@@ -196,6 +202,10 @@
     color: var(--text-color);
     font-size: 16px;
     padding: 5px 15px;
+    margin: 0;
+}
+.agent-inactive-toggle input{
+    display: none;
 }
 
 .dashboard-map

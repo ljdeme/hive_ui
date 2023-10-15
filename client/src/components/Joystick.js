@@ -40,22 +40,28 @@ function Joystick(props) {
     const [data, setData] = useState(null);
 
     // Functions
-    const handleJoystickMove = (_, data) => {
-        console.log("Moving");
+    const handleJoystickMove = (evt, data) => {
+        console.log("Moving: " + props.agentName);
         setData(data);
+        if (props.agentName != "null")
+        {
+            // Calculate linear and angular velocities based on joystick input
+            const maxLinear = 5.0; // m/s
+            const maxAngular = 2.0; // rad/s
+            const maxDistance = 75.0; // pixels
 
-        // Calculate linear and angular velocities based on joystick input
-        const maxLinear = 5.0; // m/s
-        const maxAngular = 2.0; // rad/s
-        const maxDistance = 75.0; // pixels
+            const angleRadian = parseFloat(data.angle.radian);
+            const distance = parseFloat(data.distance);
 
-        const angleRadian = parseFloat(data.angle.radian);
-        const distance = parseFloat(data.distance);
+            const linearSpeed = (Math.sin(angleRadian) * maxLinear * distance) / maxDistance;
+            const angularSpeed = (Math.cos(angleRadian) * maxAngular * distance) / maxDistance;
 
-        const linearSpeed = (Math.sin(angleRadian) * maxLinear * distance) / maxDistance;
-        const angularSpeed = (Math.cos(angleRadian) * maxAngular * distance) / maxDistance;
+            sendVelocityCommand(linearSpeed, angularSpeed);
+        }
+        else{
+            console.error("No Agent Selected in joystick!")
+        }
 
-        sendVelocityCommand(linearSpeed, angularSpeed);
     };
 
     return (

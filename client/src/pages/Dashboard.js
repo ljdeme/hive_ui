@@ -1,18 +1,19 @@
-import '../css/dashboard.css';
-import robot_img from '../images/robot.png';
+
 import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Navbar from "../components/Navbar";
+import ROSLIB from 'roslib';
+import robot_img from '../images/robot.png';
 import Joystick from "../components/Joystick";
 import Map from "../components/MapDisplay";
-import ROSLIB from 'roslib';
+import '../css/dashboard.css';
 
 function Dashboard() {
   const location = useLocation();
   const [ros, setRos] = useState(null);
   const [agentListSource, setAgentListSource] = useState(Array.from({ length: 20 }));
-  const [activeAgent, setActiveAgent] = useState(null); // State to track the active agent
+  const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
   const [hasMore, setHasMore] = useState(true);
   const [rosIP, setRosIP] = useState();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -32,8 +33,8 @@ function Dashboard() {
 
   useEffect(() => {
     // This will log the updated activeAgent value whenever it changes.
-    console.log(activeAgent);
-  }, [activeAgent]);
+    console.log(selectedAgentIndex);
+  }, [selectedAgentIndex]);
 
   useEffect(() => {
     if (isUserLoggedIn)
@@ -69,7 +70,24 @@ function Dashboard() {
     // Wait for the ROS connection to be established
     return <div>Loading...</div>;
   }
-  
+
+  const teleop = new ROSLIB.Topic({
+    ros: ros, // Use the ROS connection from props
+    name: `agent${selectedAgentIndex + 1}/command`,
+    messageType: 'std_msgs/Int32'
+  });
+  const sendTeleopValue = (value) => {
+    if (value != null){
+      const command = new ROSLIB.Message({
+        data: value
+      });
+      teleop.publish(command);
+    }
+    else{
+      console.error("No Agent Selected in teleop");
+    }
+  }
+ 
 
   const fetchMoreAgents = () => {
     if (agentListSource.length < 100) {
@@ -81,9 +99,15 @@ function Dashboard() {
     }
   }
 
-  // Function to handle the "Control Agent" button click
   const handleControlAgentClick = (index) => {
-    setActiveAgent(index); // Set the clicked agent as active
+    console.log("In handleControl")
+    if (index === selectedAgentIndex) {
+      sendTeleopValue(2);
+      setSelectedAgentIndex(null);
+    } else {
+      sendTeleopValue(1);
+      setSelectedAgentIndex(index);
+    }
   }
 
   return ( location.state) ? (
@@ -97,17 +121,17 @@ function Dashboard() {
               <p>Agent</p>
               <div className="dashboard-agent-scroll">
                 <InfiniteScroll
-                  className="dashboard-agent-list"
-                  dataLength={agentListSource.length}
-                  next={fetchMoreAgents}
-                  hasMore={hasMore}
-                  loader={<p>Loading...</p>}
-                  endMessage={<p>All Agents Displayed.</p>}
-                  height={500}
+                className="dashboard-agent-list"
+                dataLength={agentListSource.length}
+                next={fetchMoreAgents}
+                hasMore={hasMore}
+                loader={<p>Loading...</p>}
+                endMessage={<p>All Agents Displayed.</p>}
+                height={500}
                 >
                   {agentListSource.map((item, index) => {
                     return (
-                      <div key={index} className={activeAgent === index ? 'dashboard-agent-active-container' : 'dashboard-agent-inactive-container'}>
+                      <div key={index} className={selectedAgentIndex === index ? 'dashboard-agent-active-container' : 'dashboard-agent-inactive-container'}>
                         <div className="dashboard-agent-list-item">
                           <img className="agent-icon" src={robot_img} alt='agent icon'></img>
                         </div>
@@ -123,12 +147,14 @@ function Dashboard() {
                           <h1 className='agent-status'>Status: Busy</h1>
                         </div>
                         <div className="dashboard-agent-list-item">
-                          <button
-                            className={activeAgent === index ? 'agent-active-button' : 'agent-inactive-button'}
-                            onClick={() => handleControlAgentClick(index)}
-                          >
-                            Control Agent
-                          </button>
+                        <label className={selectedAgentIndex === index ? 'agent-active-toggle' : 'agent-inactive-toggle'}>
+                          <input
+                            type="checkbox"
+                            id={`checkbox-${index}`} // Add an ID for the label to reference
+                            checked={selectedAgentIndex === index}
+                            onChange={() => handleControlAgentClick(index)}
+                          /><span>Control Agent</span>
+                        </label>
                         </div>
                       </div>
                     )
@@ -161,12 +187,11 @@ function Dashboard() {
             <div className="dashboard-joystick">
               <p className='container-text'>Joystick</p>
               <div className='joystick-container'>
-                <Joystick ros={ ros } agentName={`agent${activeAgent + 1}`} />
-                {/* <Joystick agentName={`agent${activeAgent + 1}`} /> */}
+                <Joystick ros={ ros } agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} />
               </div>
             </div>
           </div>
-        </div>{/* dashboard-layout*/}
+        </div>
       </div>
     </div>
   ):
