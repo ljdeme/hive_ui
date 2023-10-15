@@ -29,6 +29,7 @@ function Dashboard() {
         console.log(location.state?.fleet.ipaddress)
         setRosIP(location.state?.fleet.ipaddress);
       }
+      // eslint-disable-next-line 
   }, []);
 
   useEffect(() => {
@@ -64,6 +65,7 @@ function Dashboard() {
         ros.close();
       };
     }
+  // eslint-disable-next-line 
   }, [isUserLoggedIn]);
 
   if (!ros) {

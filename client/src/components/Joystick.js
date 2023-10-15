@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactNipple from "react-nipple";
 import ROSLIB from 'roslib';
 
 function Joystick(props) {
-    // State
-    // eslint-disable-next-line
-    const [currentStatus, setCurrentStatus] = useState("Disconnected");
-
-    // Functions
-    const setStatus = (status) => {
-        setCurrentStatus(status);
-    };
-
     const joystick = new ROSLIB.Topic({
         ros: props.ros, // Use the ROS connection from props
         name: `${props.agentName}/joystick`,
@@ -43,7 +34,7 @@ function Joystick(props) {
     const handleJoystickMove = (evt, data) => {
         console.log("Moving: " + props.agentName);
         setData(data);
-        if (props.agentName != "null")
+        if (props.agentName !== "null")
         {
             // Calculate linear and angular velocities based on joystick input
             const maxLinear = 5.0; // m/s
