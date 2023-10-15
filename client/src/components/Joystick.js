@@ -46,9 +46,9 @@ function Joystick(props) {
         if (props.agentName != "null")
         {
             // Calculate linear and angular velocities based on joystick input
-            const maxLinear = 5.0; // m/s
-            const maxAngular = 2.0; // rad/s
-            const maxDistance = 75.0; // pixels
+            const maxLinear = 1.0; // m/s
+            const maxAngular = 1.0; // rad/s
+            const maxDistance = 100.0; // pixels
 
             const angleRadian = parseFloat(data.angle.radian);
             const distance = parseFloat(data.distance);
