@@ -5,7 +5,7 @@ import ROSLIB from 'roslib';
 function Joystick(props) {
     const joystick = new ROSLIB.Topic({
         ros: props.ros, // Use the ROS connection from props
-        name: `${props.agentName}/joystick`,
+        name: `${props.agentName}/cmd_vel`,
         messageType: 'geometry_msgs/Twist'
     });
 
@@ -26,6 +26,23 @@ function Joystick(props) {
         joystick.publish(twist);
     }
 
+    const stopVelocityCommand = () => {
+        const twist = new ROSLIB.Message({
+            linear: {
+                x: 0,
+                y: 0,
+                z: 0,
+            },
+            angular: {
+                x: 0,
+                y: 0,
+                z: 0,
+            },
+        });
+
+        joystick.publish(twist);
+    }
+
     // State
     // eslint-disable-next-line
     const [data, setData] = useState(null);
@@ -39,7 +56,7 @@ function Joystick(props) {
             // Calculate linear and angular velocities based on joystick input
             const maxLinear = 1.0; // m/s
             const maxAngular = 1.0; // rad/s
-            const maxDistance = 100.0; // pixels
+            const maxDistance = 50.0; // pixels
 
             const angleRadian = parseFloat(data.angle.radian);
             const distance = parseFloat(data.distance);
@@ -52,7 +69,10 @@ function Joystick(props) {
         else{
             console.error("No Agent Selected in joystick!")
         }
+    };
 
+    const handleJoystickEnd = (evt, data) => {
+        stopVelocityCommand();
     };
 
     return (
@@ -74,6 +94,7 @@ function Joystick(props) {
                         borderRadius: 1120
                     }}
                     onMove={handleJoystickMove}
+                    onEnd={handleJoystickEnd}
                 />
             </div>
         </div>
