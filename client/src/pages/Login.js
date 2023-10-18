@@ -73,7 +73,7 @@ function Login() {
           sessionStorage.setItem('UID', data.user._id);
           // setUser(data.user); // Set the user data in your state if needed
     
-          navigate("/myFleets?id=" + data.user._id);
+          navigate("/myFleets");
         });
       }
     });

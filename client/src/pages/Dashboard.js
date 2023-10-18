@@ -26,6 +26,7 @@ function Dashboard() {
         // Verify the token on the server (optional)
         // If token is valid, set isLoggedIn to true
         setIsUserLoggedIn(true);
+        console.log(location.state)
         console.log(location.state?.fleet.ipaddress)
         setRosIP(location.state?.fleet.ipaddress);
       }
@@ -38,11 +39,11 @@ function Dashboard() {
   }, [selectedAgentIndex]);
 
   useEffect(() => {
-    if (isUserLoggedIn)
+    if (isUserLoggedIn && rosIP !== undefined)
     {
       // Initialize the ROS connection when the component mounts
       const ros = new ROSLIB.Ros({
-        url: `ws://${rosIP}:9090`, // 192.168.254.128 FOR LOCAL
+        url: `wss://${rosIP}:9090`, // 192.168.254.128 FOR LOCAL
         // url: 'ws://144.126.249.86:9090', // On DigitalOcean
       });
 
@@ -68,7 +69,7 @@ function Dashboard() {
   // eslint-disable-next-line 
   }, [isUserLoggedIn]);
 
-  if (!ros) {
+  if (!ros && (location.state !== null && location.state !== undefined)) {
     // Wait for the ROS connection to be established
     return <div>Loading...</div>;
   }
@@ -112,7 +113,7 @@ function Dashboard() {
     }
   }
 
-  return ( location.state) ? (
+  return ( location.state !== null && location.state !== undefined ) ? (
     <div className="dashboard">
       <Navbar />
       <h1 className='dashboard-header'>{(location.state?.fleet.name).toUpperCase()} CONSOLE</h1>
