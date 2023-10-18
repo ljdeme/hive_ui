@@ -43,7 +43,7 @@ function Dashboard() {
     {
       // Initialize the ROS connection when the component mounts
       const ros = new ROSLIB.Ros({
-        url: `wss://${rosIP}:9090`, // 192.168.254.128 FOR LOCAL
+        url: `ws://${rosIP}:9090`, // 192.168.254.128 FOR LOCAL
         // url: 'ws://144.126.249.86:9090', // On DigitalOcean
       });
 

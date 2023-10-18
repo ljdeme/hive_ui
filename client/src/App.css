@@ -39,60 +39,81 @@
   }
 }
 
-.navbar {
-  height:var(--nav-size);
-  padding: 0 60px;
+.active{
+  color: var(--bg-accent);
+}
+
+nav img {
+  align-items: flex-start;
+  height: min(70px, 10vw);
+}
+
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  white-space: nowrap;
   background-color: var(--bg);
-  border-bottom: var(--border);
-} 
-
-.nav-links li{
-  display: inline-block;
-  padding: 10px 50px;
-} 
-
-.nav-links li a {
-  transition: all 0.3s ease 0s; /* Makes navigation to page smoother */
-  text-decoration: none; /* Removes Underline from links */
-  font-family: "Chakra Petch";
   color: var(--text-color);
-  font-size: 24px;
-} 
+  position: sticky;
+  top: 0;
+  padding: 1rem;
+  border-bottom: var(--border);
+  font-size: clamp(.5rem , 2vw, 1.5rem);
+}
 
-.nav-links li a:hover{
-  font-weight: 600;
+nav ul {
+  display: flex;
+  align-items: center;
+}
+
+nav ul li {
+ list-style: none; 
+}
+
+nav ul li a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  border-radius: 0.5rem;
+}
+
+nav ul li a:hover {
   color: var(--bg-accent);
+  font-weight: 600;
   transition: transform 0.5s;
 }
 
-a:is(:link, :active, :visited).active{
-  color: var(--bg-accent);
-  border-color:var(--bg-accent);
-
+nav .menu {
+  display: none;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.5rem;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2.25rem;
+  height: 2rem;
 }
 
-.navbar-spacer {
-  width: 30%;
+nav .menu span {
+  height: 0.4rem;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 0.2rem;
 }
 
-.nav-login {
+.nav-login{
   transition: all 0.3s ease 0s;
   cursor: pointer;
   background-color: transparent;
-  border-radius: 10px;
   border-color:var(--bg-accent);
   text-decoration: none; /* Removes Underline from links */
   font-family: "Chakra Petch";
   color: var(--text-color);
-  font-size: 24px;
-}
-
-.nav-login:hover{
-  color: var(--bg-accent)
+  border-radius: .5rem;
+  padding: .2rem 1rem;
+  font-size: clamp(.5rem , 2vw, 1.5rem);
 }
 
 .profile-menu{
@@ -101,7 +122,8 @@ a:is(:link, :active, :visited).active{
   font-weight: normal;
   font-family: "Chakra Petch";
   color: var(--text-color);
-  font-size: 24px;
+  margin: 0.2rem 0.5rem;
+  font-size: clamp(.5rem , 2vw, 1.5rem);
 }
 
 .profile-menu:hover{
@@ -112,8 +134,8 @@ a:is(:link, :active, :visited).active{
 
 .submenu-wrap{
   position: absolute;
-  top: 8%;
-  right: 4%;
+  top: 70%;
+  right: 2%;
   width: 225px;
   max-height: 0px;
   overflow: hidden;
@@ -170,91 +192,46 @@ a:is(:link, :active, :visited).active{
   font-weight: 600;
 }
 
+@media (max-width: 650px) {
+  nav .menu {
+      display: flex;
+      align-items: center;
+  }
 
+  nav {
+      flex-direction: column;
+      align-items: flex-start;
+  }
 
+  nav ul {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      margin-bottom: 0.25rem;
+  }
 
+  nav ul.open {
+      display: flex;
+  }
 
+  nav ul li {
+      width: 100%;
+      text-align: center;
+  }
 
+  nav ul li a {
+    margin: 0.2rem 0.5rem;
+    align-self: center;
+    justify-self: center;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Attempts to make a new nav bar */
-/* .navbar
-{
-  height:var(--nav-size);
-  background-color: var(--bg);
-  padding: 0 10rem;
-  border-bottom: var(--border);
+  .submenu-wrap{
+    position: absolute;
+    top: 90%;
+    right: 17%;
+    width: 225px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+  }
 }
-
-.navbar-nav
-{
-  max-width: 100%;
-  height: 100%;
-  display: flex;
-  font-size: 24px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-item
-{
-  width: calc(var(--nav-size) * 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-text
-{
-  --button-size: calc(var(--nav-size) * .6);
-  width: calc(var(--button-size) * 2);
-  height: var(--button-size);
-  
-  display: flex;
-  white-space: nowrap;
-  align-items: center;
-  justify-content: center;
-  
-  transition: filter 300ms;
-}
-.nav-button
-{
-  --button-size: calc(var(--nav-size) * .6);
-  width: calc(var(--button-size) * 2);
-  height: var(--button-size);
-
-  border-radius: 10px;
-  border-color:white;
-  
-  display: flex;
-  white-space: nowrap;
-  align-items: center;
-  justify-content: center;
-  padding: 0 30px;
-  
-  transition: filter 300ms;
-} */
