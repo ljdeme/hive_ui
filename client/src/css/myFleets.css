@@ -1,6 +1,6 @@
 .myFleets-page
 {
-    height: 100vh;
+    min-height: 100vh;
     background-color: var(--bg);
     color: var(--text-color);
     font-family: "Chakra Petch";
@@ -16,10 +16,10 @@
 {
     display: flex;
     flex-direction: row;
-    width: 1400px;
+    width: min(90rem, 90vw);
     
     text-align: left;
-    font-size: 36px;
+    font-size: clamp(.5rem , 2vw, 1.5rem);  
     
     justify-content: space-between;
     align-items: center;
@@ -27,16 +27,16 @@
 }
 
 .add-fleet{
-    color: var(--text-color);
-    background-color: var(--bg);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: transparent;
     border-color:var(--bg-accent);
-    box-shadow: 1px 1px 5px var(--bg-accent);
-    border-radius: 10px;
+    text-decoration: none; /* Removes Underline from links */
     font-family: "Chakra Petch";
-    font-size: 24px;
-    height: 50px;
-    width: 150px;
-   
+    color: var(--text-color);
+    border-radius: .5rem;
+    padding: .2rem 1rem;
+    font-size: clamp(.5rem , 2vw, 1.5rem);  
 }
 
 .myFleets-container
@@ -48,8 +48,7 @@
 .myFleets-layout
 {
     background-color:var(--bg-container);
-    height: 900px;
-    width: 1500px;
+    width: min(90rem, 90vw);
     border-radius: 20px;
 
     flex-shrink: 0;
@@ -65,14 +64,13 @@
 }
 
 
-
+/* 
 .fleet-scroll
 {
     background-color: var(--bg-container);
-    height: 800px;
-    width: 1450px;
+    width: min(85rem, 85vw);
     border-radius: 10px;
-}
+} */
 
 .no-fleets
 {   
@@ -90,6 +88,8 @@
     
     border-radius: 10px;
     padding-left: 10px;
+    
+    font-size: clamp(.5rem , 2vw, 1.5rem);
 }
 
 .fleet-list-container
@@ -105,6 +105,8 @@
     align-items: center;
     justify-content: left;
     border: var(--border);
+    font-size: clamp(.5rem , 2vw, 1.5rem); 
+    width: min(85rem, 85vw);
 }
 
 .fleet-list-item
@@ -114,17 +116,17 @@
     width: 470px;
     margin: 5px;
     border-radius: 10px;
+    font-size: clamp(.5rem , 2vw, 1.5rem); 
 }
 
 .fleet-title
 {
     /* background-color:red; */
-    font-size: 36px;
+    font-size: clamp(.5rem , 2vw, 1.5rem); 
 }
 
 .spacer 
 {
     /* background-color:red; */
-    height: 75px;
-    width: 900px;
+    width: min(50rem, 50vw);
 }
