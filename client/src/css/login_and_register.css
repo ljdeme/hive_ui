@@ -4,29 +4,36 @@
     color:var(--text-color);
     font-family: "Chakra Petch";
     height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
 .authentication-header
 {
     border-bottom: 1px solid var(--bg-accent);
     margin-bottom: 2rem;
+    font-size: clamp(.5rem, 1vw, 1rem);
+}
+
+.authentication-header img{
+    align-items: flex-start;
+    height: min(70px, 10vw);
 }
 
 .form-page
 {
-    height: 100%;
-    display: grid;
-    place-items: center;
+    height: min(100%, 80vh);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
 }
 
 .login-container
 {
-    width: 400px;
+    min-width: 30vw;
     border: 2px solid var(--bg-accent);
-    padding: 30px;
-    border-radius: 30px;
+    margin-top: -3rem;
+    padding: 2rem;
+    border-radius: 3%;
     text-align: center;
     box-shadow: 1px 1px 10px var(--bg-accent);
     z-index: 0;
@@ -40,19 +47,21 @@
 
 .register-container
 {
-    width: 1000px;
+    min-width: 30vw;
     border: 2px solid var(--bg-accent);
-    padding: 30px;
-    border-radius: 30px;
+    margin-top: -3rem;
+    padding: 1rem;
+    border-radius: 3%;
     text-align: center;
     box-shadow: 1px 1px 10px var(--bg-accent);
+    z-index: 0;
 }
 
 .container-half
 {
     width: 45%;
     float: left;
-    margin-left: 30px;
+    margin-left: 1vw;
 }
 
 .input-fields
@@ -64,10 +73,8 @@
 {
     color: var(--text-color);
     text-decoration: underline;
+    font-size: clamp(.5rem , 1rem, 2vw);
 }
-
-
-
 .login-register-swap:hover
 {
     color: var(--bg-accent);
@@ -76,10 +83,10 @@
 label {
 
     display: block;
-    margin-top: 1em;
-    font-size: 15px;
+    margin-top: 1vw;
     font-weight: bold;
     text-align: left;
+    font-size: clamp(.5rem , 1rem, 2vw);
 }
 
 input[type = text] {
@@ -89,6 +96,7 @@ input[type = text] {
     box-sizing: border-box;
     border-radius: 1em;
     margin-top: .5em;
+    font-size: clamp(.5rem , 1rem, 2vw);
 }
   
 textarea[type = text] {
@@ -100,6 +108,7 @@ textarea[type = text] {
     margin-top: .5em;
     margin-bottom: 1.2em;
     resize: none;
+    font-size: clamp(.5rem , 1rem, 2vw);
 }
   
 input[type = email] {
@@ -110,6 +119,7 @@ input[type = email] {
     border-radius: 1em;
     margin-top: .5em;
     margin-bottom: 1.2em;
+    font-size: clamp(.5rem , 1rem, 2vw);
   }
   
 textarea[type = text] 
@@ -122,6 +132,7 @@ textarea[type = text]
     margin-top: .5em;
     margin-bottom: 1.2em;
     resize: none;
+    font-size: clamp(.5rem , 1rem, 2vw);
 }
   
 input[type = password] 
@@ -134,21 +145,7 @@ input[type = password]
     margin-top: .5em;
     margin-bottom: 1.2em;
     font-family: Verdana;
-}
-
-.loginAndRegister-btn
-{
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-    padding: 10px 40px;
-  
-    background-color: transparent;
-    border-radius: 10px;
-    border-color: var(--bg-accent);
-    text-decoration: none; /* Removes Underline from links */
-    font-family: "Chakra Petch";
-    color: #ffffff;
-    font-size: 24px;
+    font-size: clamp(.5rem , 1rem, 2vw);
 }
 
 .error
@@ -158,6 +155,7 @@ input[type = password]
     font-size: 1rem;
     font-weight: bold;
     margin: 1rem;
+    font-size: clamp(.5rem , 1rem, 2vw);
 }
 
 .error-li
@@ -168,4 +166,5 @@ input[type = password]
     font-weight: bold;
     text-align: left;
     margin: 1rem;
+    font-size: clamp(.5rem , 1rem, 2vw);
 }

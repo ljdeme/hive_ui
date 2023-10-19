@@ -114,7 +114,7 @@ function Login() {
               <h1>
                 <Link to="/pages/home.js">
                   <input
-                    className="loginAndRegister-btn"
+                    className="nav-login"
                     type="button"
                     value="Log in"
                     onClick={handleSubmit}

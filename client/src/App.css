@@ -170,7 +170,7 @@ nav .menu span {
 }
 
 .submenu-link img{
-  width: 20px;
+  height: min(25px, 10vw);
   background: #e5e5e5;
   border-radius: 50%;
   padding: 8px;

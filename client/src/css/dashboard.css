@@ -1,6 +1,6 @@
 .dashboard
 {
-    height: 100vh;
+    min-height: 100vh;
     margin: auto;
     background-color: var(--bg);
     color: var(--text-color);
@@ -9,7 +9,7 @@
 .dashboard-header
 {
     text-align: center;
-    font-size: 48px;
+    font-size: clamp(.5rem , 2vw, 4rem);
     margin-top: 0px;
     padding-top: 3rem;
     letter-spacing: 0.3em
