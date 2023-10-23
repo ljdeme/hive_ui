@@ -59,6 +59,7 @@ nav {
   padding: 1rem;
   border-bottom: var(--border);
   font-size: clamp(.5rem , 2vw, 1.5rem);
+  z-index: 1;
 }
 
 nav ul {
