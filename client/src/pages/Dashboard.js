@@ -7,6 +7,7 @@ import ROSLIB from 'roslib';
 import robot_img from '../images/robot.png';
 import Joystick from "../components/Joystick";
 import Map from "../components/MapDisplay";
+// import Test from "./Testing";
 import '../css/dashboard.css';
 
 function Dashboard() {
@@ -168,6 +169,7 @@ function Dashboard() {
             <div className="dashboard-map">
               <p className='container-text'>Map</p>
               <Map ros={ ros } />
+              {/* <Test/> */}
             </div>
           </div>
 

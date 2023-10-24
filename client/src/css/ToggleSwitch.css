@@ -3,6 +3,7 @@
     display: inline-block;
     width: 50px;
     height: 25px;
+    z-index: 0;
   }
   .toggle-switch input[type="checkbox"] {
     display: none;

@@ -11,6 +11,7 @@ import MyFleets from "./pages/MyFleets";
 import Dashboard from "./pages/Dashboard";
 import Documentation from "./pages/Documentation";
 import Profile from "./pages/Profile";
+// import Testing from "./pages/Testing";
 
 function App() {
   return (
@@ -62,6 +63,10 @@ function App() {
             path="/profile"
             element={<Profile />} />
           <Route/>
+          {/* <Route
+            path="/testing"
+            element={<Testing />} />
+          <Route/> */}
       </Routes>
     </div>
   );

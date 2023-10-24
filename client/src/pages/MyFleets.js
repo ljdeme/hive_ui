@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import ToggleSwitch from "../components/ToggleSwitch";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Popup from "../components/Popup";
+import "../css/myFleets.css";
 import "../css/addFleet.css";
 
 function MyFleets() {
