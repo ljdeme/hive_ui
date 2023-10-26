@@ -5,10 +5,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Navbar from "../components/Navbar";
 import ROSLIB from 'roslib';
 import robot_img from '../images/robot.png';
-import Joystick from "../components/Joystick";
+// import Joystick from "../components/Joystick";
 import Map from "../components/MapDisplay";
-// import Test from "./Testing";
+import SliderComponent from "../components/SliderComponent";
 import '../css/dashboard.css';
+import KeyboardControl from "../components/KeyboardControl";
 
 function Dashboard() {
   const location = useLocation();
@@ -18,6 +19,7 @@ function Dashboard() {
   const [hasMore, setHasMore] = useState(true);
   const [rosIP, setRosIP] = useState();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [speed, setSpeed] = useState(50);
 
   // Grab fleets if user is logged in
   useEffect(() => {
@@ -38,7 +40,7 @@ function Dashboard() {
     // This will log the updated activeAgent value whenever it changes.
     console.log(selectedAgentIndex);
   }, [selectedAgentIndex]);
-
+ 
   useEffect(() => {
     if (isUserLoggedIn && rosIP !== undefined)
     {
@@ -80,6 +82,7 @@ function Dashboard() {
     name: `agent${selectedAgentIndex + 1}/command`,
     messageType: 'std_msgs/Int32'
   });
+
   const sendTeleopValue = (value) => {
     if (value != null){
       const command = new ROSLIB.Message({
@@ -190,9 +193,11 @@ function Dashboard() {
               <p>Messages</p>
             </div>
             <div className="dashboard-joystick">
-              <p className='container-text'>Joystick</p>
-              <div className='joystick-container'>
-                <Joystick ros={ ros } agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} />
+              <p className='container-text'>Teleoperation</p>
+              <div className='teleop-container'>
+                <SliderComponent setSpeed={setSpeed} />
+                <KeyboardControl ros={ ros } agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} speed={speed} />
+                {/* <Joystick ros={ ros } agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} /> */}
               </div>
             </div>
           </div>
