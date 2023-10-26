@@ -1,0 +1,53 @@
+.keyboard-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    width: 100%;
+    color: var(--bg);
+    
+}
+.keyboard-layout-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: .5rem;
+}
+.keyboard-layout-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+  
+  .key-box {
+    width: 70px;
+    height: 70px;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  }
+
+  .key-box-space {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  }
+  
+  .key-box.glow {
+    background-color: var(--bg); /* Change this to your desired glowing color */
+    color: var(--bg-accent);
+}
