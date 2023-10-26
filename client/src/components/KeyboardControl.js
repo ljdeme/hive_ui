@@ -25,42 +25,44 @@ function KeyboardControl(props) {
             let updatedLinearX = linearX;
             let updatedLinearY = linearY;
             let updatedAngularZ = angularZ;
+
             // eslint-disable-next-line
             switch (event.keyCode) {
                 case 65:
-                    console.log("turning left");
+                    console.log("Strafe left");
                     updatedKeysPressed.A = true;
-                    // eslint-disable-next-line
-                    angularZ = 1 * (props.speed / 100);
-                    console.log("turning left at " + angularZ);
+                   
+                    linearY = 1 * (props.speed/100);
+                    console.log("Strafing left at " + linearY);
                     break;
                 case 87:
                     // eslint-disable-next-line
                     updatedKeysPressed.W = true;
                     // eslint-disable-next-line
-                    linearX = 0.5 * (props.speed/100);
+                    linearX = 1 * (props.speed/100);
                     console.log("Going Straight at " + linearX);
                     break;
                 case 68:
                     updatedKeysPressed.D = true;
-                    angularZ = -1 * (props.speed/100);
-                    console.log("turning right at " + angularZ);
+                    linearY = -1 * (props.speed/100);
+                    console.log("Strafing right at " + linearY);
                     break;
                 case 83:
                     updatedKeysPressed.S = true;
-                    linearX = -0.5 * (props.speed/100);
+                    linearX = -1 * (props.speed/100);
                     console.log("Going reverse at " + linearX);
                     break;
                 case 69:
                     updatedKeysPressed.E = true;
                     // eslint-disable-next-line
-                    linearY = -0.5 * (props.speed/100);
-                    console.log("Strafing right at " + linearY);
+                    angularZ = 1 * (props.speed/100);
+                    console.log("turning right at " + angularZ);
                     break;
                 case 81:
+                    // eslint-disable-next-line
                     updatedKeysPressed.Q = true;
-                    linearY = 0.5 * (props.speed/100);
-                    console.log("Strafing left at " + linearY);
+                    angularZ = -1 * (props.speed / 100);
+                    console.log("turning left at " + angularZ);
                     break;
                 case 16:
                     updatedKeysPressed.SHIFT = true;
@@ -86,7 +88,7 @@ function KeyboardControl(props) {
             switch (event.keyCode) {
                 case 65:
                     updatedKeysPressed.A = false;
-                    angularZ = 0;
+                    linearY = 0;
                     break;
                 case 87:
                     updatedKeysPressed.W = false;
@@ -94,7 +96,7 @@ function KeyboardControl(props) {
                     break;
                 case 68:
                     updatedKeysPressed.D = false;
-                    angularZ = 0;
+                    linearY = 0;
                     break;
                 case 83:
                     updatedKeysPressed.S = false;
@@ -102,11 +104,11 @@ function KeyboardControl(props) {
                     break;
                 case 69:
                     updatedKeysPressed.E = false;
-                    linearY = 0;
+                    angularZ = 0;
                     break;
                 case 81:
                     updatedKeysPressed.Q = false;
-                    linearY = 0;
+                    angularZ = 0;
                     break;
                 case 16:
                     updatedKeysPressed.SHIFT = false;
@@ -150,12 +152,12 @@ function KeyboardControl(props) {
             linear: {
                 x: linearX,
                 y: linearY,
-                z: angularZ,
+                z: 0,
             },
             angular: {
-                x: angularZ,
+                x: 0,
                 y: 0,
-                z: 0,
+                z: angularZ,
             },
         });
 
