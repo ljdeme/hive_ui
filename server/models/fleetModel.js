@@ -26,6 +26,11 @@ const fleetSchema = new Schema({
         topic: String,
     }],
 
+    numagents:[{
+        type:Number, 
+        required:true
+    }],
+
     agents:[{
         name : String,
         namespace: String,
