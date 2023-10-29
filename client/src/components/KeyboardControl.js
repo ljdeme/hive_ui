@@ -11,126 +11,124 @@ function KeyboardControl(props) {
         Q: false,
         E: false,
     });
-    var [linearX, setLinearX] = useState(0);
-    var [linearY, setLinearY] = useState(0);
-    var [angularZ, setAngularZ] = useState(0);
+
+    const [velocities, setVelocities] = useState({
+        linearX: 0,
+        linearY: 0,
+        angularZ: 0,
+    });
+
+    const [pressedKeys, setPressedKeys] = useState([]);
+    
+    const handleKeyUp = (event) => {
+        event.stopPropagation();
+        const updatedKeysPressed = { ...keysPressed };
+        const updatedVelocities = { ...velocities };
+        setPressedKeys(pressedKeys.filter(key => key !== event.key));
+
+        if (event.keyCode === 87) // W
+        {
+            updatedKeysPressed.W = false;
+            updatedVelocities.linearX = 0;
+        }    
+        else if (event.keyCode === 83) // S
+        {
+            updatedKeysPressed.S = false;
+            updatedVelocities.linearX = 0;
+        }
+            
+        if (event.keyCode === 65) // A
+        {
+           updatedKeysPressed.A = false;
+           updatedVelocities.linearY = 0;
+        }  
+        else if (event.keyCode === 68) // D
+        {
+            updatedKeysPressed.D = false;
+            updatedVelocities.linearY = 0;
+        }
+            
+        if (event.keyCode === 81) // Q
+        {
+            updatedKeysPressed.Q = false;
+            updatedVelocities.angularZ = 0;
+        }
+            
+        else if (event.keyCode === 69) // E
+        {
+            updatedKeysPressed.E = false;
+            updatedVelocities.angularZ = 0; 
+        }
+          
+        sendVelocityCommand(updatedVelocities.linearX, updatedVelocities.linearY, updatedVelocities.angularZ);
+
+        // Update the state with the new key presses
+        setKeysPressed(updatedKeysPressed);
+        setVelocities(updatedVelocities);
+    };
+
+    const handleKeyDown = (event) => {
+        const updatedKeysPressed = { ...keysPressed };
+        const updatedVelocities = { ...velocities };
+
+        if (!pressedKeys.includes(event.key)) {
+            setPressedKeys([...pressedKeys, event.key]);
+        }
+
+        if (event.keyCode === 87) // W
+        {
+            updatedKeysPressed.W = true;
+            updatedVelocities.linearX = 1;
+        }    
+        else if (event.keyCode === 83) // S
+        {
+            updatedKeysPressed.S = true;
+            updatedVelocities.linearX = -1;
+        }
+
+        if (event.keyCode === 65) // A
+        {
+           updatedKeysPressed.A = true;
+           updatedVelocities.linearY = 1;
+        }  
+        else if (event.keyCode === 68) // D
+        {
+            updatedKeysPressed.D = true;
+            updatedVelocities.linearY = -1;
+        }
+            
+        if (event.keyCode === 81) // Q
+        {
+            updatedKeysPressed.Q = true;
+            updatedVelocities.angularZ = -1;
+        }
+        else if (event.keyCode === 69) // E
+        {
+            updatedKeysPressed.E = true;
+            updatedVelocities.angularZ = 1; 
+        }
+
+        if (updatedKeysPressed.W && updatedKeysPressed.S)
+            updatedVelocities.linearX = 0;
+
+        if (updatedKeysPressed.Q && updatedKeysPressed.E)
+            updatedVelocities.angularZ = 0;
+        
+        if (updatedKeysPressed.D && updatedKeysPressed.A)
+            updatedVelocities.linearY = 0;
+        
+        sendVelocityCommand(updatedVelocities.linearX, updatedVelocities.linearY, updatedVelocities.angularZ);
+
+        // Update the state with the new key presses
+        setKeysPressed(updatedKeysPressed);
+        setVelocities(updatedVelocities);
+    };
 
     // Event listener to handle key presses
     useEffect(() => {
-
-        const handleKeyDown = (event) => {
-            console.log(props.speed/100)
-            // Create a copy of the current keysPressed state
-            const updatedKeysPressed = { ...keysPressed };
-            let updatedLinearX = linearX;
-            let updatedLinearY = linearY;
-            let updatedAngularZ = angularZ;
-
-            // eslint-disable-next-line
-            switch (event.keyCode) {
-                case 65:
-                    console.log("Strafe left");
-                    updatedKeysPressed.A = true;
-                   
-                    linearY = 1 * (props.speed/100);
-                    console.log("Strafing left at " + linearY);
-                    break;
-                case 87:
-                    // eslint-disable-next-line
-                    updatedKeysPressed.W = true;
-                    // eslint-disable-next-line
-                    linearX = 1 * (props.speed/100);
-                    console.log("Going Straight at " + linearX);
-                    break;
-                case 68:
-                    updatedKeysPressed.D = true;
-                    linearY = -1 * (props.speed/100);
-                    console.log("Strafing right at " + linearY);
-                    break;
-                case 83:
-                    updatedKeysPressed.S = true;
-                    linearX = -1 * (props.speed/100);
-                    console.log("Going reverse at " + linearX);
-                    break;
-                case 69:
-                    updatedKeysPressed.E = true;
-                    // eslint-disable-next-line
-                    angularZ = 1 * (props.speed/100);
-                    console.log("turning right at " + angularZ);
-                    break;
-                case 81:
-                    // eslint-disable-next-line
-                    updatedKeysPressed.Q = true;
-                    angularZ = -1 * (props.speed / 100);
-                    console.log("turning left at " + angularZ);
-                    break;
-                case 16:
-                    updatedKeysPressed.SHIFT = true;
-                    break;
-            }
-
-            // Update the state with the new key presses
-            setKeysPressed(updatedKeysPressed);
-            setLinearX(updatedLinearX);
-            setLinearY(updatedLinearY);
-            setAngularZ(updatedAngularZ);
-
-            sendVelocityCommand(linearX,linearY,angularZ);
-        };
-
-        const handleKeyUp = (event) => {
-            // Create a copy of the current keysPressed state
-            const updatedKeysPressed = { ...keysPressed };
-            let updatedLinearX = linearX;
-            let updatedLinearY = linearY;
-            let updatedAngularZ = angularZ;
-            // eslint-disable-next-line
-            switch (event.keyCode) {
-                case 65:
-                    updatedKeysPressed.A = false;
-                    linearY = 0;
-                    break;
-                case 87:
-                    updatedKeysPressed.W = false;
-                    linearX = 0;
-                    break;
-                case 68:
-                    updatedKeysPressed.D = false;
-                    linearY = 0;
-                    break;
-                case 83:
-                    updatedKeysPressed.S = false;
-                    linearX = 0;
-                    break;
-                case 69:
-                    updatedKeysPressed.E = false;
-                    angularZ = 0;
-                    break;
-                case 81:
-                    updatedKeysPressed.Q = false;
-                    angularZ = 0;
-                    break;
-                case 16:
-                    updatedKeysPressed.SHIFT = false;
-                    break;
-            }
-
-            // Update the state with the new key releases
-            setKeysPressed(updatedKeysPressed);
-            setLinearX(updatedLinearX);
-            setLinearY(updatedLinearY);
-            setAngularZ(updatedAngularZ);
-
-            sendVelocityCommand(linearX,linearY,angularZ);
-        };
-
-       
-           
-
-       
-
-        window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
+        window.addEventListener('keydown', handleKeyDown);
+        
 
         // Clean up the event listeners
         return () => {
@@ -138,7 +136,7 @@ function KeyboardControl(props) {
             window.removeEventListener('keyup', handleKeyUp);
         };
         // eslint-disable-next-line
-    }, [keysPressed, linearX, linearY, angularZ]);
+    }, [keysPressed]);
 
     const keyboard = new ROSLIB.Topic({
         ros: props.ros, // Use the ROS connection from props
@@ -146,18 +144,18 @@ function KeyboardControl(props) {
         messageType: 'geometry_msgs/Twist',
     });
 
-    const sendVelocityCommand = (linearX,linearY,angularZ) => {
-        console.log("IN sendVelocityCommand")
+    const sendVelocityCommand = (linearX, linearY, angularZ) => {
+        console.log(linearX+ ", " + linearY + ", " +  angularZ + ",");
         const twist = new ROSLIB.Message({
             linear: {
-                x: linearX,
-                y: linearY,
+                x: linearX * props.speed,
+                y: linearY * props.speed,
                 z: 0,
             },
             angular: {
                 x: 0,
                 y: 0,
-                z: angularZ,
+                z: angularZ * props.speed,
             },
         });
 
