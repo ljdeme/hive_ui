@@ -3,140 +3,111 @@ import ROSLIB from 'roslib';
 import '../css/KeyboardControl.css';
 
 function KeyboardControl(props) {
-    const [keysPressed, setKeysPressed] = useState({
-        W: false,
-        A: false,
-        S: false,
-        D: false,
-        Q: false,
-        E: false,
-    });
-
     const [velocities, setVelocities] = useState({
         linearX: 0,
         linearY: 0,
         angularZ: 0,
-    });
-
-    const [pressedKeys, setPressedKeys] = useState([]);
+      });
     
-    const handleKeyUp = (event) => {
-        event.stopPropagation();
-        const updatedKeysPressed = { ...keysPressed };
-        const updatedVelocities = { ...velocities };
-        setPressedKeys(pressedKeys.filter(key => key !== event.key));
+      const movementSpeed = 1; // Set your desired movement speed here
+    
+      const [moving, setMoving] = useState({ 
+        W: 0,
+        A: 0,
+        S: 0,
+        D: 0,
+        Q: 0,
+        E: 0,
+      });
+      const [resetCommandSent, setResetCommandSent] = useState(false);
 
-        if (event.keyCode === 87) // W
-        {
-            updatedKeysPressed.W = false;
-            updatedVelocities.linearX = 0;
-        }    
-        else if (event.keyCode === 83) // S
-        {
-            updatedKeysPressed.S = false;
-            updatedVelocities.linearX = 0;
-        }
-            
-        if (event.keyCode === 65) // A
-        {
-           updatedKeysPressed.A = false;
-           updatedVelocities.linearY = 0;
-        }  
-        else if (event.keyCode === 68) // D
-        {
-            updatedKeysPressed.D = false;
-            updatedVelocities.linearY = 0;
-        }
-            
-        if (event.keyCode === 81) // Q
-        {
-            updatedKeysPressed.Q = false;
-            updatedVelocities.angularZ = 0;
-        }
-            
-        else if (event.keyCode === 69) // E
-        {
-            updatedKeysPressed.E = false;
-            updatedVelocities.angularZ = 0; 
-        }
-          
-        sendVelocityCommand(updatedVelocities.linearX, updatedVelocities.linearY, updatedVelocities.angularZ);
-
-        // Update the state with the new key presses
-        setKeysPressed(updatedKeysPressed);
-        setVelocities(updatedVelocities);
-    };
-
-    const handleKeyDown = (event) => {
-        const updatedKeysPressed = { ...keysPressed };
-        const updatedVelocities = { ...velocities };
-
-        if (!pressedKeys.includes(event.key)) {
-            setPressedKeys([...pressedKeys, event.key]);
-        }
-
-        if (event.keyCode === 87) // W
-        {
-            updatedKeysPressed.W = true;
-            updatedVelocities.linearX = 1;
-        }    
-        else if (event.keyCode === 83) // S
-        {
-            updatedKeysPressed.S = true;
-            updatedVelocities.linearX = -1;
-        }
-
-        if (event.keyCode === 65) // A
-        {
-           updatedKeysPressed.A = true;
-           updatedVelocities.linearY = 1;
-        }  
-        else if (event.keyCode === 68) // D
-        {
-            updatedKeysPressed.D = true;
-            updatedVelocities.linearY = -1;
-        }
-            
-        if (event.keyCode === 81) // Q
-        {
-            updatedKeysPressed.Q = true;
-            updatedVelocities.angularZ = -1;
-        }
-        else if (event.keyCode === 69) // E
-        {
-            updatedKeysPressed.E = true;
-            updatedVelocities.angularZ = 1; 
-        }
-
-        if (updatedKeysPressed.W && updatedKeysPressed.S)
-            updatedVelocities.linearX = 0;
-
-        if (updatedKeysPressed.Q && updatedKeysPressed.E)
-            updatedVelocities.angularZ = 0;
-        
-        if (updatedKeysPressed.D && updatedKeysPressed.A)
-            updatedVelocities.linearY = 0;
-        
-        sendVelocityCommand(updatedVelocities.linearX, updatedVelocities.linearY, updatedVelocities.angularZ);
-
-        // Update the state with the new key presses
-        setKeysPressed(updatedKeysPressed);
-        setVelocities(updatedVelocities);
-    };
-
-    // Event listener to handle key presses
-    useEffect(() => {
-        window.addEventListener('keyup', handleKeyUp);
-        window.addEventListener('keydown', handleKeyDown);
-        
-
-        // Clean up the event listeners
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('keyup', handleKeyUp);
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          switch (e.keyCode) {
+            case 87: // W
+              setMoving((prevState) => ({ ...prevState, W: 1 }));
+              break;
+            case 83: // S
+              setMoving((prevState) => ({ ...prevState, S: -1 }));
+              break;
+            case 65: // A
+              setMoving((prevState) => ({ ...prevState, A: 1 }));
+              break;
+            case 68: // D
+              setMoving((prevState) => ({ ...prevState, D: -1 }));
+              break;
+            case 81: // Q
+              setMoving((prevState) => ({ ...prevState, Q: 1 }));
+              break;
+            case 69: // E
+              setMoving((prevState) => ({ ...prevState, E: -1 }));
+              break;
+            default:
+              break;
+          }
         };
-        // eslint-disable-next-line
-    }, [keysPressed]);
+    
+        const handleKeyUp = (e) => {
+          switch (e.keyCode) {
+            case 87: // W
+              setMoving((prevState) => ({ ...prevState, W: 0 }));
+              break;
+            case 83: // S
+              setMoving((prevState) => ({ ...prevState, S: 0 }));
+              break;
+            case 65: // A
+              setMoving((prevState) => ({ ...prevState, A: 0 }));
+              break;
+            case 68: // D
+              setMoving((prevState) => ({ ...prevState, D: 0 }));
+              break;
+            case 81: // Q
+              setMoving((prevState) => ({ ...prevState, Q: 0 }));
+              break;
+            case 69: // E
+              setMoving((prevState) => ({ ...prevState, E: 0 }));
+              break;
+            default:
+              break;
+          }
+        };
+    
+        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("keyup", handleKeyUp);
+    
+        return () => {
+          document.removeEventListener("keydown", handleKeyDown);
+          document.removeEventListener("keyup", handleKeyUp);
+        };
+      }, [movementSpeed]);
+    
+    useEffect(() => {
+        const moveAgent = () => {
+            const newX = moving.W + moving.S;
+            const newY = moving.A + moving.D;
+            const newZ = moving.Q + moving.E;
+            
+            if (newX !== 0 || newY !== 0 || newZ !== 0) {
+                // Send the movement command
+                sendVelocityCommand(newX, newY, newZ);
+
+                // Reset the state variable to indicate the reset command hasn't been sent
+                setResetCommandSent(false);
+            } else if (!resetCommandSent) {
+                // Send the reset command only if no keys are pressed and it hasn't been sent already
+                sendVelocityCommand(0, 0, 0);
+
+                // Set the state variable to indicate that the reset command has been sent
+                setResetCommandSent(true);
+            }
+
+            setVelocities({ linearX: newX, linearY: newY, angularZ: newZ });
+        };
+        
+        const interval = setInterval(moveAgent, 16);
+    
+        return () => clearInterval(interval);
+    }, [moving, velocities]);
 
     const keyboard = new ROSLIB.Topic({
         ros: props.ros, // Use the ROS connection from props
@@ -145,17 +116,19 @@ function KeyboardControl(props) {
     });
 
     const sendVelocityCommand = (linearX, linearY, angularZ) => {
-        console.log(linearX+ ", " + linearY + ", " +  angularZ + ",");
+        const scaleSpeed = (props.speed / 100.0)
+        console.log(linearX * scaleSpeed+ ", " + linearY * scaleSpeed + ", " +  angularZ * scaleSpeed+ ",");
+        
         const twist = new ROSLIB.Message({
             linear: {
-                x: linearX * props.speed,
-                y: linearY * props.speed,
+                x: linearX * scaleSpeed,
+                y: linearY * scaleSpeed,
                 z: 0,
             },
             angular: {
                 x: 0,
                 y: 0,
-                z: angularZ * props.speed,
+                z: angularZ * scaleSpeed, 
             },
         });
 
@@ -165,17 +138,23 @@ function KeyboardControl(props) {
     return (
         <div className="teleop-layout">
             <div className="keyboard-layout">
-                <div className="keyboard-layout-top ">
-                    <div className={`key-box ${keysPressed.Q ? 'glow' : ''}`} id="Q">Q</div>
-                    <div className={`key-box ${keysPressed.W ? 'glow' : ''}`} id="W">W</div>
-                    <div className={`key-box ${keysPressed.E ? 'glow' : ''}`} id="E">E</div>
+                <div className='velocities'>
+                    <div className='dir'>X: {velocities.linearX}</div>
+                    <div className='dir'>Y: {velocities.linearY}</div>
+                    <div className='dir'>Z: {velocities.angularZ}</div>
                 </div>
-                <div className="keyboard-layout-bottom ">
-                    <div className={`key-box ${keysPressed.A ? 'glow' : ''}`} id="A">A</div>
-                    <div className={`key-box ${keysPressed.S ? 'glow' : ''}`} id="S">S</div>
-                    <div className={`key-box ${keysPressed.D ? 'glow' : ''}`} id="D">D</div>
+                <div className="keyboard-layout-top">
+                    <div className={`key-box ${moving.Q ? 'glow' : ''}`} id="Q">Q</div>
+                    <div className={`key-box ${moving.W ? 'glow' : ''}`} id="W">W</div>
+                    <div className={`key-box ${moving.E ? 'glow' : ''}`} id="E">E</div>
                 </div>
-            </div>
+                <div className="keyboard-layout-bottom">
+                    <div className={`key-box ${moving.A ? 'glow' : ''}`} id="A">A</div>
+                    <div className={`key-box ${moving.S ? 'glow' : ''}`} id="S">S</div>
+                    <div className={`key-box ${moving.D ? 'glow' : ''}`} id="D">D</div>
+                </div>
+
+            </div> 
         </div>
     );
 }

@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home";
 import InProgress from "./pages/InProgress";
@@ -14,6 +14,22 @@ import Profile from "./pages/Profile";
 // import Testing from "./pages/Testing";
 
 function App() {
+  useEffect(() => {
+    // Add an event listener to handle user logout when the browser is closed
+    window.addEventListener("beforeunload", handleLogout);
+
+    return () => {
+      // Remove the event listener when the component unmounts
+      window.removeEventListener("beforeunload", handleLogout);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    // Perform your logout action when the browser is closed
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('UID');
+  };
+
   return (
     <div>
       <script>activePage.js</script>

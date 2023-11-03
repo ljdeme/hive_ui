@@ -77,18 +77,24 @@ function Dashboard() {
     return <div>Loading...</div>;
   }
 
-  const teleop = new ROSLIB.Topic({
+  const cmdInterpreter =  new ROSLIB.Service({
     ros: ros, // Use the ROS connection from props
-    name: `agent${selectedAgentIndex + 1}/command`,
-    messageType: 'std_msgs/Int32'
+    name: '/command_interpreter',
+    messageType: 'hive_states/Decider'
   });
 
-  const sendTeleopValue = (value) => {
-    if (value != null){
-      const command = new ROSLIB.Message({
-        data: value
+  // XYZ not being read when controlled manually 
+  const sendCmd = () => {
+    if (selectedAgentIndex != null){
+      const command = new ROSLIB.ServiceRequest({
+        autoType: 2,
+        id: selectedAgentIndex,
+        command: 2,
+        x: 0,
+        y: 0,
+        z: 0,
       });
-      teleop.publish(command);
+      cmdInterpreter.callService(command);
     }
     else{
       console.error("No Agent Selected in teleop");
@@ -109,11 +115,12 @@ function Dashboard() {
   const handleControlAgentClick = (index) => {
     console.log("In handleControl")
     if (index === selectedAgentIndex) {
-      sendTeleopValue(2);
       setSelectedAgentIndex(null);
+      sendCmd();
+      
     } else {
-      sendTeleopValue(1);
       setSelectedAgentIndex(index);
+      sendCmd();
     }
   }
 
