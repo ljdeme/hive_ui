@@ -20,19 +20,21 @@ function AppWithScripts() {
   useEffect(() => {
     // Load all the scripts one by one
     loadScript('https://cdn.jsdelivr.net/npm/roslib@1/build/roslib.min.js', () => {
-      loadScript('https://cdn.jsdelivr.net/npm/easeljs@1/lib/easeljs.min.js', () => {
-        loadScript('https://cdn.jsdelivr.net/npm/eventemitter2@6/lib/eventemitter2.min.js', () => {
-          loadScript('https://cdn.jsdelivr.net/npm/ros2d@0/build/ros2d.js', () => {
-            // All scripts are loaded, now render your app
-            root.render(
-              <Router>
-                <App />
-              </Router>
-            );
+      loadScript('https://code.createjs.com/1.0.0/createjs.min.js', () => {
+        loadScript('https://cdn.jsdelivr.net/npm/easeljs@1/lib/easeljs.min.js', () => {
+          loadScript('https://cdn.jsdelivr.net/npm/eventemitter2@6/lib/eventemitter2.min.js', () => {
+            loadScript('https://cdn.jsdelivr.net/npm/ros2d@0/build/ros2d.js', () => {
+              // All scripts are loaded, now render your app
+              root.render(
+                <Router>
+                  <App />
+                </Router>
+              );
             });
           });
         });
-      });
+      })
+    });
   }, []);
 
   return (
