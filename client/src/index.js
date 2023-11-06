@@ -29,10 +29,10 @@ function AppWithScripts() {
                 <App />
               </Router>
             );
+            });
           });
         });
       });
-    });
   }, []);
 
   return (

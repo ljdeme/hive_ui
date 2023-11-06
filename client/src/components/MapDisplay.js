@@ -1,8 +1,9 @@
 import React, {  useEffect } from "react";
 import ROSLIB from 'roslib';
+import { Stage, Graphics } from "@createjs/easeljs";
 import '../css/dashboard.css';
 
-function MapDisplay({ ros }) {
+function MapDisplay({ ros, agents, tfnamespaces}) {
     // Functions
     useEffect(() => {
         console.log('useEffect is running');
@@ -24,11 +25,62 @@ function MapDisplay({ ros }) {
             continuous: true
         });
 
+        var rootObject = viewer.scene
+
         // Scale the canvas to fit the map
         gridClient.on('change', function() {
             viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
             viewer.shift(gridClient.currentGrid.pose.position.x, gridClient.currentGrid.pose.position.y);
         });
+
+        // get a handle to the stage
+        var stage;
+        if (rootObject instanceof Stage) {
+            stage = rootObject;
+        } else {
+            stage = rootObject.stage;
+        }
+
+        var robotMarker = new ROS2D.NavigationArrow({
+            size : 25,
+            strokeSize : 1,
+            strokeColor : Graphics.getRGB(255, 128, 0, 0.66),
+            fillColor : Graphics.getRGB(255,0,0,1),
+            pulse : true,
+        });
+
+
+        robotMarker.visible = true;
+
+        rootObject.addChild(robotMarker);        
+        var initScaleSet = false;
+
+        var updateRobotPosition = function(pose, orientation, marker) {
+            // update the robots position on the map
+            marker.x = pose.x;
+            marker.y = -pose.y;
+            if (!initScaleSet) {
+              robotMarker.scaleX = 1.0 / stage.scaleX;
+              robotMarker.scaleY = 1.0 / stage.scaleY;
+              initScaleSet = true;
+            }
+            // change the angle
+            marker.rotation =  0;
+            //rootObject.rosQuaternionToGlobalTheta(orientation);
+            // Set visible
+            marker.visible = true;
+            console.log(marker)
+          };
+          var tfClient = new ROSLIB.TFClient({
+            ros : ros,
+            fixedFrame : 'map',
+            angularThres : 0.01,
+            transThres : 0.01
+          });
+        tfClient.subscribe('agent1/base_link', function(tf) {
+            updateRobotPosition(tf.translation, tf.rotation, robotMarker);
+        });
+
     }, [ros]);
 
     // ===================== Start and End Sim =====================
@@ -56,7 +108,6 @@ function MapDisplay({ ros }) {
 
     return (
         <div>
-            
             <div id="map"></div>
             <div className="sim-buttons">
                 <button className='startSim-btn' onClick={startRosSim}>START SIM</button>
