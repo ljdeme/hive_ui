@@ -1,13 +1,62 @@
 import React, {  useEffect } from "react";
 import ROSLIB from 'roslib';
-import { Stage, Graphics } from "@createjs/easeljs";
+import { Stage, Graphics, Shape, Ticker } from "@createjs/easeljs";
 import '../css/dashboard.css';
 
 function MapDisplay({ ros, agents, tfnamespaces}) {
+
+    const createjs = window.createjs;
+    const ROS2D = window.ROS2D;
+
+    MapDisplay.NavigationArrow = function(options){
+        var that = this;
+        options = options || {};
+        var size = options.size || 10;
+        var strokeSize = options.strokeSize || 3;
+        var strokeColor = options.strokeColor || createjs.Graphics.getRGB(0, 0, 0);
+        var fillColor = options.fillColor || createjs.Graphics.getRGB(255, 0, 0);
+        var pulse = options.pulse;
+
+        // draw the arrow
+        var graphics = new createjs.Graphics();
+        // line width
+        graphics.setStrokeStyle(strokeSize);
+        graphics.moveTo(-size / 2.0, -size / 2.0);
+        graphics.beginStroke(strokeColor);
+        graphics.beginFill(fillColor);
+        graphics.lineTo(size, 0);
+        graphics.lineTo(-size / 2.0, size / 2.0);
+        graphics.lineTo(-size / 2.0, -size / 2.0);
+        graphics.endFill();
+        graphics.endStroke();
+
+        // create the shape
+        createjs.Shape.call(this, graphics);
+
+        // check if we are pulsing
+        if (pulse) {
+        // have the model "pulse"
+        var growCount = 0;
+        var growing = true;
+        createjs.Ticker.addEventListener('tick', function() {
+            if (growing) {
+            that.scaleX *= 1.035;
+            that.scaleY *= 1.035;
+            growing = (++growCount < 10);
+            } else {
+            that.scaleX /= 1.035;
+            that.scaleY /= 1.035;
+            growing = (--growCount < 0);
+            }
+        });
+        }
+
+    };
+    MapDisplay.NavigationArrow.prototype.__proto__ = createjs.Shape.prototype;
+
     // Functions
     useEffect(() => {
         console.log('useEffect is running');
-        const ROS2D = window.ROS2D;
 
         // Create the main viewer.
         const viewer = new ROS2D.Viewer({
@@ -41,7 +90,7 @@ function MapDisplay({ ros, agents, tfnamespaces}) {
             stage = rootObject.stage;
         }
 
-        var robotMarker = new ROS2D.NavigationArrow({
+        var robotMarker = new MapDisplay.NavigationArrow({
             size : 25,
             strokeSize : 1,
             strokeColor : Graphics.getRGB(255, 128, 0, 0.66),
