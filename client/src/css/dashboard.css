@@ -1,3 +1,61 @@
+.App-logo {
+    height: 10vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+@keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+
+.connection-alert{
+    color: var(--text-color);
+}   
+
+.try-again{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: #bf953a;
+    border-color: var(--bg-accent);
+    /* box-shadow: 1px 1px 5px white; */
+    border-radius: 10px;
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
+}
+
+.cancel{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: transparent;
+    border-color: var(--bg-accent);
+    /* box-shadow: 1px 1px 5px white; */
+    border-radius: 10px;
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 5px 15px;
+}
+
+.loading-options{
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+}
+
 .dashboard
 {
     min-height: 100vh;

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Navbar from "../components/Navbar";
 import ROSLIB from 'roslib';
@@ -10,9 +10,13 @@ import Map from "../components/MapDisplay";
 import SliderComponent from "../components/SliderComponent";
 import '../css/dashboard.css';
 import KeyboardControl from "../components/KeyboardControl";
+import Popup from "../components/Popup";
+import logo from '../images/hex.png';
 
 function Dashboard() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [ros, setRos] = useState(null);
   const [agentListSource, setAgentListSource] = useState(Array.from({ length: 20 }));
   const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
@@ -20,6 +24,10 @@ function Dashboard() {
   const [rosIP, setRosIP] = useState();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [speed, setSpeed] = useState(50);
+
+  // ROS Connection Alert
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
   // Grab fleets if user is logged in
   useEffect(() => {
@@ -52,14 +60,19 @@ function Dashboard() {
 
       ros.on('connection', () => {
         console.log('Connected to ROS');
+        setLoading(false);
       });
 
       ros.on('error', (error) => {
         console.error('Error connecting to ROS:', error);
+        setError('Failed to connect to ROS. Please try again.');
+        setLoading(false);
       });
 
       ros.on('close', () => {
         console.log('Disconnected from ROS');
+        setError('Disconnected from ROS. Please try again.');
+        setLoading(false);
       });
 
       setRos(ros);
@@ -130,6 +143,31 @@ function Dashboard() {
       <h1 className='dashboard-header'>{(location.state?.fleet.name).toUpperCase()} CONSOLE</h1>
       <div className="dashboard-container">
         <div className="dashboard-layout">
+        <div className="connection-alert">
+           <Popup trigger={loading}>
+           <img src={logo} className="App-logo" alt="logo"/>
+            <p>
+              Connecting...
+            </p>
+            <button className="cancel" onClick={() => {
+                navigate("/myFleets");
+              }}>Cancel </button>
+          </Popup>
+          <Popup trigger={error !== null}>
+            <div className="error-popup">
+              <p>{error}</p>
+              <div className="loading-options">
+                <button className="cancel" onClick={() => {
+                  navigate("/myFleets");
+                }}>Cancel </button>
+                <button className="try-again" onClick={() => {
+                  setLoading(true);
+                  setError(null);
+                }}>Try Again</button>
+              </div>
+            </div>
+          </Popup>
+          </div>
           <div className="dashboard-top-flexbox">
             <div className="dashboard-agent">
               <p>Agent</p>
@@ -178,7 +216,7 @@ function Dashboard() {
             </div>
             <div className="dashboard-map">
               <p className='container-text'>Map</p>
-              <Map ros={ ros } />
+              {/* <Map ros={ ros } /> */}
               {/* <Test/> */}
             </div>
           </div>
