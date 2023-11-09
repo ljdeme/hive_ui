@@ -1,4 +1,7 @@
 import React from 'react';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 function FleetForm({ initialValues, formErrors, handleChange, handleSubmit, handleClose, buttonText }) {
   return (
@@ -6,7 +9,6 @@ function FleetForm({ initialValues, formErrors, handleChange, handleSubmit, hand
         <div className="form-page">
         <form className='form-container'>
             <div className='form-container-half'>
-            <label className="form-header">Fleet Information:</label>
             <label>Fleet Name:
                 <input
                 type="text"
@@ -29,28 +31,26 @@ function FleetForm({ initialValues, formErrors, handleChange, handleSubmit, hand
             </label>
             </div>
             <div className='form-container-half'>
-            <div className='Workspace-area'>
-                <label className="form-header">Estimated 2D Workspace Area:</label>
-                <label>X:
+            <div className='additional-info'>
+                <label className='numAgents'>Number of Agents:
                 <input
                     type="text"
-                    name="workspaceX"
-                    placeholder="X"
-                    value={initialValues.workspaceX}
+                    name="numAgents"
+                    placeholder="1-10 (Limit 10)"
+                    value={initialValues.numAgents}
                     onChange={handleChange}
                 />
-                <p className="error">{formErrors.workspaceX}</p>
+                <p className="error">{formErrors.numAgents}</p>
                 </label>
-                <label>Y:
+                <label>
                 <input
-                    type="text"
-                    name="workspaceY"
-                    placeholder="Y"
-                    value={initialValues.workspaceY}
-                    onChange={handleChange}
+                    className='isSimBox'
+                    type="checkbox"
+                    name="isSim"
+                    checked={initialValues.isSim}
+                    onChange={(e) => handleChange({ target: { name: 'isSim', value: e.target.checked } })}
                 />
-                <p className="error">{formErrors.workspaceY}</p>
-                </label>
+                 Is Simulation:</label>
             </div>
             </div>
         </form>

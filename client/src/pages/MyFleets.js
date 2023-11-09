@@ -82,8 +82,8 @@ function MyFleets() {
     fleetID:"",
     fleetName: "",
     fleetIP: "",
-    workspaceX: "",
-    workspaceY: "",
+    numAgents: "",
+    isSim: "",
   };
 
   const [fleetFormValues, setFleetFormValues] = useState(initialValues);
@@ -164,11 +164,14 @@ function MyFleets() {
     if (values.fleetIP === "") {
       errors.fleetIP = "*Fleet IP is blank";
     }
-    if (values.workspaceX === "") {
-      errors.workspaceX = "*X area is blank";
+    if (values.numAgents === "") {
+      errors.numAgents = "*Number of Agents area is blank";
     }
-    if (values.workspaceY === "") {
-      errors.workspaceY = "*Y area is blank";
+    if (values.numAgents > 10) {
+      errors.numAgents = "*Number of Agents must be between 1-10";
+    }
+    else if (values.numAgents <= 0) {
+      errors.numAgents = "*Number of Agents must be between 1-10";
     }
     return errors;
   };
@@ -185,6 +188,8 @@ function MyFleets() {
       fleetID: fleet._id,
       fleetName: fleet.name,
       fleetIP: fleet.ipaddress,
+      numAgents: fleet.numagents,
+      isSim: fleet.issim
     });
     setShowFleetForm(true);
     setShowEditFleet(true);
@@ -202,7 +207,7 @@ function MyFleets() {
   };
 
   const handleAddFleet = (values) => {
-    console.log(userID + ", " + values.fleetName + ", " + values.fleetIP);
+    console.log(userID + ", " + values.fleetName + ", " + values.fleetIP, values.numAgents, values.isSim);
     fetch('/api/fleets', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -210,6 +215,8 @@ function MyFleets() {
         userid: userID,
         name: values.fleetName,
         ipaddress: values.fleetIP,
+        numagents: values.numAgents,
+        issim: values.isSim,
       }),
     })
       .then((data) => {
@@ -224,7 +231,7 @@ function MyFleets() {
   };
 
   const handleEditFleet = (values) => {
-    console.log(values._id + ", " + values.fleetName + ", " + values.fleetIP);
+    console.log(userID + ", " + values.fleetName + ", " + values.fleetIP, values.numAgents, values.isSim);
     fetch('/api/fleets', {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -232,6 +239,8 @@ function MyFleets() {
         fleetid: values.fleetID,
         name_new: values.fleetName,
         ipaddress_new: values.fleetIP,
+        numagents_new: values.numAgents,
+        issim_new: values.isSim,
       }),
     })
       .then((data) => {
@@ -325,9 +334,9 @@ function MyFleets() {
                         />
                         <Popup trigger={showFleetForm}>
                           <div className="popup-page">
-                            <p className="form-title">
+                            <h1 className="form-title">
                               {isEditingFleet ? 'Edit Fleet' : 'Add a Fleet'}
-                            </p>
+                            </h1>
                             <FleetForm
                               initialValues={fleetFormValues}
                               formErrors={fleetFormErrors}

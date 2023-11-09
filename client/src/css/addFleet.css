@@ -24,10 +24,30 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    gap: 20px;
 }
+
 
 .form-header{
     font-family: "Chakra Petch";
+    font-size: 18px;
+}
+
+.additional-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.numAgents{
+    margin-top: -1px;
+}
+
+.isSimBox{
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    margin-top: 22px;
     font-size: 18px;
 }
 

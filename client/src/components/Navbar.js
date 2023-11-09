@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate} from "react-router-dom";
 import logo from "../images/hive-logo.png";
-import settings from '../images/settings.png';
 import logout from '../images/logout.png';
 
 export default function Navbar() {
@@ -33,10 +32,6 @@ export default function Navbar() {
         navigate("/");
     }
 
-    function handleSettings() {
-        // Clear the user's session by removing the token from localStorage
-    }
-
     return (
         <nav>
             <NavLink id='hive' to='/'>
@@ -62,11 +57,6 @@ export default function Navbar() {
                         <button className='profile-menu' onClick={toggleMenu}>Profile &#9663;</button>
                         <div className={isSubMenuOpen ? "submenu-wrap open-menu" : "submenu-wrap"} id='submenu'>
                             <div className='submenu'>
-                                <div className='submenu-link' onClick={handleSettings}>
-                                    <img src={settings} alt='settings gear img' />
-                                    <p>Settings</p>
-                                    <span>&gt;</span>
-                                </div>
                                 <div className='submenu-link' onClick={handleLogout}>
                                     <img src={logout} alt='logout img' />
                                     <p>Logout</p>

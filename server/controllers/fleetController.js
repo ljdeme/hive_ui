@@ -26,12 +26,12 @@ const getFleets = async (req, res) => {
     }
   };
 
-// create a new user
+// create a new fleet
 const createFleet = async(req, res) => {
-    const {ipaddress, name, userid} = req.body
+    const {numagents, issim, ipaddress, name, userid} = req.body
 
     try{
-        const fleet = await Fleet.create({ipaddress: ipaddress, name: name, userid: userid })
+        const fleet = await Fleet.create({numagents: numagents, issim: issim, ipaddress: ipaddress, name: name, userid: userid })
         return res.status(200).json(fleet)
     }
     catch(error){
@@ -55,11 +55,10 @@ const deleteFleet = async(req, res) => {
 }
 
 const updateFleet = async(req, res) => {
-    // const {fleetid, ipaddress_new, name_new, plugins_new, agents_new} = req.body
-    const {fleetid, ipaddress_new, name_new} = req.body
+    const {fleetid, ipaddress_new, name_new, numagents_new, issim_new } = req.body
     filter = {_id : fleetid}
-    update = {ipaddress : ipaddress_new, name : name_new}
-    // update = {ipaddress : ipaddress_new, name : name_new, plugins: plugins_new, agents : agents_new}
+    update = {ipaddress : ipaddress_new, name : name_new, numagents: numagents_new, issim: issim_new}
+    
     try {
         const fleet = await Fleet.findOneAndUpdate(filter, update, {
             new : true
