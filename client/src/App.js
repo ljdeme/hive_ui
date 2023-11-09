@@ -19,55 +19,21 @@ function App() {
     <div>
       <script>activePage.js</script>
       <Routes>
-          <Route
-            path="/"
-            element={<Landing />} />
-          <Route/>
-          <Route
-            path="/inprogress"
-            element={<InProgress />} />
-          <Route/>
-          <Route
-            path="/home"
-            element={<Home />} />
-          <Route/>
-          <Route
-            path="/login"
-            element={<Login />} />
-          <Route/>
-          <Route
-            path="/register"
-            element={<Register />} />
-          <Route/>
-          <Route
-            path="/about-us"
-            element={<AboutUs />} />
-          <Route/>
-          <Route
-            path="/documentation"
-            element={<Documentation />} />
-          <Route/>
+          <Route path="/" element={<Landing />} />
+          <Route path="/inprogress" element={<InProgress />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/documentation" element={<Documentation />} />
+
           {/* LOGGED IN USER LINKS */}
-          <Route
-            path="/myFleets"
-            element={<MyFleets />} />
-          <Route/>
-          <Route
-            path="/dashboard"
-            element={<Dashboard />} />
-          <Route/>
-          <Route
-            path="/documentation"
-            element={<Documentation />} />
-          <Route/>
-          <Route
-            path="/profile"
-            element={<Profile />} />
-          <Route/>
-          {/* <Route
-            path="/testing"
-            element={<Testing />} />
-          <Route/> */}
+          <Route path="/myFleets" element={<MyFleets />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/documentation" element={<Documentation />} />
+          <Route path="/profile" element={<Profile />} /> 
+          
+          {/* <Route path="/testing" element={<Testing />} /> */}
       </Routes>
     </div>
   );
