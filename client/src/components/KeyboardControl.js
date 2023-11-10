@@ -37,10 +37,10 @@ function KeyboardControl(props) {
               setMoving((prevState) => ({ ...prevState, D: -1 }));
               break;
             case 81: // Q
-              setMoving((prevState) => ({ ...prevState, Q: 1 }));
+              setMoving((prevState) => ({ ...prevState, Q: -1 }));
               break;
             case 69: // E
-              setMoving((prevState) => ({ ...prevState, E: -1 }));
+              setMoving((prevState) => ({ ...prevState, E: 1 }));
               break;
             default:
               break;
@@ -107,6 +107,7 @@ function KeyboardControl(props) {
         const interval = setInterval(moveAgent, 16);
     
         return () => clearInterval(interval);
+      // eslint-disable-next-line
     }, [moving, velocities]);
 
     const keyboard = new ROSLIB.Topic({

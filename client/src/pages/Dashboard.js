@@ -17,10 +17,12 @@ function Dashboard() {
   const location = useLocation();
   const navigate = useNavigate();
   const [ros, setRos] = useState(null);
-  const [agentListSource, setAgentListSource] = useState(Array.from({ length: 20 }));
+
   const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
   const [hasMore, setHasMore] = useState(true);
   const [rosIP, setRosIP] = useState();
+  const [agentListSource, setAgentListSource] = useState(Array.from({ length: location.state?.fleet.numagents}));
+  
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [speed, setSpeed] = useState(50);
 
@@ -89,7 +91,14 @@ function Dashboard() {
     return <div>Loading...</div>;
   }
 
-  const cmdInterpreter =  new ROSLIB.Service({
+  const rosNumAgents = new ROSLIB.Param({
+    ros: ros,
+    name: 'numAgents'
+  });
+
+  rosNumAgents.set(location.state?.fleet.numagents || 0);
+  
+  const cmdInterpreter =  new ROSLIB.Topic({
     ros: ros, // Use the ROS connection from props
     name: '/command_interpreter',
     messageType: 'hive_states/Decider'
@@ -98,7 +107,7 @@ function Dashboard() {
   // XYZ not being read when controlled manually 
   const sendCmd = () => {
     if (selectedAgentIndex != null){
-      const command = new ROSLIB.ServiceRequest({
+      const command = new ROSLIB.Message({
         autoType: 2,
         id: selectedAgentIndex,
         command: 2,
@@ -112,12 +121,12 @@ function Dashboard() {
       console.error("No Agent Selected in teleop");
     }
   }
- 
 
+  // Fake lazy-loading
   const fetchMoreAgents = () => {
-    if (agentListSource.length < 100) {
+    if (agentListSource.length < location.state?.fleet.numagents) {
       setTimeout(() => {
-        setAgentListSource(agentListSource.concat(Array.from({ length: 20 })))
+        setAgentListSource(agentListSource.concat(Array.from({ length: 1 })))
       }, 500);
     } else {
       setHasMore(false);
@@ -190,12 +199,8 @@ function Dashboard() {
                           <div className='dashboard-agent-list-item-info-container'>
                             <div className='dashboard-agent-list-item-info-item'>
                               <span className='agent-title'>Agent {index + 1} <br></br></span>
-                              <p className='agent-location'>Location: Back Warehouse</p>
                             </div>
                           </div>
-                        </div>
-                        <div className="dashboard-agent-list-item">
-                          <h1 className='agent-status'>Status: Busy</h1>
                         </div>
                         <div className="dashboard-agent-list-item">
                         <label className={selectedAgentIndex === index ? 'agent-active-toggle' : 'agent-inactive-toggle'}>
