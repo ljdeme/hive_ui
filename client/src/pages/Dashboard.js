@@ -19,10 +19,12 @@ function Dashboard() {
   const [ros, setRos] = useState(null);
 
   const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
+  const [selectedTopicIndex, setSelectedTopicIndex] = useState(null);
+
   const [rosIP, setRosIP] = useState();
   const [agentListSource, setAgentListSource] = useState(Array.from({ length: location.state?.fleet.numagents}));
-  
+  const [topics, setTopics] = useState([]);
+
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [speed, setSpeed] = useState(50);
 
@@ -91,6 +93,18 @@ function Dashboard() {
     return <div>Loading...</div>;
   }
 
+  const topicsClient = new ROSLIB.Service({
+    ros,
+    name: '/rosapi/topics',
+    serviceType: 'rosapi/Topics'
+  });
+
+  // Request list of topics
+  const request = new ROSLIB.ServiceRequest();
+  topicsClient.callService(request, (result) => {
+    setTopics(result.topics);
+  });
+
   const rosNumAgents = new ROSLIB.Param({
     ros: ros,
     name: 'numAgents'
@@ -122,17 +136,6 @@ function Dashboard() {
     }
   }
 
-  // Fake lazy-loading
-  const fetchMoreAgents = () => {
-    if (agentListSource.length < location.state?.fleet.numagents) {
-      setTimeout(() => {
-        setAgentListSource(agentListSource.concat(Array.from({ length: 1 })))
-      }, 500);
-    } else {
-      setHasMore(false);
-    }
-  }
-
   const handleControlAgentClick = (index) => {
     console.log("In handleControl")
     if (index === selectedAgentIndex) {
@@ -142,6 +145,18 @@ function Dashboard() {
     } else {
       setSelectedAgentIndex(index);
       sendCmd();
+    }
+  }
+
+  const handleEchoTopicClick = (index) => {
+    console.log("In handleControl")
+    if (index === selectedAgentIndex) {
+      setSelectedTopicIndex(null);
+      // ECHO
+      
+    } else {
+      setSelectedTopicIndex(index);
+      // ECHO
     }
   }
 
@@ -183,8 +198,6 @@ function Dashboard() {
                 <InfiniteScroll
                 className="dashboard-agent-list"
                 dataLength={agentListSource.length}
-                next={fetchMoreAgents}
-                hasMore={hasMore}
                 loader={<p>Loading...</p>}
                 endMessage={<p>All Agents Displayed.</p>}
                 height={500}
@@ -203,7 +216,7 @@ function Dashboard() {
                           </div>
                         </div>
                         <div className="dashboard-agent-list-item">
-                        <label className={selectedAgentIndex === index ? 'agent-active-toggle' : 'agent-inactive-toggle'}>
+                        <label className={selectedAgentIndex === index ? 'active-toggle' : 'inactive-toggle'}>
                           <input
                             type="checkbox"
                             id={`checkbox-${index}`} // Add an ID for the label to reference
@@ -228,15 +241,31 @@ function Dashboard() {
           <div className="dashboard-bottom-flexbox">
             <div className="dashboard-topics">
               <p>Topics</p>
-              {/* <InfiniteScroll className="dashboard-agent-list" dataLength={agentListSource.length}>
-                {agentListSource.map((item,index)=>{
+              <InfiniteScroll className="dashboard-topic-list"
+                dataLength={topics.length}
+                loader={<p>Loading...</p>}
+                endMessage={<p>All Topics Displayed.</p>}
+                height={250}>
+                {topics.map((item,index)=>{
                   return(
+                    <div key={index} className={selectedAgentIndex === index ? 'dashboard-topic-active-container' : 'dashboard-topic-inactive-container'}>
                     <div className="dashboard-agent-list-item">
-                      This is a div #{index+1} inside InfiniteScroll
+                      {item}
                     </div>
+                    <div className="dashboard-topic-list-item">
+                    <label className={selectedAgentIndex === index ? 'active-toggle' : 'inactive-toggle'}>
+                      <input
+                        type="checkbox"
+                        id={`checkbox-${index}`} // Add an ID for the label to reference
+                        checked={selectedAgentIndex === index}
+                        onChange={() => handleEchoTopicClick(index)}
+                      /><span>Echo Topic</span>
+                    </label>
+                    </div>
+                  </div>
                     )
                 })}
-              </InfiniteScroll> */}
+              </InfiniteScroll>
             </div>
             <div className="dashboard-messages">
               <p>Messages</p>
