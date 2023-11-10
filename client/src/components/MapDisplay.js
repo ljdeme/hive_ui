@@ -3,7 +3,7 @@ import ROSLIB from 'roslib';
 import { Stage, Graphics, Shape, Ticker } from "@createjs/easeljs";
 import '../css/dashboard.css';
 
-function MapDisplay({ ros, agents, tfnamespaces}) {
+function MapDisplay({ ros, numagents, colors, isSim}) {
 
     const createjs = window.createjs;
     const ROS2D = window.ROS2D;
@@ -89,17 +89,17 @@ function MapDisplay({ ros, agents, tfnamespaces}) {
         } else {
             stage = rootObject.stage;
         }
-
+        console.log(colors[0])
         var robotMarker = new MapDisplay.NavigationArrow({
             size : 25,
             strokeSize : 1,
-            strokeColor : Graphics.getRGB(255, 128, 0, 0.66),
-            fillColor : Graphics.getRGB(255,0,0,1),
+            strokeColor : Graphics.getRGB(0, 0, 0, 0.66),
+            fillColor : colors[0],
             pulse : true,
         });
 
 
-        robotMarker.visible = true;
+        robotMarker.visible = false;
 
         rootObject.addChild(robotMarker);        
         var initScaleSet = false;
@@ -118,7 +118,7 @@ function MapDisplay({ ros, agents, tfnamespaces}) {
             //rootObject.rosQuaternionToGlobalTheta(orientation);
             // Set visible
             marker.visible = true;
-            console.log(marker)
+            console.log("Recieved TF")
           };
           var tfClient = new ROSLIB.TFClient({
             ros : ros,
@@ -155,7 +155,21 @@ function MapDisplay({ ros, agents, tfnamespaces}) {
         stopSim.publish();
     }
 
-    return (
+    if (isSim){
+        return (
+            <div>
+                <div id="map"></div>
+                <div className="sim-buttons">
+                    <button className='startSim-btn' onClick={startRosSim}>START SIM</button>
+                    <button className='stopSim-btn' onClick={stopRosSim}>STOP SIM</button> 
+                </div>
+                
+            </div>
+        );
+    }
+    else
+    {
+        return (
         <div>
             <div id="map"></div>
             <div className="sim-buttons">
@@ -164,7 +178,9 @@ function MapDisplay({ ros, agents, tfnamespaces}) {
             </div>
             
         </div>
-    );
+         );
+    }
+
 }
 
 export default MapDisplay;

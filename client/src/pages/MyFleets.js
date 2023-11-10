@@ -9,8 +9,35 @@ import FleetForm from "../components/FleetForm";
 import "../css/addFleet.css";
 import edit from '../images/edit.png';
 import deleteBin from '../images/delete.png';
+import {Graphics} from "@createjs/easeljs";
 
 function MyFleets() {
+  
+  var colors =[];
+  // Colors for map display and agents
+  var c1 = Graphics.getRGB(232, 184, 61);
+  var c2 = Graphics.getRGB(16, 9, 36);
+  var c3 = Graphics.getRGB(131,34,50);
+  var c4 = Graphics.getRGB(81,113,165);
+  var c5 = Graphics.getRGB(157,205,192);
+  var c6 = Graphics.getRGB(250,166,255);
+  var c7 = Graphics.getRGB(156 ,255,250);
+  var c8 = Graphics.getRGB(134,203,146);
+  var c9 = Graphics.getRGB(3,76,60);
+  var c10 = Graphics.getRGB(130, 106,237);
+  colors.push(c1);
+  colors.push(c2);
+  colors.push(c3);
+  colors.push(c4);
+  colors.push(c5);
+  colors.push(c6);
+  colors.push(c7);
+  colors.push(c8);
+  colors.push(c9);
+  colors.push(c10);
+
+
+
   const navigate = useNavigate();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userID, setUserID] = useState(null);
@@ -37,7 +64,7 @@ function MyFleets() {
 
   const handleSwitchToggle = (item) => {
     // Navigate to the dashboard route when the switch is toggled on
-    navigate("/dashboard", { state: { fleet: item } });
+    navigate("/dashboard", { state: { fleet: item, colors:colors }  });
   };
 
   

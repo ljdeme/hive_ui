@@ -16,7 +16,6 @@ import logo from '../images/hex.png';
 function Dashboard() {
   const location = useLocation();
   const navigate = useNavigate();
-
   const [ros, setRos] = useState(null);
   const [agentListSource, setAgentListSource] = useState(Array.from({ length: 20 }));
   const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
@@ -185,7 +184,7 @@ function Dashboard() {
                     return (
                       <div key={index} className={selectedAgentIndex === index ? 'dashboard-agent-active-container' : 'dashboard-agent-inactive-container'}>
                         <div className="dashboard-agent-list-item">
-                          <img className="agent-icon" src={robot_img} alt='agent icon'></img>
+                        <img className="agent-icon" src={robot_img} alt='agent icon' style={{ backgroundColor: location.state.colors[index]}}></img>
                         </div>
                         <div className="dashboard-agent-list-item">
                           <div className='dashboard-agent-list-item-info-container'>
@@ -216,7 +215,7 @@ function Dashboard() {
             </div>
             <div className="dashboard-map">
               <p className='container-text'>Map</p>
-              <Map ros={ ros } />
+              <Map ros={ ros } numagents={1} colors={location.state.colors} isSim={location.state?.fleet.isSim} />
               {/* <Test/> */}
             </div>
           </div>
