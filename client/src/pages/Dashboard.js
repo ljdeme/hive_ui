@@ -22,6 +22,8 @@ function Dashboard() {
   const [selectedTopicIndex, setSelectedTopicIndex] = useState(null);
 
   const [rosIP, setRosIP] = useState();
+  
+  // eslint-disable-next-line
   const [agentListSource, setAgentListSource] = useState(Array.from({ length: location.state?.fleet.numagents}));
   const [topics, setTopics] = useState([]);
 
@@ -82,6 +84,12 @@ function Dashboard() {
 
       // Clean up the ROS connection on unmount
       return () => {
+        const rosNumAgents = new ROSLIB.Param({
+          ros,
+          name: 'numAgents'
+        });
+        console.log('numAgents to 0')
+        rosNumAgents.set(0);
         ros.close();
       };
     }
@@ -93,13 +101,12 @@ function Dashboard() {
     return <div>Loading...</div>;
   }
 
+  // Request list of topics
   const topicsClient = new ROSLIB.Service({
     ros,
     name: '/rosapi/topics',
     serviceType: 'rosapi/Topics'
   });
-
-  // Request list of topics
   const request = new ROSLIB.ServiceRequest();
   topicsClient.callService(request, (result) => {
     setTopics(result.topics);
@@ -109,8 +116,7 @@ function Dashboard() {
     ros: ros,
     name: 'numAgents'
   });
-
-  rosNumAgents.set(location.state?.fleet.numagents || 0);
+  rosNumAgents.set(location.state?.fleet.numagents || 1);
   
   const cmdInterpreter =  new ROSLIB.Topic({
     ros: ros, // Use the ROS connection from props
@@ -122,14 +128,14 @@ function Dashboard() {
   const sendCmd = () => {
     if (selectedAgentIndex != null){
       const command = new ROSLIB.Message({
-        autoType: 2,
         id: selectedAgentIndex,
         command: 2,
+        autoType: 0,
         x: 0,
         y: 0,
-        z: 0,
+        orientation: 0,
       });
-      cmdInterpreter.callService(command);
+      cmdInterpreter.publish(command);
     }
     else{
       console.error("No Agent Selected in teleop");
@@ -150,12 +156,14 @@ function Dashboard() {
 
   const handleEchoTopicClick = (index) => {
     console.log("In handleControl")
-    if (index === selectedAgentIndex) {
+    if (index === selectedTopicIndex) {
       setSelectedTopicIndex(null);
+      console.log('Unselected: ' + topics[index]);
       // ECHO
       
     } else {
       setSelectedTopicIndex(index);
+      console.log('Selected: ' + topics[index]);
       // ECHO
     }
   }
@@ -202,26 +210,26 @@ function Dashboard() {
                 endMessage={<p>All Agents Displayed.</p>}
                 height={500}
                 >
-                  {agentListSource.map((item, index) => {
+                  {agentListSource.map((item, agentIndex) => {
                     return (
-                      <div key={index} className={selectedAgentIndex === index ? 'dashboard-agent-active-container' : 'dashboard-agent-inactive-container'}>
+                      <div key={agentIndex} className={selectedAgentIndex === agentIndex ? 'dashboard-agent-active-container' : 'dashboard-agent-inactive-container'}>
                         <div className="dashboard-agent-list-item">
-                        <img className="agent-icon" src={robot_img} alt='agent icon' style={{ backgroundColor: location.state.colors[index]}}></img>
+                        <img className="agent-icon" src={robot_img} alt='agent icon' style={{ backgroundColor: location.state.colors[agentIndex]}}></img>
                         </div>
                         <div className="dashboard-agent-list-item">
                           <div className='dashboard-agent-list-item-info-container'>
                             <div className='dashboard-agent-list-item-info-item'>
-                              <span className='agent-title'>Agent {index + 1} <br></br></span>
+                              <span className='agent-title'>Agent {agentIndex + 1} <br></br></span>
                             </div>
                           </div>
                         </div>
                         <div className="dashboard-agent-list-item">
-                        <label className={selectedAgentIndex === index ? 'active-toggle' : 'inactive-toggle'}>
+                        <label className={selectedAgentIndex === agentIndex ? 'active-toggle' : 'inactive-toggle'}>
                           <input
                             type="checkbox"
-                            id={`checkbox-${index}`} // Add an ID for the label to reference
-                            checked={selectedAgentIndex === index}
-                            onChange={() => handleControlAgentClick(index)}
+                            id={`checkbox-${agentIndex}`} // Add an ID for the label to reference
+                            checked={selectedAgentIndex === agentIndex}
+                            onChange={() => handleControlAgentClick(agentIndex)}
                           /><span>Control Agent</span>
                         </label>
                         </div>
@@ -246,19 +254,19 @@ function Dashboard() {
                 loader={<p>Loading...</p>}
                 endMessage={<p>All Topics Displayed.</p>}
                 height={250}>
-                {topics.map((item,index)=>{
+                {topics.map((item,topicIndex)=>{
                   return(
-                    <div key={index} className={selectedAgentIndex === index ? 'dashboard-topic-active-container' : 'dashboard-topic-inactive-container'}>
+                    <div key={topicIndex} className={selectedTopicIndex === topicIndex ? 'dashboard-topic-active-container' : 'dashboard-topic-inactive-container'}>
                     <div className="dashboard-agent-list-item">
                       {item}
                     </div>
                     <div className="dashboard-topic-list-item">
-                    <label className={selectedAgentIndex === index ? 'active-toggle' : 'inactive-toggle'}>
+                    <label className={selectedTopicIndex === topicIndex ? 'active-toggle' : 'inactive-toggle'}>
                       <input
                         type="checkbox"
-                        id={`checkbox-${index}`} // Add an ID for the label to reference
-                        checked={selectedAgentIndex === index}
-                        onChange={() => handleEchoTopicClick(index)}
+                        id={`checkbox-${topicIndex}`} // Add an ID for the label to reference
+                        checked={selectedTopicIndex === topicIndex}
+                        onChange={() => handleEchoTopicClick(topicIndex)}
                       /><span>Echo Topic</span>
                     </label>
                     </div>
