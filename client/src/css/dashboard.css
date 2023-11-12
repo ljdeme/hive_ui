@@ -374,7 +374,7 @@
     
 }
 
-.startSim-btn{
+.start-btn{
     transition: all 0.3s ease 0s;
     cursor: pointer;
     background-color: #266353;
@@ -388,7 +388,7 @@
     padding: 5px 15px;
 }
 
-.stopSim-btn{
+.stop-btn{
     transition: all 0.3s ease 0s;
     cursor: pointer;
     background-color: #b33d2e;

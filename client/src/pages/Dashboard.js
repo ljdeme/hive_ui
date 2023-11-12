@@ -241,7 +241,7 @@ function Dashboard() {
             </div>
             <div className="dashboard-map">
               <p className='container-text'>Map</p>
-              <Map ros={ ros } numagents={1} colors={location.state.colors} isSim={location.state?.fleet.isSim} />
+              <Map ros={ ros } numagents={location.state.fleet.numagents} colors={location.state.colors} isSim={location.state?.fleet.isSim} selectedAgent={location.state.selectedAgent} />
               {/* <Test/> */}
             </div>
           </div>
