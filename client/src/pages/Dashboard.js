@@ -100,12 +100,21 @@ function Dashboard() {
 
       // Clean up the ROS connection on unmount
       return () => {
-        const rosNumAgents = new ROSLIB.Param({
-          ros,
-          name: 'numAgents'
+        const rosNumAgents = new ROSLIB.Topic({
+          ros: ros,
+          name: 'numAgents',
+          messageTypeType:'std_msgs/Int32'
         });
+        
+        const setNumAgents = (numAgents) => {
+          console.log("Setting num agents: " + numAgents);
+          const sendNum = new ROSLIB.Message({
+              data: numAgents
+          });
+          rosNumAgents.publish(sendNum);
+        }
         console.log('numAgents to 0')
-        rosNumAgents.publish(0);
+        setNumAgents(0);
         ros.close();
       };
     }
@@ -182,7 +191,7 @@ function Dashboard() {
   return ( location.state !== null && location.state !== undefined ) ? (
     <div className="dashboard">
       <Navbar />
-      <h1 className='dashboard-header'>{(location.state?.fleet.name).toUpperCase()} CONSOLE</h1>
+      <h1 className='dashboard-header'>{(location.state?.fleet.name).toUpperCase()} CONSOLE ({location.state?.fleet.issim})</h1>
       <div className="dashboard-container">
         <div className="dashboard-layout">
         <div className="connection-alert">
@@ -252,7 +261,7 @@ function Dashboard() {
             </div>
             <div className="dashboard-map">
               <p className='container-text'>Map</p>
-              <Map ros={ ros } numagents={location.state.fleet.numagents} colors={location.state.colors} isSim={location.state?.fleet.isSim} selectedAgent={location.state.selectedAgent} />
+              <Map ros={ ros } numagents={location.state.fleet?.numagents} colors={location.state?.colors} isSim={location.state?.fleet.issim} selectedAgent={location.state?.selectedAgent} />
               {/* <Test/> */}
             </div>
           </div>

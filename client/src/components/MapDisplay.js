@@ -385,8 +385,8 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
             <div>
                 <div id="map"></div>
                 <div className="sim-buttons">
-                    <button className='start-btn' onClick={startRosSim}>START</button>
-                    <button className='stop-btn' onClick={stopRosSim}>STOP</button> 
+                    <button className='start-btn' onClick={startRosSim}>START SIM</button>
+                    <button className='stop-btn' onClick={stopRosSim}>STOP SIM</button> 
                 </div>
                 
             </div>
@@ -398,8 +398,8 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
         <div>
             <div id="map"></div>
             <div className="sim-buttons">
-                <button className='start-btn' onClick={startRosStack}>START</button>
-                <button className='stop-btn' onClick={stopRosStack}>STOP</button> 
+                <button className='start-btn' onClick={startRosStack}>START STACK</button>
+                <button className='stop-btn' onClick={stopRosStack}>STOP STACK</button> 
             </div>
             
         </div>
