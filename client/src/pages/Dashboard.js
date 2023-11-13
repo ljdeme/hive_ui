@@ -66,6 +66,22 @@ function Dashboard() {
       ros.on('connection', () => {
         console.log('Connected to ROS');
         setLoading(false);
+
+        const rosNumAgents = new ROSLIB.Topic({
+          ros: ros,
+          name: 'numAgents',
+          messageTypeType:'std_msgs/Int32'
+        });
+        
+        const setNumAgents = (numAgents) => {
+          console.log("Setting num agents: " + numAgents);
+          const sendNum = new ROSLIB.Message({
+              data: numAgents || 1
+          });
+      
+          rosNumAgents.publish(sendNum);
+        }
+        setNumAgents(location.state?.fleet.numagents);
       });
 
       ros.on('error', (error) => {
@@ -89,7 +105,7 @@ function Dashboard() {
           name: 'numAgents'
         });
         console.log('numAgents to 0')
-        rosNumAgents.set(0);
+        rosNumAgents.publish(0);
         ros.close();
       };
     }
@@ -112,11 +128,6 @@ function Dashboard() {
     setTopics(result.topics);
   });
 
-  const rosNumAgents = new ROSLIB.Param({
-    ros: ros,
-    name: 'numAgents'
-  });
-  rosNumAgents.set(location.state?.fleet.numagents || 1);
   
   const cmdInterpreter =  new ROSLIB.Topic({
     ros: ros, // Use the ROS connection from props

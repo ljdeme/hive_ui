@@ -110,7 +110,7 @@ function MyFleets() {
     fleetName: "",
     fleetIP: "",
     numAgents: "",
-    isSim: "",
+    isSim: false,
   };
 
   const [fleetFormValues, setFleetFormValues] = useState(initialValues);
