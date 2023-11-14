@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate} from "react-router-dom";
 import logo from "../images/hive-logo.png";
-import settings from '../images/settings.png';
 import logout from '../images/logout.png';
 
 export default function Navbar() {
@@ -27,14 +26,10 @@ export default function Navbar() {
     function handleLogout() {
         // Clear the user's session by removing the token from localStorage
         localStorage.removeItem('token');
-        sessionStorage.removeItem('UID');
+        localStorage.removeItem('UID');
         setIsUserLoggedIn(false);
         setIsSubMenuOpen(false); // Close the submenu after logout
         navigate("/");
-    }
-
-    function handleSettings() {
-        // Clear the user's session by removing the token from localStorage
     }
 
     return (
@@ -62,11 +57,6 @@ export default function Navbar() {
                         <button className='profile-menu' onClick={toggleMenu}>Profile &#9663;</button>
                         <div className={isSubMenuOpen ? "submenu-wrap open-menu" : "submenu-wrap"} id='submenu'>
                             <div className='submenu'>
-                                <div className='submenu-link' onClick={handleSettings}>
-                                    <img src={settings} alt='settings gear img' />
-                                    <p>Settings</p>
-                                    <span>&gt;</span>
-                                </div>
                                 <div className='submenu-link' onClick={handleLogout}>
                                     <img src={logout} alt='logout img' />
                                     <p>Logout</p>
@@ -82,7 +72,7 @@ export default function Navbar() {
                         <NavLink to="/about-us">About Us</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/documentation">Services</NavLink>
+                        <NavLink to="/documentation">Documentation</NavLink>
                     </li>
                     <li>
                         <NavLink to="/login">

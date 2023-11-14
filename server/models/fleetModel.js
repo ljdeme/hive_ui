@@ -21,10 +21,15 @@ const fleetSchema = new Schema({
         required: true
     },
 
-    plugins:[{
-        id : String, 
-        topic: String,
-    }],
+    issim:{
+        type:"boolean",
+        required: true
+    },
+    
+    numagents:{
+        type:Number, 
+        required:true
+    },
 
     agents:[{
         name : String,

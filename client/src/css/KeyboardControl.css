@@ -50,4 +50,16 @@
   .key-box.glow {
     background-color: var(--bg); /* Change this to your desired glowing color */
     color: var(--bg-accent);
-}
+  }
+
+  .velocities {
+    min-width: 100%;
+    color: var(--bg-accent);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .dir {
+  justify-content: space-around;
+  }

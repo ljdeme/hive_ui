@@ -1,0 +1,74 @@
+.aboutUs-page
+{
+    background-color: var(--bg);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+.aboutUs-layout{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    padding: 1em;
+}
+
+.about-header{
+    font-size: clamp(1rem, 4vw, 3rem);
+    font-family: 'Chakra Petch';
+}
+
+.meet-team{
+    font-size: clamp(1rem, 4vw, 3rem);
+    text-align: center;
+    font-family: 'Chakra Petch';
+}
+.aboutUs-layout p{
+    /* background-color: brown; */
+    font-size: clamp(.5rem, 2vw, 1.5rem);
+    font-family: 'Raleway';
+}
+
+.team-layout h1{
+    /* background-color: rebeccapurple; */
+    font-size: clamp(1rem, 5vw, 2rem);
+}
+
+.member-name{
+    /* background-color: rebeccapurple; */
+    font-size: clamp(.5rem, 2vw, 1.5rem);
+}
+
+.member-res{
+    /* background-color: rebeccapurple; */
+    font-size: clamp(.25rem, 1vw, .75rem);
+    margin-top: -5px;
+    font-family: 'Roboto';
+}
+
+.team-layout{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: min(10vw, 5rem)
+}
+
+.member-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    text-align: center;
+}
+
+.member-img
+{
+  align-items: flex-start;
+  /* height: min(700px, 40vw); */
+  height: 25vw;
+  /* height: 900px; */
+  padding-left: 2vw;
+  padding-right: 2vw;
+}

@@ -70,7 +70,7 @@ function Login() {
           console.log(data.user._id);
           // Store the token and user data in localStorage or state as needed
           localStorage.setItem('token', data.token);
-          sessionStorage.setItem('UID', data.user._id);
+          localStorage.setItem('UID', data.user._id);
           // setUser(data.user); // Set the user data in your state if needed
     
           navigate("/myFleets");
@@ -81,7 +81,7 @@ function Login() {
 
   return (
     <div className="authentication-page">
-      <Navbar/>
+
       <div className="form-page">
         <div className="login-container">
               <div className="authentication-header">

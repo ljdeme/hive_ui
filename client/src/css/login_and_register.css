@@ -96,7 +96,7 @@ input[type = text] {
     box-sizing: border-box;
     border-radius: 1em;
     margin-top: .5em;
-    font-size: clamp(.5rem , 1rem, 2vw);
+    font-size: clamp(.25rem , .75rem, 2vw);
 }
   
 textarea[type = text] {
@@ -119,7 +119,7 @@ input[type = email] {
     border-radius: 1em;
     margin-top: .5em;
     margin-bottom: 1.2em;
-    font-size: clamp(.5rem , 1rem, 2vw);
+    font-size: clamp(.25rem , .75rem, 2vw);
   }
   
 textarea[type = text] 
@@ -145,7 +145,7 @@ input[type = password]
     margin-top: .5em;
     margin-bottom: 1.2em;
     font-family: Verdana;
-    font-size: clamp(.5rem , 1rem, 2vw);
+    font-size: clamp(.25rem , .75rem, 2vw);
 }
 
 .error
@@ -155,7 +155,7 @@ input[type = password]
     font-size: 1rem;
     font-weight: bold;
     margin: 1rem;
-    font-size: clamp(.5rem , 1rem, 2vw);
+    font-size: clamp(.25rem , .75rem, 2vw);
 }
 
 .error-li
@@ -166,5 +166,5 @@ input[type = password]
     font-weight: bold;
     text-align: left;
     margin: 1rem;
-    font-size: clamp(.5rem , 1rem, 2vw);
+    font-size: clamp(.25rem , .75rem, 2vw);
 }
