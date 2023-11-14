@@ -52,7 +52,7 @@ function MyFleets() {
   useEffect(() => {
     // Check if a JWT token exists in localStorage
     const token = localStorage.getItem('token');
-    const userID = sessionStorage.getItem('UID');
+    const userID = localStorage.getItem('UID');
     if (token) {
       // Verify the token on the server
       // If token is valid, set isLoggedIn to true
