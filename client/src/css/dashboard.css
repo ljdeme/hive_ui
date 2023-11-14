@@ -270,8 +270,6 @@
     display: none;
 }
 
-
-
 .inactive-toggle{
     transition: all 0.3s ease 0s;
     cursor: pointer;
@@ -289,7 +287,26 @@
 .inactive-toggle input{
     display: none;
 }
+.agent-status{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100px;
+    
+}
+.active-agent{
+    width: 25px;
+    height: 25px;
+    background-color: #266353;
+    border-radius: 50%;
+}
 
+.inactive-agent{
+    width: 25px;
+    height: 25px;
+    background-color: #b33d2e;
+    border-radius: 50%;
+}
 .dashboard-map
 {
     background-color: var(--bg-container);
@@ -317,7 +334,7 @@
 {
     background-color:var(--bg-container);
     height: 100%;
-    width: 25%;
+    width: 37%;
     border-radius: 10px;
     padding-left: 10px;
 }
@@ -327,7 +344,7 @@
     background-color:var(--bg-container);
     
     height: 100%;
-    width: 45%;
+    width: 35%;
     border-radius: 10px;
     padding-left: 10px;
 }
@@ -400,4 +417,25 @@
     color: var(--text-color);
     font-size: 16px;
     padding: 5px 15px;
+}
+
+.messages-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.clear{
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    background-color: #fff;
+    border-color: var(--bg-accent);
+    /* box-shadow: 1px 1px 5px white; */
+    border-radius: 10px;
+    text-decoration: none; /* Removes Underline from links */
+    font-family: "Chakra Petch";
+    color: var(--bg);
+    font-size: 16px;
+    padding: 10px 15px;
+    height: 40px;
+    margin: 10px;
 }
