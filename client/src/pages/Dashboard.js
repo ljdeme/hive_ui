@@ -18,7 +18,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [ros, setRos] = useState(null);
 
-  const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
+  const [selectedAgentIndex, setSelectedAgentIndex] = useState(-1);
   const [selectedTopicIndex, setSelectedTopicIndex] = useState(null);
 
   const [rosIP, setRosIP] = useState();
@@ -165,7 +165,7 @@ function Dashboard() {
   const handleControlAgentClick = (index) => {
     console.log("In handleControl")
     if (index === selectedAgentIndex) {
-      setSelectedAgentIndex(null);
+      setSelectedAgentIndex(-1);
       sendCmd();
       
     } else {
@@ -261,7 +261,7 @@ function Dashboard() {
             </div>
             <div className="dashboard-map">
               <p className='container-text'>Map</p>
-              <Map ros={ ros } numagents={location.state.fleet?.numagents} colors={location.state?.colors} isSim={location.state?.fleet.issim} selectedAgent={location.state?.selectedAgent} />
+              <Map ros={ ros } numagents={location.state.fleet?.numagents} colors={location.state?.colors} isSim={location.state?.fleet.issim} selectedAgent={selectedAgentIndex + 1} />
               {/* <Test/> */}
             </div>
           </div>

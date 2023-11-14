@@ -4,10 +4,25 @@ import { Stage, Graphics, Shape, Ticker } from "@createjs/easeljs";
 import '../css/dashboard.css';
 
 function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
+    
+    
+    var selectedAgentIndex = 0;
+    var setSelectedAgentIndex = (index) =>{
+        selectedAgentIndex = index
+    };
 
     const [stoppedSim, setSimstate] = useState(false);
     const createjs = window.createjs;
     const ROS2D = window.ROS2D;
+    
+    if(selectedAgent != 0){
+        setSelectedAgentIndex(selectedAgent + 1);
+    }
+
+    console.log(selectedAgent);
+    if(selectedAgent == 0){
+        setSelectedAgentIndex(0);
+    }
 
     var position = null;
     var posx = null;
@@ -92,26 +107,36 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
     MapDisplay.NavigationArrow.prototype.__proto__ = createjs.Shape.prototype;
 
     // Functions
-    var mouseEventHandler = function(event, mouseState, stage, selectedAgent, rootObject) {
+    var mouseEventHandler = function(event, mouseState, stage, rootObject, agentId) {
 
-        if (selectedAgent == null)
+        if (agentId == 0)
         {
             console.log("No agent selected on map.");
-            selectedAgent = 1;
+            return;
+        }
+
+        else {
+            console.log("Selected agent:" + agentId);
         };
 
-        var namespace = "/agent" + selectedAgent + "/goalSet";
+        var namespace = "/agent" + (selectedAgent) + "/goalSet";
         
         var isBusy = new ROSLIB.Param({
             ros : ros,
             name : namespace
         });
 
+        console.log(namespace, agentBusy);
+
         isBusy.get(function(value) {
             navCallback(value)
         });
 
-        console.log(agentBusy);
+        if(agentBusy)
+        {
+            console.log("Agent is busy.");
+            return;
+        }
 
         if (mouseState === 'down'){
            // get position when mouse button is pressed down
@@ -209,7 +234,7 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
               thetaRadians -= (Math.PI/2);
             }
             
-            cmd.id = selectedAgent;
+            cmd.id = (selectedAgent);
             cmd.command = 3;
             cmd.x = posx;
             cmd.y = posy;
@@ -317,15 +342,15 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
         }
 
         rootObject.addEventListener('stagemousedown', function(event) {
-            mouseEventHandler(event, 'down', stage, selectedAgent, rootObject);
+            mouseEventHandler(event, 'down', stage, rootObject, selectedAgent);
         });
 
         rootObject.addEventListener('stagemousemove', function(event) {
-            mouseEventHandler(event, 'move', stage, selectedAgent, rootObject);
+            mouseEventHandler(event, 'move', stage, rootObject, selectedAgent);
         });
 
         rootObject.addEventListener('stagemouseup', function(event) {
-            mouseEventHandler(event, 'up', stage, selectedAgent, rootObject);
+            mouseEventHandler(event, 'up', stage, rootObject, selectedAgent);
         });
 
     }, [ros]);
