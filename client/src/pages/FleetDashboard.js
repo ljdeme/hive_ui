@@ -301,7 +301,7 @@ function FleetDashboard() {
             </div>
             <div className="dashboard-map">
               <p className='container-text'>Map</p>
-              <Map ros={ ros } numagents={location.state.fleet?.numagents} colors={location.state?.colors} isSim={location.state?.fleet.issim} selectedAgent={selectedAgentIndex + 1} />
+              <Map ros={ ros } numagents={location.state.fleet?.numagents} colors={location.state?.colors} isSim={location.state?.fleet.issim} selectedAgent={selectedAgentIndex == null? -1 : selectedAgentIndex + 1} />
               {/* <Test/> */}
             </div>
           </div>

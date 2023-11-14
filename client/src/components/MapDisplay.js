@@ -11,6 +11,7 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
     };
 
     const selectedAgentRef = useRef(selectedAgent);
+    var payload = useRef({})
     const [stoppedSim, setSimstate] = useState(false);
     const createjs = window.createjs;
     const ROS2D = window.ROS2D;
@@ -53,6 +54,34 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
         y: 0.0,
         orientation: 0.0 
     });
+
+    MapDisplay.Payload = function(options){
+        var that = this;
+        options = options || {};
+        var size = options.size || 10;
+        var strokeSize = options.strokeSize || 3;
+        var strokeColor = options.strokeColor || createjs.Graphics.getRGB(0, 0, 0);
+        var fillColor = options.fillColor || createjs.Graphics.getRGB(255, 0, 0);
+
+        // draw the shape
+        var graphics = new createjs.Graphics();
+
+        // line width
+        graphics.setStrokeStyle(strokeSize);
+        graphics.moveTo(-size / 2.0, -size / 2.0);
+        graphics.beginStroke(strokeColor);
+        graphics.beginFill(fillColor);
+        graphics.lineTo(size, 0);
+        graphics.lineTo(-size / 2.0, size / 2.0);
+        graphics.lineTo(-size / 2.0, -size / 2.0);
+        graphics.endFill();
+        graphics.endStroke();
+
+        // create the shape
+        createjs.Shape.call(this, graphics);
+    };
+
+    MapDisplay.Payload.prototype.__proto__ = createjs.Shape.prototype;
     
     MapDisplay.NavigationArrow = function(options){
         var that = this;
@@ -269,6 +298,37 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
 
         var rootObject = viewer.scene
 
+        var payloadSub = new ROSLIB.Topic({
+            ros: ros,
+            name: "/payloadCoords",
+            messageType: "geometry_msgs/PoseArray"
+        })
+    
+        payloadSub.subscribe((data)=>{
+            data.poses.forEach((coord)=>{
+                payload.current.value = coord
+                payload = new MapDisplay.Payload({
+                    size : 0.4,
+                    strokeSize : 0.05,
+                  });
+                  
+                  payload.x = coord.position.x;
+                  payload.y = -coord.position.y;
+                  var q0 = 1;
+                  var q1 = 0;
+                  var q2 = 0;
+                  var q3 = 0;
+                  console.log("Triggered subscriber");
+                  // Canvas rotation is clock wise and in degrees
+                  var rotation = -Math.atan2(2 * (q0 * q3 + q1 * q2), 1 - 2 * (q2 * q2 + q3 * q3)) * 180.0 / Math.PI;
+      
+                  payload.rotation =  rotation;
+                  // Set visible
+                  payload.visible = true;
+                  rootObject.addChild(payload);
+            });
+        });
+
         // Scale the canvas to fit the map
         gridClient.on('change', function() {
             viewer.scaleToDimensions(gridClient.currentGrid.width, gridClient.currentGrid.height);
@@ -317,7 +377,6 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
             marker.rotation =  rotation;
             // Set visible
             marker.visible = true;
-            console.log("Recieved TF")
           };
 
         var clients = [];
