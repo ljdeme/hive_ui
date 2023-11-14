@@ -18,6 +18,7 @@ function KeyboardControl(props) {
         D: 0,
         Q: 0,
         E: 0,
+        SPACE: 1,
       });
       const [resetCommandSent, setResetCommandSent] = useState(false);
 
@@ -37,11 +38,14 @@ function KeyboardControl(props) {
               setMoving((prevState) => ({ ...prevState, D: -1 }));
               break;
             case 81: // Q
-              setMoving((prevState) => ({ ...prevState, Q: -1 }));
+              setMoving((prevState) => ({ ...prevState, Q: 1 }));
               break;
             case 69: // E
-              setMoving((prevState) => ({ ...prevState, E: 1 }));
+              setMoving((prevState) => ({ ...prevState, E: -1 }));
               break;
+            case 32: // Space
+              setMoving((prevState) => ({ ...prevState, SPACE: prevState.SPACE === 1 ? 0 : 1 }));
+            break;
             default:
               break;
           }
@@ -89,13 +93,13 @@ function KeyboardControl(props) {
             
             if (newX !== 0 || newY !== 0 || newZ !== 0) {
                 // Send the movement command
-                sendVelocityCommand(newX, newY, newZ);
+                sendVelocityCommand(newX, newY, newZ, moving.SPACE);
 
                 // Reset the state variable to indicate the reset command hasn't been sent
                 setResetCommandSent(false);
             } else if (!resetCommandSent) {
                 // Send the reset command only if no keys are pressed and it hasn't been sent already
-                sendVelocityCommand(0, 0, 0);
+                sendVelocityCommand(newX, newY, newZ, moving.SPACE);
 
                 // Set the state variable to indicate that the reset command has been sent
                 setResetCommandSent(true);
@@ -116,7 +120,13 @@ function KeyboardControl(props) {
         messageType: 'geometry_msgs/Twist',
     });
 
-    const sendVelocityCommand = (linearX, linearY, angularZ) => {
+    const cmdInterpreter =  new ROSLIB.Topic({
+      ros: props.ros, // Use the ROS connection from props
+      name: '/command_interpreter',
+      messageType: 'hive_states/Decider'
+    });
+
+    const sendVelocityCommand = (linearX, linearY, angularZ, attachmentToggle) => {
         const scaleSpeed = (props.speed / 100.0)
         console.log(linearX * scaleSpeed+ ", " + linearY * scaleSpeed + ", " +  angularZ * scaleSpeed+ ",");
         
@@ -133,17 +143,25 @@ function KeyboardControl(props) {
             },
         });
 
+        const command = new ROSLIB.Message({
+          id: props.selectedAgentIndex,
+          command: 2,
+          autoType: 0,
+          x: 0,
+          y: 0,
+          z: attachmentToggle,
+          orientation: 0,
+        });
+
+        cmdInterpreter.publish(command);
         keyboard.publish(twist);
     };
 
     return (
         <div className="teleop-layout">
             <div className="keyboard-layout">
-                <div className='velocities'>
-                    <div className='dir'>X: {velocities.linearX}</div>
-                    <div className='dir'>Y: {velocities.linearY}</div>
-                    <div className='dir'>Z: {velocities.angularZ}</div>
-                </div>
+                {(moving.SPACE) ? (<div className='velocities'>Attachment: Locked</div>) : (<div className='velocities'>Attachment: Unocked</div>)}
+                
                 <div className="keyboard-layout-top">
                     <div className={`key-box ${moving.Q ? 'glow' : ''}`} id="Q">Q</div>
                     <div className={`key-box ${moving.W ? 'glow' : ''}`} id="W">W</div>
@@ -153,6 +171,7 @@ function KeyboardControl(props) {
                     <div className={`key-box ${moving.A ? 'glow' : ''}`} id="A">A</div>
                     <div className={`key-box ${moving.S ? 'glow' : ''}`} id="S">S</div>
                     <div className={`key-box ${moving.D ? 'glow' : ''}`} id="D">D</div>
+                    <div className={`key-box ${moving.SPACE ? 'glow' : ''}`} id="A">SPACE</div>
                 </div>
 
             </div> 

@@ -23,7 +23,6 @@ function FleetDashboard() {
   
   // eslint-disable-next-line
   const [agentListSource, setAgentListSource] = useState(Array.from({ length: location.state?.fleet.numagents}));
-  const [agentStatus, setAgentStatus] = useState(Array.from({ length: location.state?.fleet.numagents }, () => false));
   const [topics, setTopics] = useState([]);
   const [topicTypes, setTopicTypes] = useState([]);
   const [rosTopicData, setRosTopicData] = useState([]);
@@ -68,12 +67,6 @@ function FleetDashboard() {
       ros.on('connection', () => {
         console.log('Connected to ROS');
         setLoading(false);
-
-        const rosNumAgents = new ROSLIB.Param({
-          ros: ros,
-          name: 'numAgents'
-        });
-        rosNumAgents.set(location.state?.fleet.numagents || 1);
       });
 
       ros.on('error', (error) => {
@@ -111,6 +104,12 @@ function FleetDashboard() {
     return <div>Loading...</div>;
   }
 
+  const rosNumAgents = new ROSLIB.Param({
+    ros: ros,
+    name: 'numAgents'
+  });
+  rosNumAgents.set(location.state?.fleet.numagents || 1);
+
   // Request list of topics
   const topicsClient = new ROSLIB.Service({
     ros,
@@ -123,40 +122,12 @@ function FleetDashboard() {
     setTopicTypes(result.types);
   });
 
-  
-  const cmdInterpreter =  new ROSLIB.Topic({
-    ros: ros, // Use the ROS connection from props
-    name: '/command_interpreter',
-    messageType: 'hive_states/Decider'
-  });
-
-  // XYZ not being read when controlled manually 
-  const sendCmd = () => {
-    if (selectedAgentIndex != null){
-      const command = new ROSLIB.Message({
-        id: selectedAgentIndex,
-        command: 2,
-        autoType: 0,
-        x: 0,
-        y: 0,
-        orientation: 0,
-      });
-      cmdInterpreter.publish(command);
-    }
-    else{
-      console.error("No Agent Selected in teleop");
-    }
-  }
-
   const handleControlAgentClick = (index) => {
     console.log("In handleControl")
     if (index === selectedAgentIndex) {
       setSelectedAgentIndex(null);
-      sendCmd();
-      
     } else {
       setSelectedAgentIndex(index);
-      sendCmd();
     }
   }
 
@@ -201,26 +172,6 @@ function FleetDashboard() {
     setRosTopicData([]);
     console.log('Clear Data');
   };
-
-//   const agentStatusListener = new ROSLIB.Topic({
-//     ros : ros,
-//     name : 'status',
-//     messageType : 'std_msgs/Int32'
-//   });
-
-//   agentStatusListener.subscribe(function(message) {
-//     console.log('Agent ' + message.data + ' is offline ' );
-//     updateAgentStatus(message.data)
-//   });
-
-//   const updateAgentStatus = (index) => {
-//     // Create a new array with the toggled value at the specified index
-//     const newAgentStatus = [...agentStatus];
-//     newAgentStatus[index] = !newAgentStatus[index];
-
-//     // Update the state with the new array
-//     setAgentStatus(newAgentStatus);
-//   };
 
   return (
     <div className="dashboard">
@@ -275,12 +226,6 @@ function FleetDashboard() {
                             <div className='dashboard-agent-list-item-info-item'>
                               <span className='agent-title'>Agent {agentIndex + 1} <br></br></span>
                             </div>
-                          </div>
-                        </div>
-                        <div className="dashboard-agent-list-item">
-                          <div className="agent-status">
-                            {(agentStatus[agentIndex]) ? (<h3 className="status-text">Online</h3>) : (<h3 className="status-text">Offline</h3>)}
-                            <div className={ agentStatus[agentIndex] ? 'active-agent' : 'inactive-agent'}></div>
                           </div>
                         </div>
                         <div className="dashboard-agent-list-item">

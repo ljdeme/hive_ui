@@ -15,7 +15,7 @@ function Dashboard() {
   (
     <div className="dashboard">
       <Navbar />
-      <h1 className='dashboard-header'>No Fleet Active</h1>
+      <h1 className='dashboard-header-inactive'>No Fleet Active</h1>
       <div className="dashboard-container">
       </div>
     </div>
