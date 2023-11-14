@@ -6,7 +6,6 @@ function Documentation() {
   return (
     
     <div className="documentation">
-      <Navbar/>
       <div className='documentation-page'>
         <div className='documentation-container'>
           <h1>Getting Started</h1>
@@ -43,7 +42,6 @@ function Documentation() {
             </ul>
         </div>
       </div>
-      <Footer/>
     </div>
   );
 }

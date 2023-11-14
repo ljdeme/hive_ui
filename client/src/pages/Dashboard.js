@@ -1,7 +1,6 @@
 
 import React from "react";
 import { useLocation } from 'react-router-dom';
-import Navbar from "../components/Navbar";
 import '../css/dashboard.css';
 import FleetDashboard from "./FleetDashboard";
 
@@ -14,10 +13,7 @@ function Dashboard() {
   ):
   (
     <div className="dashboard">
-      <Navbar />
       <h1 className='dashboard-header-inactive'>No Fleet Active</h1>
-      <div className="dashboard-container">
-      </div>
     </div>
   )
 }

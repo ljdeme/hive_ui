@@ -63,7 +63,7 @@ function Register() {
     }
 
     if (values.email === "") {
-      errors.email = "*Email Address is blank";
+      errors.email = "*Email is blank";
     } else {
       var emailCheck = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-z]+$/g;
       if (emailCheck.test(values.email) === false) {
@@ -81,7 +81,6 @@ function Register() {
 
       if (passCheck.test(values.password) === false)
       {
-        errors.password = "Please make sure your password meets all the requirements.";
         // Check if password is between 8-32 characters
         if ((values.password.length >= 8 && values.password.length <= 32) === false) {
           setIsBetween8And32Chars(true);
@@ -141,7 +140,6 @@ function Register() {
 
   return (
     <div className="authentication-page">
-      <Navbar/>
       <div className="form-page">
         <div className="register-container">
           <div className="authentication-header">
@@ -189,10 +187,10 @@ function Register() {
                 <p className="error">{formErrors.password}</p>
                 <p>
                   <ul className="error">
-                    {isBetween8And32Chars && <li className="error-li">*Password must be between 8-32 characters</li>}
-                    {hasUppercaseLetter && <li className="error-li">*Password must contain at least one uppercase letter</li>}
-                    {hasSpecialCharacter && <li className="error-li">*Password must contain at least one special character (@#$%^&+=)</li>}
-                    {hasDigit && <li className="error-li">*Password must contain at least one digit</li>}
+                    {isBetween8And32Chars && <li className="error-li">Must be 8-32 characters</li>}
+                    {hasUppercaseLetter && <li className="error-li">Must contain an uppercase letter</li>}
+                    {hasSpecialCharacter && <li className="error-li">Must have a special character (@#$%^&+=)</li>}
+                    {hasDigit && <li className="error-li">Must have a digit</li>}
                   </ul>
                 </p>
 

@@ -1,17 +1,14 @@
 
 import '../css/aboutUs.css';
 import React from "react";
-import Navbar from "../components/Navbar";
 import cameron from '../images/cameron.jpg';
 import konstantin from '../images/konstantin.jpg';
 import marc from '../images/marc.jpg';
 import julia from '../images/julia.jpg';
-import Footer from "../components/Footer";
 
 function AboutUs() {
   return (
     <div className="aboutUs-page">
-      <Navbar/>
       <div className="aboutUs-layout">
         <div className='about'>
           <h1 className='about-header'>Who Are We?</h1>
@@ -64,7 +61,6 @@ function AboutUs() {
             <h3 className='member-name'>John McClain (ME), Isaac Finley (EE), Benjamin Palladino (EE), Cooper Fitzgerald (EE)</h3>
           </div>
       </div>
-      <Footer/>
     </div>
   );
 }

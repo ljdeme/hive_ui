@@ -302,7 +302,6 @@ function MyFleets() {
 
   return (
     <div className='myFleets-page'>
-      <Navbar />
       <div className='myFleets-content'>
         <div className='fleets-header'>
           <h1>Fleets</h1>

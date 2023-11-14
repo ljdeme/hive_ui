@@ -175,7 +175,6 @@ function FleetDashboard() {
 
   return (
     <div className="dashboard">
-      <Navbar />
       <h1 className='dashboard-header'>{(location.state?.fleet.name).toUpperCase()} CONSOLE</h1>
       <div className="dashboard-container">
         <div className="dashboard-layout">

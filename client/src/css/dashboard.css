@@ -59,7 +59,7 @@
 .dashboard
 {
     min-height: 100vh;
-    margin: auto;
+    
     background-color: var(--bg);
     color: var(--text-color);
 }
@@ -75,12 +75,12 @@
 
 .dashboard-header-inactive
 {
-    min-height: 80vh;
-    text-align: center;
-    font-size: clamp(.5rem , 2vw, 4rem);
+    margin-top: -20px;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .dashboard-container

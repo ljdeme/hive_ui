@@ -81,7 +81,7 @@ function Login() {
 
   return (
     <div className="authentication-page">
-      <Navbar/>
+
       <div className="form-page">
         <div className="login-container">
               <div className="authentication-header">

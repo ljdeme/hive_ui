@@ -12,11 +12,13 @@ import Dashboard from "./pages/Dashboard";
 import Documentation from "./pages/Documentation";
 import Profile from "./pages/Profile";
 // import Testing from "./pages/Testing";
-
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 function App() {
 
   return (
     <div>
+      <Navbar/>
       <script>activePage.js</script>
       <Routes>
           <Route path="/" element={<Landing />} />
@@ -35,6 +37,7 @@ function App() {
           
           {/* <Route path="/testing" element={<Testing />} /> */}
       </Routes>
+      <Footer/>
     </div>
   );
 }

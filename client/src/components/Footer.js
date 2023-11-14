@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import logo2 from '../images/hex2.png';
 
 function Copyright() {
   return (
@@ -32,21 +33,21 @@ export default function Footer() {
         }}
       >
         <CssBaseline />
-        <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-        </Container>
         <Box
           component="footer"
           sx={{
             py: 3,
             px: 2,
             mt: 'auto',
-            backgroundColor: '#ffffff40',
+            backgroundColor: 'gray',
             color: 'white',
             alignItems: 'center',
             justifyContent: 'center',
             textAlign: 'center',
+            fontFamily:'Chakra Petch',
           }}
         >
+          <img src={logo2} width={50}/>
           <Container maxWidth="sm">
             <Link color="inherit" href="/" sx={{ marginRight: 2 }}>
               Home
@@ -54,8 +55,11 @@ export default function Footer() {
             <Link color="inherit" href="/about-us" sx={{ marginRight: 2 }}>
               About
             </Link>
-            <Link color="inherit" href="/documentation">
+            <Link color="inherit" href="/documentation" sx={{ marginRight: 2 }}>
               Docs
+            </Link>
+            <Link color="inherit" href="https://github.com/marc4813/HIVE" sx={{ marginRight: 2 }}>
+              GitHub
             </Link>
             <Copyright />
           </Container>
