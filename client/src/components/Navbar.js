@@ -26,7 +26,7 @@ export default function Navbar() {
     function handleLogout() {
         // Clear the user's session by removing the token from localStorage
         localStorage.removeItem('token');
-        sessionStorage.removeItem('UID');
+        localStorage.removeItem('UID');
         setIsUserLoggedIn(false);
         setIsSubMenuOpen(false); // Close the submenu after logout
         navigate("/");
