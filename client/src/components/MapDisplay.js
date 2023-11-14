@@ -1,31 +1,23 @@
-import React, {  useEffect, useState } from "react";
+import React, {  useEffect, useState, useRef } from "react";
 import ROSLIB from 'roslib';
 import { Stage, Graphics, Shape, Ticker } from "@createjs/easeljs";
 import '../css/dashboard.css';
 
 function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
     
-    
-    
     var selectedAgentIndex = 0;
     var setSelectedAgentIndex = (index) =>{
         selectedAgentIndex = index
     };
 
+    const selectedAgentRef = useRef(selectedAgent);
     const [stoppedSim, setSimstate] = useState(false);
     const createjs = window.createjs;
     const ROS2D = window.ROS2D;
 
-    console.log("Prop:" + selectedAgent);
-    
-    if(selectedAgent != 0){
-        setSelectedAgentIndex(selectedAgent);
-    }
-
-    console.log(selectedAgent);
-    if(selectedAgent == 0){
-        setSelectedAgentIndex(0);
-    }
+    useEffect(() => {
+        selectedAgentRef.current = selectedAgent;
+    }, [selectedAgent]);
 
     var position = null;
     var posx = null;
@@ -112,18 +104,19 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
     // Functions
     var mouseEventHandler = function(event, mouseState, stage, rootObject, agentId) {
 
-        console.log(selectedAgent);
-        if (agentId == 0)
+        const currentSelectedAgent = selectedAgentRef.current;
+        console.log("In mouseventHandler:" + currentSelectedAgent);
+        if (currentSelectedAgent == -1)
         {
             console.log("No agent selected on map.");
             return;
         }
 
         else {
-            console.log("Selected agent:" + agentId);
+            console.log("Selected agent:" + currentSelectedAgent);
         };
 
-        var namespace = "/agent" + (selectedAgent) + "/goalSet";
+        var namespace = "/agent" + (currentSelectedAgent) + "/goalSet";
         
         var isBusy = new ROSLIB.Param({
             ros : ros,
@@ -218,7 +211,7 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
                 size : 0.5,
                 strokeSize : 0.05,
                 strokeColor : Graphics.getRGB(0, 0, 0, 0.66),
-                fillColor : colors[(selectedAgent-1)],
+                fillColor : colors[(currentSelectedAgent-1)],
                 pulse : true,
               });
   
@@ -238,7 +231,7 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
               thetaRadians -= (Math.PI/2);
             }
             
-            cmd.id = (selectedAgent);
+            cmd.id = (currentSelectedAgent);
             cmd.command = 3;
             cmd.x = posx;
             cmd.y = posy;
@@ -346,15 +339,15 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
         }
 
         rootObject.addEventListener('stagemousedown', function(event) {
-            mouseEventHandler(event, 'down', stage, rootObject, selectedAgent);
+            mouseEventHandler(event, 'down', stage, rootObject);
         });
 
         rootObject.addEventListener('stagemousemove', function(event) {
-            mouseEventHandler(event, 'move', stage, rootObject, selectedAgent);
+            mouseEventHandler(event, 'move', stage, rootObject);
         });
 
         rootObject.addEventListener('stagemouseup', function(event) {
-            mouseEventHandler(event, 'up', stage, rootObject, selectedAgent);
+            mouseEventHandler(event, 'up', stage, rootObject);
         });
 
     }, [ros]);
