@@ -6,6 +6,7 @@ import cameron from '../images/cameron.jpg';
 import konstantin from '../images/konstantin.jpg';
 import marc from '../images/marc.jpg';
 import julia from '../images/julia.jpg';
+import Footer from "../components/Footer";
 
 function AboutUs() {
   return (
@@ -62,7 +63,8 @@ function AboutUs() {
             <h1 className='meet-team'>Hardware Team:</h1>
             <h3 className='member-name'>John McClain (ME), Isaac Finley (EE), Benjamin Palladino (EE), Cooper Fitzgerald (EE)</h3>
           </div>
-      </div>  
+      </div>
+      <Footer/>
     </div>
   );
 }

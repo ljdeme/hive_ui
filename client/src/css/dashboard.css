@@ -70,8 +70,17 @@
     font-size: clamp(.5rem , 2vw, 4rem);
     margin-top: 0px;
     padding-top: 3rem;
-    letter-spacing: 0.3em
-    
+    letter-spacing: 0.3em 
+}
+
+.dashboard-header-inactive
+{
+    min-height: 80vh;
+    text-align: center;
+    font-size: clamp(.5rem , 2vw, 4rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .dashboard-container
@@ -361,6 +370,7 @@
     flex-direction: column;
     text-align: left;
 }
+
 .container-text{
     /* background-color:greenyellow; */
 }

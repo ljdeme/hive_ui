@@ -2,6 +2,7 @@ import '../css/landing.css';
 import connect_img from '../images/connect-img.png';
 import modular_img from '../images/modular-img.png';
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default Landing;
 
@@ -36,6 +37,7 @@ function Landing() {
                     </a>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }
