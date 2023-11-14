@@ -6,6 +6,7 @@ import '../css/dashboard.css';
 function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
     
     
+    
     var selectedAgentIndex = 0;
     var setSelectedAgentIndex = (index) =>{
         selectedAgentIndex = index
@@ -14,9 +15,11 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
     const [stoppedSim, setSimstate] = useState(false);
     const createjs = window.createjs;
     const ROS2D = window.ROS2D;
+
+    console.log("Prop:" + selectedAgent);
     
     if(selectedAgent != 0){
-        setSelectedAgentIndex(selectedAgent + 1);
+        setSelectedAgentIndex(selectedAgent);
     }
 
     console.log(selectedAgent);
@@ -109,6 +112,7 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
     // Functions
     var mouseEventHandler = function(event, mouseState, stage, rootObject, agentId) {
 
+        console.log(selectedAgent);
         if (agentId == 0)
         {
             console.log("No agent selected on map.");
