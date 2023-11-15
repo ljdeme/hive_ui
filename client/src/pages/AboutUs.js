@@ -12,10 +12,10 @@ function AboutUs() {
       <div className="aboutUs-layout">
         <div className='about'>
           <h1 className='about-header'>Who Are We?</h1>
-          <p className='about-desc'>Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. 
-              Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. 
-              Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque 
-              nibh nibh, at maximus ante.</p>
+          <p className='about-desc'>We are students from the University of Central Florida. For our capstone 
+          project we wanted to create a modular, user-friendly, cost-effective robotic software and hardware system 
+          that offers seamless control and quick deployment. As the culmination of our academic journey we combined 
+          our knowledge in software and hardware engineering.</p>
           </div>
         <h1 className='meet-team'>Meet our team!</h1>
         <div className='team-layout'>

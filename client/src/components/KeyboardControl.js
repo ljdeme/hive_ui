@@ -102,7 +102,7 @@ function KeyboardControl(props) {
 
             if (newX !== 0 || newY !== 0 || newZ !== 0 || shiftPressed) {
                 // Send the movement command
-                console.log('IN MOVE AGENT: ' + newX + ", " + newY + ", " +  newZ + ", " + ': ' + newToggleAttachment);
+                // console.log("IN MOVE AGENT: " + newX + ", " + newY + ", " +  newZ + ": " + newToggleAttachment);
                 sendVelocityCommand(newX, newY, newZ, moving.SHIFT);
 
                 // Reset the state variable to indicate the reset command hasn't been sent
@@ -121,32 +121,6 @@ function KeyboardControl(props) {
       // eslint-disable-next-line
     }, [moving, velocities]);
 
-    // const keyboard = new ROSLIB.Topic({
-    //     ros: props.ros, // Use the ROS connection from props
-    //     name: `${props.agentName}/cmd_vel`,
-    //     messageType: 'geometry_msgs/Twist',
-    // });
-
-    // const sendVelocityCommand = (linearX, linearY, angularZ, attachmentToggle) => {
-    //     const scaleSpeed = (props.speed / 100.0)
-    //     console.log(linearX * scaleSpeed+ ", " + linearY * scaleSpeed + ", " +  angularZ * scaleSpeed+ ", " + ': ' + attachmentToggle);
-        
-    //     const twist = new ROSLIB.Message({
-    //         linear: {
-    //             x: linearX * scaleSpeed,
-    //             y: linearY * scaleSpeed,
-    //             z: attachmentToggle,
-    //         },
-    //         angular: {
-    //             x: 0,
-    //             y: 0,
-    //             z: angularZ * scaleSpeed, 
-    //         },
-    //     });
-
-    //     keyboard.publish(twist);
-    // };
-
     const keyboard = new ROSLIB.Topic({
       ros: props.ros, // Use the ROS connection from props
       name: `/joystick`,
@@ -161,7 +135,7 @@ function KeyboardControl(props) {
 
   const sendVelocityCommand = (linearX, linearY, angularZ, attachmentToggle) => {
       const scaleSpeed = (props.speed / 100.0)
-      console.log(linearX * scaleSpeed+ ", " + linearY * scaleSpeed + ", " +  angularZ * scaleSpeed+ ", " + ': ' + attachmentToggle);
+      // console.log(linearX * scaleSpeed + ", " + linearY * scaleSpeed + ", " +  angularZ * scaleSpeed+ ", " + ": " + attachmentToggle);
       
       const twist = new ROSLIB.Message({
           linear: {

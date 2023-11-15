@@ -47,7 +47,7 @@ export default function Footer() {
             fontFamily:'Chakra Petch',
           }}
         >
-          <img src={logo2} width={50}/>
+          <img src={logo2} alt='hive logo' width={50}/>
           <Container maxWidth="sm">
             <Link color="inherit" href="/" sx={{ marginRight: 2 }}>
               Home

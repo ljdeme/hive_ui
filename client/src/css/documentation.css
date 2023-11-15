@@ -3,10 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Petch:wght@400;500&display=swap');
 
 .documentation{
-    min-height: 85vh;
+    min-height: 160vh;
     margin: auto;
     background-color: var(--bg);
     color: var(--text-color);
+    padding-bottom: 50px;
 }
 
 .documentation-page{
@@ -16,7 +17,6 @@
     align-items: flex-start;
     height: 100%;
     padding-left: 2rem;
-    
 }
 
 .documentation h1{

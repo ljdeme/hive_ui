@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import '../css/login_and_register.css';
 import hex from "../images/hive-logo.png"
-import Navbar from "../components/Navbar";
 
 function Login() {
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ function Login() {
   };
 
   useEffect(() => {
-    console.log(formErrors);
+    // console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       handleLogin(formValues);
       console.log(formValues);
@@ -65,9 +64,9 @@ function Login() {
       }
       else{
         return response.json().then((data) => {
-          console.log(data.token); // Log the token
-          console.log(data.user);  // Log the user object
-          console.log(data.user._id);
+          // console.log(data.token); // Log the token
+          // console.log(data.user);  // Log the user object
+          // console.log(data.user._id);
           // Store the token and user data in localStorage or state as needed
           localStorage.setItem('token', data.token);
           localStorage.setItem('UID', data.user._id);

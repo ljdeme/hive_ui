@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Navbar from "../components/Navbar";
 import ROSLIB from 'roslib';
 import robot_img from '../images/robot.png';
-// import Joystick from "../components/Joystick";
 import Map from "../components/MapDisplay";
 import SliderComponent from "../components/SliderComponent";
 import '../css/dashboard.css';
