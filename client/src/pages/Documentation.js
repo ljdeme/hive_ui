@@ -1,6 +1,4 @@
 import '../css/documentation.css';
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 function Documentation() {
   return (

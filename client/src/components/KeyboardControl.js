@@ -18,7 +18,7 @@ function KeyboardControl(props) {
         D: 0,
         Q: 0,
         E: 0,
-        SPACE: 1,
+        SPACE: 0,
       });
       const [resetCommandSent, setResetCommandSent] = useState(false);
 
@@ -44,7 +44,7 @@ function KeyboardControl(props) {
               setMoving((prevState) => ({ ...prevState, E: -1 }));
               break;
             case 32: // Space
-              setMoving((prevState) => ({ ...prevState, SPACE: prevState.SPACE === 1 ? 0 : 1 }));
+              setMoving((prevState) => ({ ...prevState, SPACE: prevState.SPACE === 1 ? 1 : 0 }));
             break;
             default:
               break;
@@ -160,7 +160,7 @@ function KeyboardControl(props) {
     return (
         <div className="teleop-layout">
             <div className="keyboard-layout">
-                {(moving.SPACE) ? (<div className='velocities'>Attachment: Locked</div>) : (<div className='velocities'>Attachment: Unocked</div>)}
+                {(!moving.SPACE) ? (<div className='velocities'>Attachment: Locked</div>) : (<div className='velocities'>Attachment: Unocked</div>)}
                 
                 <div className="keyboard-layout-top">
                     <div className={`key-box ${moving.Q ? 'glow' : ''}`} id="Q">Q</div>
@@ -171,7 +171,7 @@ function KeyboardControl(props) {
                     <div className={`key-box ${moving.A ? 'glow' : ''}`} id="A">A</div>
                     <div className={`key-box ${moving.S ? 'glow' : ''}`} id="S">S</div>
                     <div className={`key-box ${moving.D ? 'glow' : ''}`} id="D">D</div>
-                    <div className={`key-box ${moving.SPACE ? 'glow' : ''}`} id="A">SPACE</div>
+                    <div className={`key-box ${!moving.SPACE ? 'glow' : ''}`} id="A">SPACE</div>
                 </div>
 
             </div> 
