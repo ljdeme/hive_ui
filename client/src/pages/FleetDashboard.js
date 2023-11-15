@@ -17,7 +17,7 @@ function FleetDashboard() {
   const navigate = useNavigate();
   const [ros, setRos] = useState(null);
 
-  const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
+  const [selectedAgentIndex, setSelectedAgentIndex] = useState(-1);
   const [selectedTopicIndex, setSelectedTopicIndex] = useState(null);
   const [rosIP, setRosIP] = useState();
   
@@ -121,6 +121,8 @@ function FleetDashboard() {
     setTopics(result.topics);
     setTopicTypes(result.types);
   });
+  
+
 
   const handleControlAgentClick = (index) => {
     console.log("In handleControl")
@@ -136,8 +138,14 @@ function FleetDashboard() {
     if (index === selectedTopicIndex) {
       setSelectedTopicIndex(null);
       console.log('Unselected: ' + topics[index]);
-      // ECHO
-      
+
+      const prevTopicListener = new ROSLIB.Topic({
+        ros,
+        name: `${topics[selectedTopicIndex]}`,
+        messageType: `${topicTypes[selectedTopicIndex]}`,
+      });
+  
+      prevTopicListener.unsubscribe();
     } else {
       const prevTopicListener = new ROSLIB.Topic({
         ros,
@@ -298,7 +306,7 @@ function FleetDashboard() {
               <p className='container-text'>Teleoperation</p>
               <div className='teleop-container'>
                 <SliderComponent setSpeed={setSpeed} />
-                <KeyboardControl ros={ ros } agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} speed={speed} />
+                <KeyboardControl ros={ ros } agentID={selectedAgentIndex + 1} agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} speed={speed} />
                 {/* <Joystick ros={ ros } agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} /> */}
               </div>
             </div>

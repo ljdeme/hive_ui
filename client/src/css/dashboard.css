@@ -76,7 +76,8 @@
 .dashboard-header-inactive
 {
     margin-top: -20px;
-    min-height: 100vh;
+    margin-bottom: -20px;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,7 +96,7 @@
 {
     /* background-color: green; */
 
-    height: 950px;
+    height: 980px;
     width: 1650px;
     
     flex-shrink: 0;
@@ -113,7 +114,7 @@
 {
     /* background-color: blueviolet; */
 
-    height: 60%;
+    height: 62%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -330,7 +331,7 @@
 {
     /* background-color: blue; */
 
-    height: 35%;
+    height: 34%;
     width: 100%;
 
     display: flex;

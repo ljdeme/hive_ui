@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Petch:wght@400;500&display=swap');
 
 .documentation{
-    min-height: 100vh;
+    min-height: 85vh;
     margin: auto;
     background-color: var(--bg);
     color: var(--text-color);
