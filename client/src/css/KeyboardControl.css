@@ -1,11 +1,16 @@
+.teleop-layout{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 .keyboard-layout {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: .5rem;
-    width: 100%;
-    color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  width: 100%;
+  color: var(--bg);
     
 }
 .keyboard-layout-top {
@@ -23,43 +28,46 @@
     gap: .5rem;
 }
   
-  .key-box {
-    width: 70px;
-    height: 70px;
-    background-color: #e0e0e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    transition: background-color 0.2s;
-  }
+.key-box {
+  width: 70px;
+  height: 70px;
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
 
-  .key-box-space {
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    transition: background-color 0.2s;
-  }
+.key-box-space {
+  width: 90px;
+  height: 70px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+#SHIFT{
+  width: 90px;
+}
   
-  .key-box.glow {
-    background-color: var(--bg); /* Change this to your desired glowing color */
-    color: var(--bg-accent);
-  }
+.key-box.glow {
+  background-color: var(--bg); /* Change this to your desired glowing color */
+  color: var(--bg-accent);
+}
 
-  .velocities {
-    min-width: 100%;
-    color: var(--bg-accent);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .dir {
+.velocities {
+  min-width: 100%;
+  color: var(--bg-accent);
+  display: flex;
   justify-content: space-around;
-  }
+  align-items: center;
+}
+
+.dir {
+  justify-content: space-around;
+}

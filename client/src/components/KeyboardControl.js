@@ -165,21 +165,27 @@ function KeyboardControl(props) {
 
     return (
         <div className="teleop-layout">
+          {(!moving.SHIFT) ? (<div className='velocities'>Attachment: Locked</div>) : (<div className='velocities'>Attachment: Unocked</div>)}
             <div className="keyboard-layout">
-                {(!moving.SHIFT) ? (<div className='velocities'>Attachment: Locked</div>) : (<div className='velocities'>Attachment: Unocked</div>)}
-                
-                <div className="keyboard-layout-top">
-                    <div className={`key-box ${moving.Q ? 'glow' : ''}`} id="Q">Q</div>
-                    <div className={`key-box ${moving.W ? 'glow' : ''}`} id="W">W</div>
-                    <div className={`key-box ${moving.E ? 'glow' : ''}`} id="E">E</div>
-                </div>
-                <div className="keyboard-layout-bottom">
-                    <div className={`key-box ${moving.A ? 'glow' : ''}`} id="A">A</div>
-                    <div className={`key-box ${moving.S ? 'glow' : ''}`} id="S">S</div>
-                    <div className={`key-box ${moving.D ? 'glow' : ''}`} id="D">D</div>
+              <div className="keyboard-layout-top">
+                  <div className='key-box-space'></div>
+                  <div className={`key-box ${moving.Q ? 'glow' : ''}`} id="Q">Q</div>
+                  <div className={`key-box ${moving.W ? 'glow' : ''}`} id="W">W</div>
+                  <div className={`key-box ${moving.E ? 'glow' : ''}`} id="E">E</div>
+              </div>
+              <div className="keyboard-layout-bottom">
+                  <div className='shift-container'>
                     <div className={`key-box ${!moving.SHIFT ? 'glow' : ''}`} id="SHIFT">SHIFT</div>
-                </div>
-
+                  </div>
+                  <div className={`key-box ${moving.A ? 'glow' : ''}`} id="A">A</div>
+                  <div className={`key-box ${moving.S ? 'glow' : ''}`} id="S">S</div>
+                  <div className={`key-box ${moving.D ? 'glow' : ''}`} id="D">D</div>
+              </div>
+              <div className='velocities'>
+                <div className='dir'>X: {velocities.linearX * (props.speed / 100.0)}</div>
+                <div className='dir'>Y: {velocities.linearY * (props.speed / 100.0)}</div>
+                <div className='dir'>Z: {velocities.angularZ * (props.speed / 100.0)}</div>
+              </div>
             </div> 
         </div>
     );
