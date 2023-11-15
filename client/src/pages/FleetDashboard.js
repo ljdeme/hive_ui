@@ -153,6 +153,7 @@ function FleetDashboard() {
                 <button className="try-again" onClick={() => {
                   setLoading(true);
                   setError(null);
+                  window.location.reload(false);
                 }}>Try Again</button>
               </div>
             </div>

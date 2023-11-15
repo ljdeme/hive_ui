@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate} from "react-router-dom";
+import { NavLink, useLocation, useNavigate} from "react-router-dom";
 import logo from "../images/hive-logo.png";
 import logout from '../images/logout.png';
 
 export default function Navbar() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [menuOpen, setMenuOpen] = useState(false);
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    
     useEffect(() => {
         // Check if a JWT token exists in localStorage
         const token = localStorage.getItem('token');
         if (token) {
             // Verify the token on the server (optional)
             // If token is valid, set isLoggedIn to true
-            setIsUserLoggedIn(true);
+            setIsUserLoggedIn(location.state?.isAuth);
         }
-    }, []);
+    }, [location.state?.isAuth]);
 
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
 

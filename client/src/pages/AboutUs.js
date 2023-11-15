@@ -26,7 +26,7 @@ function AboutUs() {
               <img className='member-img' src={marc} alt="Marcus Simmonds" />
             </a>
             <h3 className='member-name'>Marcus Simmonds (CS)</h3>
-            <p className='member-res'>Program Manager, ROS & Backend Developer</p>
+            <p className='member-res'>Project Manager, ROS & Fullstack Developer</p>
           </div>
           <div className='member-info'>
             <a
@@ -35,7 +35,7 @@ function AboutUs() {
               <img className='member-img' src={konstantin} alt="Konstantin Clonce" />
             </a>
             <h3 className='member-name'>Konstantin Clonce (CS)</h3>
-            <p className='member-res'>Embeded Software & ROS Developer</p>
+            <p className='member-res'>Router Software & ROS Developer</p>
           </div>
           <div className='member-info'>
             <a
@@ -52,7 +52,7 @@ function AboutUs() {
             >
               <img className='member-img' src={cameron} alt="Cameron Nichols" />
             </a>
-            <h3 className='member-name'>Cameron Nichols (CS, CPE, EE)</h3>
+            <h3 className='member-name'>Cameron Nichols (CPE, CS, EE)</h3>
             <p className='member-res'>Agent Developer & Hardware Team Lead</p>
           </div>
         </div>
