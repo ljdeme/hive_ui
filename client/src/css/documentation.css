@@ -1,35 +1,84 @@
+/* Updated documentation.css */
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Petch:wght@400;500&display=swap');
 
-.documentation{
-    min-height: 100vh;
-    margin: auto;
-    background-color: var(--bg);
-    color: var(--text-color);
+.documentation {
+  min-height: 160vh;
+  margin: auto;
+  background-color: var(--bg);
+  color: var(--text-color);
+  padding-bottom: 50px;
 }
 
-.documentation-page{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100%;
-    padding-left: 2rem;
-    
+.documentation-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  background-color: var(--bg);
+  border-radius: 8px;
+  padding: 20px;
 }
 
-.documentation h1{
-    font-family: 'Chakra Petch';
-}
-.documentation h2{
-    font-family: 'Chakra Petch';
-}
-
-.documentation h3{
-    font-family: 'Raleway';
+.documentation h1,
+.documentation h2,
+.documentation h3 {
+  font-family: 'Chakra Petch';
+  color: var(--primary-color);
 }
 
-.documentation p li ul{
-    font-family: 'Roboto';
+.documentation h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.documentation h2 {
+  font-size: 1.5em;
+  margin-top: 30px;
+  box-shadow: 0 4px 2px -2px #e8b83d8a
+}
+
+.documentation h3 {
+  font-size: 1.2em;
+}
+
+.documentation p {
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.documentation ul {
+  list-style: none;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.documentation ul li {
+  margin-bottom: 10px;
+}
+
+.documentation ul li:before {
+  content: '\2022';
+  color: var(--primary-color);
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.documentation img {
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #e8b83d8a
+}
+
+.documentation code {
+  font-family: 'Courier New', monospace;
+  background-color: #f4f4f4;
+  padding: 2px 5px;
+  border-radius: 3px;
 }

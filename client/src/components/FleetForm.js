@@ -1,7 +1,4 @@
 import React from 'react';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 
 function FleetForm({ initialValues, formErrors, handleChange, handleSubmit, handleClose, buttonText }) {
   return (

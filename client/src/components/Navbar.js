@@ -51,7 +51,7 @@ export default function Navbar() {
                         <NavLink to='/dashboard'>Dashboard</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/documentation'>Docs</NavLink>
+                        <NavLink to='/documentation'>Documentation</NavLink>
                     </li>
                     <li >
                         <button className='profile-menu' onClick={toggleMenu}>Profile &#9663;</button>

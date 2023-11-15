@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Navbar from "../components/Navbar";
 import ROSLIB from 'roslib';
 import robot_img from '../images/robot.png';
-// import Joystick from "../components/Joystick";
 import Map from "../components/MapDisplay";
 import SliderComponent from "../components/SliderComponent";
 import '../css/dashboard.css';
@@ -17,7 +15,7 @@ function FleetDashboard() {
   const navigate = useNavigate();
   const [ros, setRos] = useState(null);
 
-  const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
+  const [selectedAgentIndex, setSelectedAgentIndex] = useState(-1);
   const [selectedTopicIndex, setSelectedTopicIndex] = useState(null);
   const [rosIP, setRosIP] = useState();
   
@@ -25,7 +23,6 @@ function FleetDashboard() {
   const [agentListSource, setAgentListSource] = useState(Array.from({ length: location.state?.fleet.numagents}));
   const [topics, setTopics] = useState([]);
   const [topicTypes, setTopicTypes] = useState([]);
-  const [rosTopicData, setRosTopicData] = useState([]);
   
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -121,57 +118,15 @@ function FleetDashboard() {
     setTopics(result.topics);
     setTopicTypes(result.types);
   });
-
+  
   const handleControlAgentClick = (index) => {
     console.log("In handleControl")
     if (index === selectedAgentIndex) {
-      setSelectedAgentIndex(null);
+      setSelectedAgentIndex(-1);
     } else {
       setSelectedAgentIndex(index);
     }
   }
-
-  const handleEchoTopicClick = (index) => {
-    console.log("In handleControl")
-    if (index === selectedTopicIndex) {
-      setSelectedTopicIndex(null);
-      console.log('Unselected: ' + topics[index]);
-      // ECHO
-      
-    } else {
-      const prevTopicListener = new ROSLIB.Topic({
-        ros,
-        name: `${topics[selectedTopicIndex]}`,
-        messageType: `${topicTypes[selectedTopicIndex]}`,
-      });
-  
-      prevTopicListener.unsubscribe();
-    }
-      setSelectedTopicIndex(index);
-      console.log('Selected: ' + topics[index]);
-      
-      const newTopicListener = new ROSLIB.Topic({
-        ros,
-        name: `${topics[selectedTopicIndex]}`,
-        messageType: `${topicTypes[selectedTopicIndex]}`,
-      });
-    
-      newTopicListener.subscribe(
-        function (message) {
-          console.log(`Listening to ${topics[selectedTopicIndex]}`);
-          console.log('Received message:', message);
-          setRosTopicData((prevData) => [...prevData, message.data]);
-        },
-        function (error) {
-          console.error('Error subscribing to topic:', error);
-        }
-      );
-  }
-
-  const handleClearData = () => {
-    setRosTopicData([]);
-    console.log('Clear Data');
-  };
 
   return (
     <div className="dashboard">
@@ -264,41 +219,16 @@ function FleetDashboard() {
                     <div className="dashboard-agent-list-item">
                       {item}
                     </div>
-                    <div className="dashboard-topic-list-item">
-                    <label className={selectedTopicIndex === topicIndex ? 'active-toggle' : 'inactive-toggle'}>
-                      <input
-                        type="checkbox"
-                        id={`checkbox-${topicIndex}`} // Add an ID for the label to reference
-                        checked={selectedTopicIndex === topicIndex}
-                        onChange={() => handleEchoTopicClick(topicIndex)}
-                      /><span>Echo Topic</span>
-                    </label>
-                    </div>
                   </div>
                     )
                 })}
-              </InfiniteScroll>
-            </div>
-            <div className="dashboard-messages">
-              <div className="messages-header">
-                <p>Messages</p>
-                <button className='clear' onClick={handleClearData}>Clear Data</button>
-              </div>
-              <InfiniteScroll className="dashboard-topic-list"
-                dataLength={rosTopicData.length}
-                loader={<p>Loading...</p>}
-                endMessage={<p>All Messages Displayed.</p>}
-                height={250}>
-                {rosTopicData.map((message, index) => (
-                  <p key={index}>{message}</p>
-                ))}
               </InfiniteScroll>
             </div>
             <div className="dashboard-joystick">
               <p className='container-text'>Teleoperation</p>
               <div className='teleop-container'>
                 <SliderComponent setSpeed={setSpeed} />
-                <KeyboardControl ros={ ros } agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} speed={speed} />
+                <KeyboardControl ros={ ros } agentID={selectedAgentIndex + 1} agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} speed={speed} />
                 {/* <Joystick ros={ ros } agentName={selectedAgentIndex === null ? 'null' : `agent${selectedAgentIndex + 1}`} /> */}
               </div>
             </div>

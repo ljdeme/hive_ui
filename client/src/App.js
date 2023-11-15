@@ -1,7 +1,6 @@
 
 import React from "react";
 import { Route, Routes } from 'react-router-dom';
-import Home from "./pages/Home";
 import InProgress from "./pages/InProgress";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -11,7 +10,6 @@ import MyFleets from "./pages/MyFleets";
 import Dashboard from "./pages/Dashboard";
 import Documentation from "./pages/Documentation";
 import Profile from "./pages/Profile";
-// import Testing from "./pages/Testing";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 function App() {
@@ -23,7 +21,6 @@ function App() {
       <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/inprogress" element={<InProgress />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/about-us" element={<AboutUs />} />
@@ -34,8 +31,6 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/profile" element={<Profile />} /> 
-          
-          {/* <Route path="/testing" element={<Testing />} /> */}
       </Routes>
       <Footer/>
     </div>

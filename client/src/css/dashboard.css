@@ -76,7 +76,8 @@
 .dashboard-header-inactive
 {
     margin-top: -20px;
-    min-height: 100vh;
+    margin-bottom: -20px;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,7 +96,7 @@
 {
     /* background-color: green; */
 
-    height: 950px;
+    height: 980px;
     width: 1650px;
     
     flex-shrink: 0;
@@ -113,7 +114,7 @@
 {
     /* background-color: blueviolet; */
 
-    height: 60%;
+    height: 62%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -127,7 +128,7 @@
 
     background-color: var(--bg-container);
     height: 100%;
-    width: 40%;
+    width: 41%;
     border-radius: 10px;
     padding-left: 10px;
     
@@ -330,7 +331,7 @@
 {
     /* background-color: blue; */
 
-    height: 35%;
+    height: 34%;
     width: 100%;
 
     display: flex;
@@ -363,7 +364,7 @@
     background-color:var(--bg-container);
     /* background-color:aqua; */
     height: 100%;
-    width: 25%;
+    width: 62%;
     border-radius: 10px;
     padding-left: 10px;
     display: flex;
@@ -387,11 +388,11 @@
 .teleop-container {
     /* background-color:aqua; */
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%; 
-    gap: .5rem;
+    gap: 10rem;
 }
 
 .sim-buttons{
