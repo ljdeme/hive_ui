@@ -135,7 +135,7 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
 
         const currentSelectedAgent = selectedAgentRef.current;
         console.log("In mouseventHandler:" + currentSelectedAgent);
-        if (currentSelectedAgent == -1)
+        if (currentSelectedAgent == -1 || currentSelectedAgent == 0)
         {
             console.log("No agent selected on map.");
             return;
@@ -312,8 +312,9 @@ function MapDisplay({ ros, numagents, colors, isSim, selectedAgent}) {
                     strokeSize : 0.05,
                   });
                   
-                  payload.x = coord.position.x;
-                  payload.y = -coord.position.y;
+
+                  payload.x = coord.position.x * data.info.resolution;
+                  payload.y = -coord.position.y* data.info.resolution;
                   var q0 = 1;
                   var q1 = 0;
                   var q2 = 0;
